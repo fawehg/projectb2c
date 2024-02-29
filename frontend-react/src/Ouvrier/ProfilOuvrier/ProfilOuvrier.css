@@ -1,0 +1,45 @@
+/* ProfilOuvrier.css */
+
+.profil-container {
+    display: flex;
+    flex-direction: column;
+    height: 80vh; 
+    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+    color: rgb(255, 255, 255);;
+    background-size: cover; /* Pour couvrir toute la surface */
+    background-position: center;
+}
+
+
+.main-content {
+    display: flex;
+    flex: 1; 
+    padding: 20px;
+}
+
+.sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: #ffffff52;
+    border-radius: 2%;
+    
+    
+}
+
+.history {
+    width: 70%;
+    padding-left: 50px;
+    background-color: #ffffff27;
+    border-radius: 2%;
+}
+    
+   button {   
+    padding: 10px 20px; 
+    background-color: transparent;
+    color: white;
+    border: 2px solid white; 
+    border-radius: 8px; 
+    transition: 0.3s;
+  }
+
+

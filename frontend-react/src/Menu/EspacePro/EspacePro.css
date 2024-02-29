@@ -1,0 +1,67 @@
+.Espace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('./EspacePro.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.loginform {
+  background: rgba(19, 19, 19, 0.435); 
+  padding:40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: auto;
+}
+
+.formgroup {
+  margin-bottom: 5px;
+}
+
+.formgroup label {
+  display: block;
+  width: px;
+}
+
+.formgroup input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.forgot-password {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.forgot-password a {
+  color: #007bffb7;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
