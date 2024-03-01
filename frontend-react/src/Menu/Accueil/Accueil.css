@@ -84,7 +84,7 @@ button {
   width: 600px; /* Taille ajustée */
   height: auto; /* Pour maintenir le rapport hauteur/largeur */
   margin-bottom: 10px;
-  border-radius: 100px;
+  border-radius: 40px;
 }
 #cher-client,
 #cher-ouvrier {
@@ -235,7 +235,7 @@ body,
   font-size: 14px;
 }
 .phrase-card img {
-  width: 50px; /* Ajustez la largeur des images selon vos besoins */
+  width: 100px; /* Ajustez la largeur des images selon vos besoins */
   height: auto; /* Pour maintenir le rapport hauteur/largeur */
   margin-bottom: 10px; /* Espacement en dessous des images */
 }

@@ -10,8 +10,16 @@ function ProfilOuvrier() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+<<<<<<< Updated upstream
                 const response = await axios.get('http://localhost:8000/api/show'); 
                 setInformationsPersonnelles(response.data);
+=======
+                // Ici vous récupérez les données depuis la base de données
+                // Exemple avec une API fictive
+                const response = await fetch('http://localhost:8000/api/register');
+                const data = await response.json();
+                setInformationsPersonnelles(data);
+>>>>>>> Stashed changes
             } catch (error) {
                 console.error('Erreur lors de la récupération des données : ', error);
             }
