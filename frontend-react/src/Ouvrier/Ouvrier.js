@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link ,Navigate} from 'react-router-dom';
 import './Ouvrier.css';
+import ProfilOuvrier from './ProfilOuvrier/ProfilOuvrier';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import ProfilOuvrier from './ProfilOuvrier/ProfilOuvrier';
+import MotDePasseOublie from '../MDPoubliée/MDPoubliée';
+
 
 class Ouvrier extends React.Component {
   constructor(props) {
@@ -72,8 +74,9 @@ handleAvailabilityChange = (e) => {
                 body: JSON.stringify(this.state),
             });
             if (response.ok) {
-                console.log('Inscription réussie !');
-            Navigate('/ProfilOuvrier');
+              Navigate('/ProfilOuvrier');
+              console.log('Connexion réussie !');
+             
             } else {
                 console.error('Erreur lors de l\'inscription');
             }
@@ -308,8 +311,8 @@ handleSubmitLogin = async (e) => {
               <h1>Connexion</h1>
               <input className="input-field" type="email" placeholder="Email" />
               <input className="input-field" type="password" placeholder="Mot de passe" />
-              <Link to="#">Mot de passe Oublié?</Link>
-              <Link to ="/ProfilOuvrier" ><button type="submit" onClick={this.handleSubmitLogin}>Connexion</button></Link>
+              <Link to="/MotDePasseOublie">Mot de passe Oublié?</Link>
+              <Link to ="//ProfilOuvrier" ><button type="submit" onClick={this.handleSubmitLogin}>Connexion</button></Link>
             </form>
           </div>
 
