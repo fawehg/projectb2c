@@ -161,7 +161,8 @@ header {
   /* Logo à gauche */
  
   .logo {
-    width: 100px; /* Ajustez la taille du logo selon vos besoins */
+    width: 100px;
+     /* Ajustez la taille du logo selon vos besoins */
   }
   
   /* Boutons à droite */
@@ -171,9 +172,16 @@ header {
   }
   
 
-  
+  .additional-text {
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+
+    /* Changez la couleur selon vos préférences */
+  }
 
   .rapide {
     color: rgb(2, 35, 100);
+    font-size: 50px;
+
     /* Changez la couleur selon vos préférences */
   }
