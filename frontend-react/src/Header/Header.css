@@ -113,10 +113,7 @@ header {
   
 
   
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
+  
   
  
     
@@ -127,12 +124,7 @@ header {
     color: rgb(255, 255, 255);
   }
   
-  .logo {
-    width: 50px;
-    padding-right: 15px;
-    display: inline-block;
-    vertical-align: middle;
-  }
+  
   
   .inner-header {
     height: 1vh;
@@ -157,14 +149,13 @@ header {
     background-color: white;
   }
   
- 
-  /* Logo à gauche */
- 
   .logo {
-    width: 100px;
-     /* Ajustez la taille du logo selon vos besoins */
+    width: 200px; /* Définissez la largeur souhaitée */
+    height: auto; /* Gardez la hauteur proportionnelle pour éviter la distorsion */
   }
-  
+
+ 
+
   /* Boutons à droite */
   .buttons {
     display: flex;

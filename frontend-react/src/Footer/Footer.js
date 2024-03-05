@@ -7,7 +7,7 @@ const Footer = () => {
                 <button>À Propos</button>
                 <button>Contacter Nous</button>
             </div>
-            <span className="rapide">@b2c</span>
+            
         </footer>
     );
 };

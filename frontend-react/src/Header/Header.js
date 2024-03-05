@@ -15,8 +15,8 @@ const Header = () => {
         <Link to="/qui-sommes-nous"><button>Support Utilisateur</button></Link>
       </div>
       <div className="header-text">
-        <p>TROUVEZ EN URGENCE UN PROFESSIONNEL DISPONIBLE INTERVENTION EXPRESS 24H/24 7J/7</p>
-        <p className="additional-text">SIMPLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="rapide">RAPIDE</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EFFICACE</p>
+      
+        <p className="additional-text">Ouvriers compétents&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="rapide">Gestion simplifiée</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Projets réussis</p>
       </div>
       
       <div>

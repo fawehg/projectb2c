@@ -12,48 +12,8 @@ body {
   font-family: 'poppins', sans-serif;
 }
 
-header {
-  padding: 20px;
-}
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.buttons {
-  display: flex;
-}
-
-button {
-  
-  margin-left: 10px;
-  padding: 8px 16px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-.buttons button {
-  margin-left: 10px;
-  padding: 10px 20px; /* Ajuste la taille des boutons */
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: white; /* Change la couleur du texte des boutons */
-  border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
-  border-radius: 8px; /* Arrondit les coins des boutons */
-  transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
-}
-
-.buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Change la couleur de fond au survol */
-}
 
 .nav-container {
   
@@ -69,12 +29,6 @@ button {
   align-items: center;
 }
 
-.client img,
-.ouvrier img {
-  width: 200px;
-  height: 200px;
-  margin-bottom: 10px;
-}
 
 
 
@@ -86,43 +40,31 @@ button {
   margin-bottom: 10px;
   border-radius: 40px;
 }
-#cher-client,
-#cher-ouvrier {
-  margin-left: 10px;
+
+
+/* Style spécifique pour le bouton "cher-client" */
+.cher-client,
+.cher-ouvrier {
+  margin: 0 40px;
   padding: 10px 20px; /* Ajuste la taille des boutons */
   border: none;
   background-color: transparent;
   cursor: pointer;
-  color: rgb(244, 244, 244); /* Change la couleur du texte des boutons */
-  border: 2px solid rgb(2, 9, 96); /* Ajoute une bordure blanche aux boutons */
+  color: rgb(255, 255, 255); /* Change la couleur du texte des boutons */
+  border: 2px solid  rgb(0, 69, 206); /* Ajoute une bordure blanche aux boutons */
+  background-color: rgb(2, 35, 100);
   border-radius: 8px; /* Arrondit les coins des boutons */
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
+  
+  
 }
-#cher-client:hover,
-#cher-ouvrier:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Change la couleur de fond au survol */
-}
-body {
-  margin: 0;
-}
-
-
-
-.logo {
-  width: 50px;
-  padding-right: 15px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
 
 
 body,
 .accueil-container,
 .header,
 .header-text,
-.header-text p,
-.buttons button,
+.header-text p, 
 .footer-container button,
 .additional-text,
 .phrase-card p,
@@ -130,15 +72,7 @@ body,
   font-family: 'Poppins', sans-serif;
 }
 
-/* Logo à gauche */
-.logo-container {
-  display: flex;
-  align-items: center;
-}
 
-.logo {
-  width: 100px; /* Ajustez la taille du logo selon vos besoins */
-}
 
 /* Boutons à droite */
 .buttons {
@@ -150,10 +84,7 @@ body,
   margin-left: 10px;
 }
 
-/* Texte centré sous les boutons */
-.header-text {
-  text-align: center;
-}
+
 .buttons {
   position: absolute;
   top: 20px;
@@ -225,6 +156,7 @@ body,
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  text-size-adjust: 20px;
 }
 
 .phrase-card {
@@ -232,7 +164,7 @@ body,
 }
 
 .phrase-card p {
-  font-size: 14px;
+  font-size: 23px;
 }
 .phrase-card img {
   width: 100px; /* Ajustez la largeur des images selon vos besoins */

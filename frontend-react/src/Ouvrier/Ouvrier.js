@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link ,Navigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faEnvelope, faMapMarkerAlt, faAddressCard, faLock, faBriefcase, faCalendarAlt, faClock } from '@fortawesome/free-solid-svg-icons';
 import './Ouvrier.css';
 import ProfilOuvrier from './ProfilOuvrier/ProfilOuvrier';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MotDePasseOublie from '../MDPoubliée/MDPoubliée';
-
 
 class Ouvrier extends React.Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class Ouvrier extends React.Component {
       joursDisponibilite: [],
       heureDebut: '',
       heureFin: '',
-    
       errors: {}
     };
   }
@@ -47,21 +47,22 @@ class Ouvrier extends React.Component {
       });
     }
   }
-handleAvailabilityChange = (e) => {
-  const day = e.target.value;
-  const { joursDisponibilite } = this.state;
-  if (joursDisponibilite.includes(day)) {
-    this.setState({
-      joursDisponibilite: joursDisponibilite.filter(item => item !== day)
-    });
-  } else {
-    this.setState({
-      joursDisponibilite: [...joursDisponibilite, day]
-    });
+
+  handleAvailabilityChange = (e) => {
+    const day = e.target.value;
+    const { joursDisponibilite } = this.state;
+    if (joursDisponibilite.includes(day)) {
+      this.setState({
+        joursDisponibilite: joursDisponibilite.filter(item => item !== day)
+      });
+    } else {
+      this.setState({
+        joursDisponibilite: [...joursDisponibilite, day]
+      });
+    }
   }
-}
+
   handleSubmitRegister = async (e) => {
-   
     e.preventDefault();
     const errors = this.validateForm();
     if (Object.keys(errors).length === 0) {
@@ -74,9 +75,8 @@ handleAvailabilityChange = (e) => {
                 body: JSON.stringify(this.state),
             });
             if (response.ok) {
-              Navigate('/ProfilOuvrier');
+              this.props.history.push('/ProfilOuvrier');
               console.log('Connexion réussie !');
-             
             } else {
                 console.error('Erreur lors de l\'inscription');
             }
@@ -86,9 +86,9 @@ handleAvailabilityChange = (e) => {
     } else {
         this.setState({ errors });
     }
-}
+  }
 
-handleSubmitLogin = async (e) => {
+  handleSubmitLogin = async (e) => {
     e.preventDefault();
     try {
         const response = await fetch('http://localhost:8000/api/login', {
@@ -104,14 +104,14 @@ handleSubmitLogin = async (e) => {
         const data = await response.json();
         if (response.ok) {
             console.log('Connexion réussie !');
-            Navigate('/ProfilOuvrier');        } 
-            else {
+            this.props.history.push('/ProfilOuvrier');
+        } else {
             console.error('Erreur lors de la connexion :', data.message);
         }
     } catch (error) {
         console.error('Erreur lors de la requête :', error);
     }
-}
+  }
 
   validateForm = () => {
     const errors = {};
@@ -141,9 +141,7 @@ handleSubmitLogin = async (e) => {
     if (this.state.profession.trim() === '') {
       errors.profession = 'Veuillez sélectionner votre profession';
     }
-  
     
-  
     return errors;
   }
 
@@ -183,62 +181,83 @@ handleSubmitLogin = async (e) => {
           <div className="form-container sign-up-container">
             <form onSubmit={this.handleSubmit}>
               <h1>Créer un compte</h1>
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Nom"
-                name="nom"
-                value={this.state.nom}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Prénom"
-                name="prenom"
-                value={this.state.prenom}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Ville"
-                name="ville"
-                value={this.state.ville}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Adresse"
-                name="adresse"
-                value={this.state.adresse}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="password"
-                placeholder="Mot de passe"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="password"
-                placeholder="Confirmation du mot de passe"
-                name="confirmationMotDePasse"
-                value={this.state.confirmationMotDePasse}
-                onChange={this.handleChange}
-              />
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faUser} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="text"
+                  placeholder="Nom"
+                  name="nom"
+                  value={this.state.nom}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faUser} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="text"
+                  placeholder="Prénom"
+                  name="prenom"
+                  value={this.state.prenom}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faEnvelope} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="text"
+                  placeholder="Ville"
+                  name="ville"
+                  value={this.state.ville}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faAddressCard} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="text"
+                  placeholder="Adresse"
+                  name="adresse"
+                  value={this.state.adresse}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faLock} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="password"
+                  placeholder="Mot de passe"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faLock} className="input-field-icon" />
+                <input
+                  className="input-field"
+                  type="password"
+                  placeholder="Confirmation du mot de passe"
+                  name="confirmationMotDePasse"
+                  value={this.state.confirmationMotDePasse}
+                  onChange={this.handleChange}
+                />
+              </div>
               <select
                 className="input-field"
                 value={this.state.profession}
@@ -286,33 +305,43 @@ handleSubmitLogin = async (e) => {
                   </label>
                 ))}
               </div>
-              <input
-                className="input-field"
-                type="time"
-                placeholder="Heure de début"
-                name="heureDebut"
-                value={this.state.heureDebut}
-                onChange={this.handleChange}
-              />
-              <input
-                className="input-field"
-                type="time"
-                placeholder="Heure de fin"
-                name="heureFin"
-                value={this.state.heureFin}
-                onChange={this.handleChange}
-              />
-              <Link to ="/ProfilOuvrier" ><button type="submit" onClick={this.handleSubmitRegister}>S'inscrire</button></Link>
+              <div className="input-field-container">
+                <input
+                  className="input-field"
+                  type="time"
+                  placeholder="Heure de début"
+                  name="heureDebut"
+                  value={this.state.heureDebut}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="input-field-container">
+                <input
+                  className="input-field"
+                  type="time"
+                  placeholder="Heure de fin"
+                  name="heureFin"
+                  value={this.state.heureFin}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button type="submit" onClick={this.handleSubmitRegister}>S'inscrire</button>
             </form>
           </div>
 
           <div className="form-container sign-in-container">
             <form>
               <h1>Connexion</h1>
-              <input className="input-field" type="email" placeholder="Email" />
-              <input className="input-field" type="password" placeholder="Mot de passe" />
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faEnvelope} className="input-field-icon" />
+                <input className="input-field" type="email" placeholder="Email" />
+              </div>
+              <div className="input-field-container">
+                <FontAwesomeIcon icon={faLock} className="input-field-icon" />
+                <input className="input-field" type="password" placeholder="Mot de passe" />
+              </div>
               <Link to="/MotDePasseOublie">Mot de passe Oublié?</Link>
-              <Link to ="//ProfilOuvrier" ><button type="submit" onClick={this.handleSubmitLogin}>Connexion</button></Link>
+              <button type="submit" onClick={this.handleSubmitLogin}>Connexion</button>
             </form>
           </div>
 
