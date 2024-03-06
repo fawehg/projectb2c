@@ -76,7 +76,7 @@ class Client extends React.Component {
       });
       if (response.ok) {
         console.log('Connexion réussie !');
-        // Redirection vers la page suivante après connexion réussie
+        
         this.props.history.push('/RechercheOuvrier');
       } else {
         console.error('Erreur lors de la connexion');
