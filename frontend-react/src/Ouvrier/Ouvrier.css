@@ -226,3 +226,19 @@ a {
   color: #1c109c; /* Couleur de l'icône */
   font-size: 1.2rem; /* Taille de l'icône */
 }
+.input-field-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-field-container label {
+  margin-right: 10px;
+}
+
+.input-field {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+

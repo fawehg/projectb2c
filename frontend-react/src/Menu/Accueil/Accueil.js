@@ -4,7 +4,6 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import { Link } from 'react-router-dom'; 
 import Client from '../../Clients/Client.js';
-
 const Accueil = () => {
   return (
     

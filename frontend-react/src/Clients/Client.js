@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import './Client.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { FaUser, FaEnvelope, FaLock, FaMapMarkerAlt } from 'react-icons/fa'; // Import des icônes
+import { FaUser, FaEnvelope, FaLock, FaMapMarkerAlt } from 'react-icons/fa'; 
+import axios from 'axios';
 
 class Client extends React.Component {
   constructor(props) {
@@ -39,20 +40,18 @@ class Client extends React.Component {
     const errors = this.validateForm();
     if (Object.keys(errors).length === 0) {
       try {
-        const response = await fetch('http://localhost:8000/api/signup', {
-          method: 'POST',
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/register`, 
+        JSON.stringify(this.state),
+        {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(this.state),
         });
-        if (response.ok) {
-          console.log('Inscription réussie !');
-          // Redirection vers la page suivante après inscription réussie
-          this.props.history.push('/RechercheOuvrier');
-        } else {
-          console.error('Erreur lors de l\'inscription');
-        }
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.token);
+          this.navigate('/RechercheOuvrier');
+          console.log('Inscription réussie');
+        } 
       } catch (error) {
         console.error('Erreur lors de la requête :', error);
       }
@@ -60,31 +59,28 @@ class Client extends React.Component {
       this.setState({ errors });
     }
   }
+  
 
   handleSubmitSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/api/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }),
-      });
-      if (response.ok) {
-        console.log('Connexion réussie !');
-        
-        this.props.history.push('/RechercheOuvrier');
-      } else {
-        console.error('Erreur lors de la connexion');
-      }
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/login`,
+            this.state,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        console.log(response.data);
+        localStorage.setItem('token', response.data.token);
+        console.log('Connexion réussie');
     } catch (error) {
-      console.error('Erreur lors de la requête :', error);
+        console.error('Erreur lors de la requête :', error);
+        
     }
-  }
+};
+
 
   validateForm = () => {
     const errors = {};

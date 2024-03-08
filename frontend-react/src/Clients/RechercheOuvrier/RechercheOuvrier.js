@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import HeaderClient from '../HeaderClient/HeaderClient';
 import FooterClient from '../FooterClient/FooterClient';
 import './RechercheOuvrier.css';
+import axios from 'axios';
 
 const RechercheOuvrier = () => {
+  const [client, setclient] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [service, setService] = useState('');
   const [panneType, setPanneType] = useState('');
   const [city, setCity] = useState('');
@@ -36,7 +40,7 @@ const RechercheOuvrier = () => {
     event.preventDefault();
     try {
       const formData = { service, panneType, city, date, time, description };
-      const response = await fetch('http://localhost:8000/api/demandes', {
+      const response = await axios.post(process.env.REACT_APP_API_URL +'demandes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -45,12 +49,16 @@ const RechercheOuvrier = () => {
       });
 
       if (response.ok) {
-        console.log('Formulaire soumis avec succès !');
+        const data = await response.json();
+        setclient(data);
+        setLoading(false);
       } else {
-        console.error('Erreur lors de la soumission du formulaire.');
+        throw new Error('Erreur lors de la récupération du profil de l\'ouvrier');
       }
     } catch (error) {
-      console.error('Erreur lors de la soumission du formulaire :', error);
+      console.error('Erreur lors de la récupération du profil de l\'ouvrier : ', error);
+      setLoading(false);
+      setError('Erreur lors de la récupération du profil de l\'ouvrier');
     }
   };
 
@@ -61,7 +69,7 @@ const RechercheOuvrier = () => {
   return (
     <div>
       <HeaderClient />
-      <div className="background-image"/>
+      <div className="background-image"></div>
       <div className="service-search">
         <form onSubmit={handleSubmit}>
           <h1>Veuillez Choisir votre Ouvrier</h1>

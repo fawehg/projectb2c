@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ProfilOuvrier.css'; 
 import Header from '../HeaderOuvrier/HeaderOuvrier';
 import Footer from '../FooterOuvrier/FooterOuvrier';
-import axios from 'axios'; // Importez Axios pour effectuer des requêtes HTTP
+import axios from 'axios'; 
 
 function ProfilOuvrier() {
     const [informationsPersonnelles, setInformationsPersonnelles] = useState(null);
@@ -10,20 +10,18 @@ function ProfilOuvrier() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/show'); 
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/show`); 
                 setInformationsPersonnelles(response.data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données : ', error);
             }
         };
-
         fetchData();
     }, []);
 
     const handleModifierProfil = async () => {
-
         try {
-            await axios.put('http://localhost:8000/api/update',);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/update`); 
             console.log("Profil modifié avec succès !");
         } catch (error) {
             console.error('Erreur lors de la modification du profil : ', error);

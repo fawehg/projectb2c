@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faMapMarkerAlt, faAddressCard, faLock, faBriefcase, faCalendarAlt, faClock } from '@fortawesome/free-solid-svg-icons';
 import './Ouvrier.css';
@@ -7,6 +7,7 @@ import ProfilOuvrier from './ProfilOuvrier/ProfilOuvrier';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MotDePasseOublie from '../MDPoubliée/MDPoubliée';
+import axios from 'axios';
 
 class Ouvrier extends React.Component {
   constructor(props) {
@@ -62,56 +63,61 @@ class Ouvrier extends React.Component {
     }
   }
 
+  
+  
   handleSubmitRegister = async (e) => {
     e.preventDefault();
     const errors = this.validateForm();
     if (Object.keys(errors).length === 0) {
         try {
-            const response = await fetch('http://localhost:8000/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.state),
-            });
-            if (response.ok) {
-              this.props.history.push('/ProfilOuvrier');
-              console.log('Connexion réussie !');
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/register`, 
+                JSON.stringify(this.state),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }    
+            );
+            console.log(response.data); 
+            if (response.data.token) { 
+                localStorage.setItem('token', response.data.token);
+                this.navigate('/ProfilOuvrier'); 
             } else {
-                console.error('Erreur lors de l\'inscription');
+                console.error('Token not found in response:', response.data);
             }
         } catch (error) {
             console.error('Erreur lors de la requête :', error);
         }
-    } else {
-        this.setState({ errors });
     }
-  }
+}
+
 
   handleSubmitLogin = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch('http://localhost:8000/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/login`,
+            {
                 email: this.state.email,
                 password: this.state.password,
-            }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-            console.log('Connexion réussie !');
-            this.props.history.push('/ProfilOuvrier');
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        console.log(response.data);
+        if (response.status === 200) {
+            localStorage.setItem('token', response.data.token);
+            this.navigate('/ProfilOuvrier');
+            console.log('Connexion réussie');
         } else {
-            console.error('Erreur lors de la connexion :', data.message);
+            console.error('Erreur lors de la connexion :', response.data.message);
         }
     } catch (error) {
         console.error('Erreur lors de la requête :', error);
     }
-  }
+};
 
   validateForm = () => {
     const errors = {};
@@ -278,7 +284,7 @@ class Ouvrier extends React.Component {
                 <option value="Installateur HVAC">Installateur HVAC</option>
                 <option value="Jardinier / Paysagiste">Jardinier / Paysagiste</option>
               </select>
-              <div>
+              <div className="input-field-container">
                 {this.state.profession && professionsWithSpecialties[this.state.profession].map((specialty, index) => (
                   <label key={index}>
                     <input
@@ -291,8 +297,9 @@ class Ouvrier extends React.Component {
                   </label>
                 ))}
               </div>
-              <div>
+              
                 <h3>Jours de disponibilité :</h3>
+                <div className="input-field-container">
                 {['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((day, index) => (
                   <label key={index}>
                     <input
@@ -306,6 +313,7 @@ class Ouvrier extends React.Component {
                 ))}
               </div>
               <div className="input-field-container">
+              <label htmlFor="datedebut">Heure de début:</label>
                 <input
                   className="input-field"
                   type="time"
@@ -314,8 +322,7 @@ class Ouvrier extends React.Component {
                   value={this.state.heureDebut}
                   onChange={this.handleChange}
                 />
-              </div>
-              <div className="input-field-container">
+              <label htmlFor="datedebut">Heure de Fin:</label>
                 <input
                   className="input-field"
                   type="time"
