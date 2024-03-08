@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="header"> 
       <div className="logo-container">
-        <img src="logo.avif" alt="Logo" className="logo" />
+        <img src="./LOGO.png" alt="Logo" className="logo" />
       </div>
       <div className="buttons">
         <Link to="/"><button>Déconnexion</button></Link>

@@ -78,7 +78,7 @@ class Ouvrier extends React.Component {
                     },
                 }    
             );
-            console.log(response.data); 
+            console.log(response.data); // Log the response data
             if (response.data.token) { 
                 localStorage.setItem('token', response.data.token);
                 this.navigate('/ProfilOuvrier'); 
@@ -88,6 +88,8 @@ class Ouvrier extends React.Component {
         } catch (error) {
             console.error('Erreur lors de la requête :', error);
         }
+    } else {
+        this.setState({ errors });
     }
 }
 

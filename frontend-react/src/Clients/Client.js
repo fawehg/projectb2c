@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Client.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import rechercheouvrier from './RechercheOuvrier/RechercheOuvrier';
 import { FaUser, FaEnvelope, FaLock, FaMapMarkerAlt } from 'react-icons/fa'; 
 import axios from 'axios';
 
@@ -49,7 +50,7 @@ class Client extends React.Component {
         });
         if (response.status === 200) {
           localStorage.setItem('token', response.data.token);
-          this.navigate('/RechercheOuvrier');
+          this.navigate('/recherche-ouvrier');
           console.log('Inscription réussie');
         } 
       } catch (error) {

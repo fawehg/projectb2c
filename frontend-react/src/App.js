@@ -19,7 +19,7 @@ function App() {
         
         <Routes>
           <Route path="/" element={<Accueil />} />
-          <Route path="/espace-Pro" element={<EspacePro />} />
+          <Route path="/espacePro" element={<EspacePro />} />
           <Route path="/client" element={<Client/>} />
           <Route path="/ouvrier" element={<Ouvrier/>} />
           <Route path="/recherche-ouvrier" element={<RechercheOuvrier/>} />
