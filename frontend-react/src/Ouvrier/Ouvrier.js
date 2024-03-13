@@ -20,7 +20,7 @@ class Ouvrier extends React.Component {
       adresse: '',
       password: '',
       confirmationMotDePasse: '',
-      profession: '', 
+      profession: [], 
       specialties: [], 
       joursDisponibilite: [],
       heureDebut: '',
@@ -28,25 +28,41 @@ class Ouvrier extends React.Component {
       errors: {}
     };
   }
+  componentDidMount() {
+    axios.get(`${process.env.REACT_APP_API_URL}/domaines`)
+      .then(response => {
+        this.setState({ domaines: response.data || [] });
+      })
+      ;
+      axios.get(`${process.env.REACT_APP_API_URL}/specialites`)
+      .then(response => {
+        this.setState({ specialites: response.data || [] });
+      })
+      ;
+  }
+
+  
+
+  handleSpecialtyChange = (e) => {
+    const specialty = e.target.value;
+    const { selectedDomain, domaines } = this.state;
+    const selectedDomainObj = domaines.find(domain => domain.nom_domaine === selectedDomain);
+    if (selectedDomainObj.specialites.includes(specialty)) {
+      this.setState(prevState => ({
+        specialties: prevState.specialties.filter(item => item !== specialty)
+      }));
+    } else {
+      this.setState(prevState => ({
+        specialties: [...prevState.specialties, specialty]
+      }));
+    }
+  }
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
-
-  handleSpecialtyChange = (e) => {
-    const specialty = e.target.value;
-    const { specialties } = this.state;
-    if (specialties.includes(specialty)) {
-      this.setState({
-        specialties: specialties.filter(item => item !== specialty)
-      });
-    } else {
-      this.setState({
-        specialties: [...specialties, specialty]
-      });
-    }
+    
   }
 
   handleAvailabilityChange = (e) => {
@@ -78,7 +94,7 @@ class Ouvrier extends React.Component {
                     },
                 }    
             );
-            console.log(response.data); // Log the response data
+            console.log(response.data); 
             if (response.data.token) { 
                 localStorage.setItem('token', response.data.token);
                 this.navigate('/ProfilOuvrier'); 
@@ -167,20 +183,7 @@ class Ouvrier extends React.Component {
     const { errors } = this.state;
 
     // Définir les spécialités pour chaque profession
-    const professionsWithSpecialties = {
-      Maçon: ['Mur endommagé', 'Fondation fissurée', 'Béton dégradé'],
-      Charpentier: ['Toiture endommagée', 'Charpente affaissée', 'Isolation défectueuse'],
-      Électricien: ['Court-circuit', 'Problème de câblage', 'Panne de prise de courant'],
-      Plombier: ['Fuite d\'eau', 'Canalisations bouchées', 'Problème de chauffe-eau'],
-      Peintre: ['Peinture écaillée', 'Décoloration de la peinture', 'Mauvaise préparation de surface'],
-      Menuisier: ['Fenêtre cassée', 'Porte qui coince', 'Escalier endommagé'],
-      Carreleur: ['Carrelage fissuré', 'Joint de carrelage détérioré', 'Carrelage mal posé'],
-      Couvreur: ['Tuile cassée', 'Problème d\'étanchéité', 'Chéneau obstrué'],
-      Plâtrier: ['Plafond fissuré', 'Enduit qui se décolle', 'Cloison abîmée'],
-      Ferronnier: ['Portail déformé', 'Rampe d\'escalier endommagée', 'Grille rouillée'],
-      'Installateur HVAC': ['Climatisation en panne', 'Système de chauffage défaillant', 'Ventilation bruyante'],
-      'Jardinier / Paysagiste': ['Pelouse envahie de mauvaises herbes', 'Taille d\'arbres à effectuer', 'Problème d\'arrosage automatique']
-    };
+  
 
     return (
       <div>
@@ -267,39 +270,32 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <select
-                className="input-field"
-                value={this.state.profession}
+              className="input-field"
+              value={this.state.domaines}
                 onChange={this.handleChange}
-                name="profession"
-              >
-                <option value="">Sélectionnez une profession</option>
-                <option value="Maçon">Maçon</option>
-                <option value="Charpentier">Charpentier</option>
-                <option value="Électricien">Électricien</option>
-                <option value="Plombier">Plombier</option>
-                <option value="Peintre">Peintre</option>
-                <option value="Menuisier">Menuisier</option>
-                <option value="Carreleur">Carreleur</option>
-                <option value="Couvreur">Couvreur</option>
-                <option value="Plâtrier">Plâtrier</option>
-                <option value="Ferronnier">Ferronnier</option>
-                <option value="Installateur HVAC">Installateur HVAC</option>
-                <option value="Jardinier / Paysagiste">Jardinier / Paysagiste</option>
-              </select>
-              <div className="input-field-container">
-                {this.state.profession && professionsWithSpecialties[this.state.profession].map((specialty, index) => (
-                  <label key={index}>
-                    <input
-                      type="checkbox"
-                      value={specialty}
-                      checked={this.state.specialties.includes(specialty)}
-                      onChange={this.handleSpecialtyChange}
-                    />
-                    {specialty}
-                  </label>
-                ))}
-              </div>
-              
+               name="profession">
+               <option value="">Sélectionnez une profession</option>
+               {this.state.domaines && this.state.domaines.map((domaines, index) => (
+                   <option key={index} value={domaines.nom_domaine}>{domaines.nom_domaine}</option>
+
+            ))}
+           </select>
+           <div>
+  <h1>Liste des spécialités par domaine</h1>
+  {this.state.specialties && this.state.specialties.map((specialite, index) => (
+    <div key={index}>
+      <input
+        type="checkbox"
+        id={specialite.id_specialites}
+        value={specialite.nom_specialites}
+        onChange={this.handleSpecialtyChange}
+        checked={this.state.specialties.includes(specialite.nom_specialites)}
+      />
+      <label>{specialite.nom_specialites}</label>
+    </div>
+  ))}
+</div>
+    
                 <h3>Jours de disponibilité :</h3>
                 <div className="input-field-container">
                 {['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((day, index) => (

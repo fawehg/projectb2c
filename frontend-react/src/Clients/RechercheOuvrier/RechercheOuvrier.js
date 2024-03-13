@@ -1,71 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderClient from '../HeaderClient/HeaderClient';
 import FooterClient from '../FooterClient/FooterClient';
 import './RechercheOuvrier.css';
 import axios from 'axios';
 
 const RechercheOuvrier = () => {
-  const [client, setclient] = useState(null);
+  const [domaines, setDomaines] = useState([]);
+  const [specialites, setSpecialites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [service, setService] = useState('');
-  const [panneType, setPanneType] = useState('');
+  const [selectedDomain, setSelectedDomain] = useState('');
+  const [selectedSpecialite, setSelectedSpecialite] = useState('');
   const [city, setCity] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
 
-  const serviceToPanneTypes = {
-    Maçon: ['Mur endommagé', 'Fondation fissurée', 'Béton dégradé'],
-    Charpentier: ['Toiture endommagée', 'Charpente affaissée', 'Isolation défectueuse'],
-    Plombier: ['Fuite d\'eau', 'Canalisations bouchées', 'Problème de chauffe-eau'],
-    Peintre: ['Peinture écaillée', 'Décoloration de la peinture', 'Mauvaise préparation de surface'],
-    Menuisier: ['Fenêtre cassée', 'Porte qui coince', 'Escalier endommagé'],
-    Carreleur: ['Carrelage fissuré', 'Joint de carrelage détérioré', 'Carrelage mal posé'],
-    Couvreur: ['Tuile cassée', 'Problème d\'étanchéité', 'Chéneau obstrué'],
-    Plâtrier: ['Plafond fissuré', 'Enduit qui se décolle', 'Cloison abîmée'],
-    Ferronnier: ['Portail déformé', 'Rampe d\'escalier endommagée', 'Grille rouillée'],
-    'Installateur HVAC': ['Climatisation en panne', 'Système de chauffage défaillant', 'Ventilation bruyante'],
-    'Jardinier / Paysagiste': ['Pelouse envahie de mauvaises herbes', 'Taille d\'arbres à effectuer', 'Problème d\'arrosage automatique']
-  };
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/domaines`)
+      .then(response => {
+        setDomaines(response.data || []);
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+
+    axios.get(`${process.env.REACT_APP_API_URL}/specialites`)
+      .then(response => {
+        setSpecialites(response.data || []);
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+
+  }, []); 
 
   const gouvernorats = [
     "Ariana", "Béja", "Ben Arous", "Bizerte", "Gabès", "Gafsa", "Jendouba", "Kairouan",
     "Kasserine", "Kébili", "Le Kef", "Mahdia", "La Manouba", "Médenine", "Monastir",
     "Nabeul", "Sfax", "Sidi Bouzid", "Siliana", "Sousse", "Tataouine", "Tozeur", "Tunis", "Zaghouan"
   ];
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const formData = { service, panneType, city, date, time, description };
-      const response = await axios.post(process.env.REACT_APP_API_URL +'demandes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setclient(data);
-        setLoading(false);
-      } else {
-        throw new Error('Erreur lors de la récupération du profil de l\'ouvrier');
-      }
-    } catch (error) {
-      console.error('Erreur lors de la récupération du profil de l\'ouvrier : ', error);
-      setLoading(false);
-      setError('Erreur lors de la récupération du profil de l\'ouvrier');
-    }
+  
+  const handleDomainChange = (event) => {
+    setSelectedDomain(event.target.value);
+    setSelectedSpecialite('');
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = { selectedDomain, selectedSpecialite, city, date, time, description };
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`, formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response.data);
+      // Handle response accordingly
+    } catch (error) {
+      console.error('Erreur lors de la requête :', error);
+      // Handle error accordingly
+    }
+  }
 
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
-
+  const filteredSpecialites = domaines
+    .find(domaine => domaine.nom_domaine === selectedDomain)
+    ?.specialites || [];
+  
   return (
     <div>
       <HeaderClient />
@@ -73,16 +77,26 @@ const RechercheOuvrier = () => {
       <div className="service-search">
         <form onSubmit={handleSubmit}>
           <h1>Veuillez Choisir votre Ouvrier</h1>
-          <select value={service} onChange={(e) => setService(e.target.value)}>
-            <option value="">Sélectionner un service</option>
-            {Object.keys(serviceToPanneTypes).map((service) => (
-              <option key={service} value={service}>{service}</option>
+          <select
+            className="input-field"
+            value={selectedDomain}
+            onChange={handleDomainChange}
+            name="service"
+          >
+            <option value="">Sélectionnez un domaine</option>
+            {domaines && domaines.map((domaine, index) => (
+              <option key={index} value={domaine.nom_domaine}>{domaine.nom_domaine}</option>
             ))}
           </select>
-          <select value={panneType} onChange={(e) => setPanneType(e.target.value)}>
-            <option value="">Sélectionner un type de panne</option>
-            {serviceToPanneTypes[service]?.map((type) => (
-              <option key={type} value={type}>{type}</option>
+          <select
+            className="input-field"
+            value={selectedSpecialite}
+            onChange={(e) => setSelectedSpecialite(e.target.value)}
+            name=""
+          >
+            <option value="">Sélectionnez une spécialité</option>
+            {filteredSpecialites && filteredSpecialites.map((specialite, index) => (
+              <option key={index} value={specialite.id}>{specialite.nom_specialite}</option>
             ))}
           </select>
           <select value={city} onChange={(e) => setCity(e.target.value)}>
@@ -91,6 +105,7 @@ const RechercheOuvrier = () => {
               <option key={gouvernorat} value={gouvernorat}>{gouvernorat}</option>
             ))}
           </select>
+          
           <input
             type="date"
             value={date}
@@ -111,7 +126,7 @@ const RechercheOuvrier = () => {
             accept="image/*"
             onChange={handleImageChange}
           />
-          <button type="submit">Rechercher</button> {/*Changed button text to "Rechercher"*/}
+          <button type="submit">Rechercher</button>
         </form>
       </div>
       <FooterClient />
