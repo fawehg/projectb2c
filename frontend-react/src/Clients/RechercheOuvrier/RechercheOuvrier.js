@@ -48,20 +48,26 @@ const RechercheOuvrier = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = { selectedDomain, selectedSpecialite, city, date, time, description };
+    const formData = { selectedDomain, selectedSpecialite, city, date, time, description,image };
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log(response.data);
-      // Handle response accordingly
-    } catch (error) {
-      console.error('Erreur lors de la requête :', error);
-      // Handle error accordingly
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`, 
+          JSON.stringify(this.state),
+          {
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          }    
+      );  console.log(response.data);
+      if (response.data.token) { 
+        localStorage.setItem('token', response.data.token);
+        this.navigate('/ProfilOuvrier'); 
+    } else {
+        console.error('Token not found in response:', response.data);
     }
-  }
+} catch (error) {
+    console.error('Erreur lors de la requête :', error);
+}
+} 
 
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);

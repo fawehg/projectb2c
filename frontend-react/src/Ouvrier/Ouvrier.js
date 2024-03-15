@@ -82,7 +82,14 @@ class Ouvrier extends React.Component {
       });
     }
   }
-
+  
+  FilteredSpecialites = () => {
+    const { domaines, selectedDomain } = this.state;
+    return domaines
+    
+      .find(domaine => domaine.nom_domaine === selectedDomain)
+      ?.specialites || [];
+  }
   
   
   handleSubmitRegister = async (e) => {
@@ -277,7 +284,7 @@ class Ouvrier extends React.Component {
               <select
               className="input-field"
               value={this.state.domaines}
-              onChange={this.handleDomainChange}
+              onChange={this.handleChange}
                name="profession">
                <option value="">Sélectionnez une profession</option>
                {this.state.domaines && this.state.domaines.map((domaines, index) => (
@@ -288,7 +295,7 @@ class Ouvrier extends React.Component {
            </select>
            <div>
   <h1>Liste des spécialités par domaine</h1>
-  {this.state.specialties && this.state.specialties.map((specialite, index) => (  
+  {this.statefilteredSpecialites && this.state.filteredSpecialites.map((specialite, index) => (
     <div key={index}>
       <input
         type="checkbox"
