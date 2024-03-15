@@ -39,8 +39,12 @@ class Ouvrier extends React.Component {
         this.setState({ specialites: response.data || [] });
       })
       ;
+      
   }
-
+  handleDomainChange = (event) => {
+    this.setState({ selectedDomain: event.target.value });
+    this.setState({ selectedSpecialite: '' }); 
+  };
   
 
   handleSpecialtyChange = (e) => {
@@ -269,20 +273,22 @@ class Ouvrier extends React.Component {
                   onChange={this.handleChange}
                 />
               </div>
+              
               <select
               className="input-field"
               value={this.state.domaines}
-                onChange={this.handleChange}
+              onChange={this.handleDomainChange}
                name="profession">
                <option value="">Sélectionnez une profession</option>
                {this.state.domaines && this.state.domaines.map((domaines, index) => (
-                   <option key={index} value={domaines.nom_domaine}>{domaines.nom_domaine}</option>
+                   <option key={index} value={domaines.id_domaine}>{domaines.nom_domaine}</option>
 
-            ))}
+            )
+            )}
            </select>
            <div>
   <h1>Liste des spécialités par domaine</h1>
-  {this.state.specialties && this.state.specialties.map((specialite, index) => (
+  {this.state.specialties && this.state.specialties.map((specialite, index) => (  
     <div key={index}>
       <input
         type="checkbox"

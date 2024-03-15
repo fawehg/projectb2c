@@ -1,7 +1,10 @@
-.background-image {
-    background-image: url('./RechercheOuv.png');  
-    top:0%;
-    right:auto;
+.service-search{
+  display: flex;
+}
 
-  }
-  
+
+
+.RechercheOuv{
+  margin-left: 60%;
+  margin-top: 0%; /* ou toute autre valeur de marge appropriée */
+}

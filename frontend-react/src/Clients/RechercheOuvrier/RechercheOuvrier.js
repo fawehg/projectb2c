@@ -73,9 +73,9 @@ const RechercheOuvrier = () => {
   return (
     <div>
       <HeaderClient />
-      <div className="background-image"></div>
+      
       <div className="service-search">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="service-search-form">
           <h1>Veuillez Choisir votre Ouvrier</h1>
           <select
             className="input-field"
@@ -85,9 +85,10 @@ const RechercheOuvrier = () => {
           >
             <option value="">Sélectionnez un domaine</option>
             {domaines && domaines.map((domaine, index) => (
-              <option key={index} value={domaine.nom_domaine}>{domaine.nom_domaine}</option>
+              <option key={index} value={domaine.id_domaine}>{domaine.nom_domaine}</option>
             ))}
           </select>
+          
           <select
             className="input-field"
             value={selectedSpecialite}
@@ -128,9 +129,13 @@ const RechercheOuvrier = () => {
           />
           <button type="submit">Rechercher</button>
         </form>
-      </div>
+        <img src="./RechercheOuv.png" className="RechercheOuv" />
+        </div>
+        
+      
       <FooterClient />
     </div>
+  
   );
 };
 
