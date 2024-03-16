@@ -58,12 +58,7 @@ const RechercheOuvrier = () => {
               },
           }    
       );  console.log(response.data);
-      if (response.data.token) { 
-        localStorage.setItem('token', response.data.token);
-        this.navigate('/ProfilOuvrier'); 
-    } else {
-        console.error('Token not found in response:', response.data);
-    }
+   
 } catch (error) {
     console.error('Erreur lors de la requête :', error);
 }
@@ -106,7 +101,7 @@ const RechercheOuvrier = () => {
               <option key={index} value={specialite.id}>{specialite.nom_specialite}</option>
             ))}
           </select>
-          <select value={city} onChange={(e) => setCity(e.target.value)}>
+          <select value={city} onChange={(e) => setCity(e.target.value)}  className="input-field">
             <option value="">Sélectionner une ville</option>
             {gouvernorats.map((gouvernorat) => (
               <option key={gouvernorat} value={gouvernorat}>{gouvernorat}</option>
@@ -117,21 +112,26 @@ const RechercheOuvrier = () => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            className="input-field"
           />
           <input
+           className="input-field"
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
+           
           />
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Explication"
+            className="input-field"
           />
           <input
             type="file"
             accept="image/*"
             onChange={handleImageChange}
+            className="input-field"
           />
           <button type="submit">Rechercher</button>
         </form>

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import './MDPoubliée.css';
 
 function ResetMotDePasse() {
     const [password, setPassword] = useState('');
@@ -28,10 +31,12 @@ function ResetMotDePasse() {
 
     return (
         <div>
+            <Header/>
+            
+            <form onSubmit={handleSubmit} className='reset'>
             <h2>Réinitialiser le mot de passe</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="token">Code de réinitialisation :</label><br />
                 <input
+                placeholder="Code de réinitialisation"
                     type="text"
                     id="token"
                     name="token"
@@ -39,8 +44,9 @@ function ResetMotDePasse() {
                     onChange={(e) => setToken(e.target.value)}
                     required
                 /><br />
-                <label htmlFor="email">Adresse e-mail :</label><br />
+                
                 <input
+                 placeholder="Email"
                     type="email"
                     id="email"
                     name="email"
@@ -48,8 +54,9 @@ function ResetMotDePasse() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 /><br />
-                <label htmlFor="password">Nouveau mot de passe :</label><br />
+                
                 <input
+                placeholder="Nouveau mot de passe"
                     type="password"
                     id="password"
                     name="password"
@@ -57,8 +64,8 @@ function ResetMotDePasse() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 /><br />
-                <label htmlFor="passwordConfirmation">Confirmez le nouveau mot de passe :</label><br />
                 <input
+                placeholder="Confirmez le nouveau mot de passe"
                     type="password"
                     id="passwordConfirmation"
                     name="passwordConfirmation"
@@ -66,9 +73,10 @@ function ResetMotDePasse() {
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                     required
                 /><br />
-                <button type="submit">Envoyer</button>
+                <button type="submit" className='confirmer'>comnfirmer</button>
             </form>
             {message && <p>{message}</p>}
+            <Footer/>
         </div>
     );
 }

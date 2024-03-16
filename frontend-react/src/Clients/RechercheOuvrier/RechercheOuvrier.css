@@ -1,10 +1,38 @@
-.service-search{
+.service-search {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+ 
 }
-
 
 
 .RechercheOuv{
-  margin-left: 60%;
-  margin-top: 0%; /* ou toute autre valeur de marge appropriée */
+  margin-left: 20px;
+  height: 80vh;
+  
 }
+.service-search-form {
+   /* Positionnement relatif pour faciliter le positionnement absolu */
+  width: 3000px; /* Largeur du formulaire */
+  height: 80vh;
+  background-color: rgba(24, 121, 201, 0.247);
+  border-radius: 30px;
+  box-shadow: 0 14px 28px rgba(239, 235, 235, 0.25), 
+              0 10px 10px rgba(14, 11, 216, 0.719);
+}
+
+
+.input-field {
+  width: calc(100% - 24px); 
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 3px solid #cccccc76;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #7b7d8001;
+}
+
+
+
+
