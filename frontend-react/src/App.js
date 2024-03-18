@@ -9,7 +9,7 @@ import RechercheOuvrier from './Clients/RechercheOuvrier/RechercheOuvrier';
 import ProfilOuvrier from './Ouvrier/ProfilOuvrier/ProfilOuvrier';
 import MotDePasseOublie from './MDPoubliée/MDPoubliée';
 import Reset from './MDPoubliée/Reset/Reset';
-
+import SupportUtilisateurs from './Menu/SupportUtilisateurs/SupportUtilisateurs';
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
           <Route path="/profil-ouvrier" element={<ProfilOuvrier/>} />
           <Route path="/mot-de-passe-oublie" element={<MotDePasseOublie/>} />
           <Route path="/reset" element={<Reset/>} />
+          <Route path="/support-utilisateurs" element={<SupportUtilisateurs/>} />
 
         </Routes>
       </div>

@@ -1,6 +1,6 @@
 /* Footer */
 .footer-container {
-    position: relative;
+    position: absolute;
     display: flex; /* Utiliser flexbox */
     justify-content: space-between; /* Aligner les éléments horizontalement */
     align-items: center; /* Centrer les éléments verticalement */

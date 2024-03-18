@@ -1,0 +1,27 @@
+
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color:white;
+}
+
+
+.md {
+    
+   width: 600px; /* Largeur du formulaire */
+   height: 30vh;
+   background-color: rgba(95, 105, 215, 0.685) ;
+   border-radius: 20px;
+   box-shadow:      rgb(65, 74, 167) , 
+                    rgb(65, 74, 167);
+ }
+ 
+input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #fff8f82d;
+    font-size: 16px;
+}
+

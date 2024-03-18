@@ -5,9 +5,17 @@ import './RechercheOuvrier.css';
 import axios from 'axios';
 
 const RechercheOuvrier = () => {
+  const [formData, setFormData] = useState({
+    domaines: "",
+    specialites: "",
+    city: "",
+    date: "",
+    time: "",
+    description: "",
+    image: null, // Changed to null to match initial state
+  });
   const [domaines, setDomaines] = useState([]);
   const [specialites, setSpecialites] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedDomain, setSelectedDomain] = useState('');
   const [selectedSpecialite, setSelectedSpecialite] = useState('');
@@ -46,27 +54,27 @@ const RechercheOuvrier = () => {
     setSelectedDomain(event.target.value);
     setSelectedSpecialite('');
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = { selectedDomain, selectedSpecialite, city, date, time, description,image };
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`, 
-          JSON.stringify(this.state),
+          formData,
           {
               headers: {
                   'Content-Type': 'application/json',
               },
           }    
-      );  console.log(response.data);
-   
-} catch (error) {
-    console.error('Erreur lors de la requête :', error);
-}
-} 
-
+      );
+      console.log(response.data); 
+    } catch (error) {
+      console.error('Erreur lors de la requête :', error);
+    }
+  };
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
+
   const filteredSpecialites = domaines
     .find(domaine => domaine.nom_domaine === selectedDomain)
     ?.specialites || [];
@@ -103,8 +111,8 @@ const RechercheOuvrier = () => {
           </select>
           <select value={city} onChange={(e) => setCity(e.target.value)}  className="input-field">
             <option value="">Sélectionner une ville</option>
-            {gouvernorats.map((gouvernorat) => (
-              <option key={gouvernorat} value={gouvernorat}>{gouvernorat}</option>
+            {gouvernorats.map((gouvernorat, index) => (
+              <option key={index} value={gouvernorat}>{gouvernorat}</option>
             ))}
           </select>
           
@@ -119,7 +127,6 @@ const RechercheOuvrier = () => {
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
-           
           />
           <textarea
             value={description}
@@ -135,13 +142,10 @@ const RechercheOuvrier = () => {
           />
           <button type="submit">Rechercher</button>
         </form>
-        <img src="./RechercheOuv.png" className="RechercheOuv" />
-        </div>
-        
-      
+        <img src="./RechercheOuv.png" className="RechercheOuv" alt="Recherche Ouvrier" />
+      </div>
       <FooterClient />
     </div>
-  
   );
 };
 

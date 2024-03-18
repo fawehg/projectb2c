@@ -2,51 +2,44 @@ import React, { useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './MDPoubliée.css';
+import axios from 'axios';
 
 function ResetMotDePasse() {
-    const [password, setPassword] = useState('');
-    const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    const [token, setToken] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const response = await fetch('/api/password/reset', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/reset-password`, 
+                {
+                    email: email 
                 },
-                body: JSON.stringify({ email, token, password, password_confirmation: passwordConfirmation }),
-            });
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            console.log(response.data);
 
-            const data = await response.json();
-            setMessage(data.message);
+            if (response.data && response.data.error === "Email non trouvé") {
+                setMessage("L'e-mail n'existe pas.");
+            } else {
+                setMessage("Vérifiez votre e-mail pour les instructions de réinitialisation.");
+            }
         } catch (error) {
-            console.error('Erreur lors de l\'envoi de la demande :', error);
+            console.error('Erreur lors de la requête :', error);
         }
     };
 
     return (
-        <div>
-            <Header/>
-            
-            <form onSubmit={handleSubmit} className='reset'>
-            <h2>Réinitialiser le mot de passe</h2>
+        <div className='MDPoubliee'>
+            <Header/> 
+            <form onSubmit={handleSubmit} className='md'>
+                <h2>Réinitialiser le mot de passe</h2>
                 <input
-                placeholder="Code de réinitialisation"
-                    type="text"
-                    id="token"
-                    name="token"
-                    value={token}
-                    onChange={(e) => setToken(e.target.value)}
-                    required
-                /><br />
-                
-                <input
-                 placeholder="Email"
+                    placeholder="Email"
                     type="email"
                     id="email"
                     name="email"
@@ -54,26 +47,8 @@ function ResetMotDePasse() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 /><br />
-                
-                <input
-                placeholder="Nouveau mot de passe"
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                /><br />
-                <input
-                placeholder="Confirmez le nouveau mot de passe"
-                    type="password"
-                    id="passwordConfirmation"
-                    name="passwordConfirmation"
-                    value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    required
-                /><br />
-                <button type="submit" className='confirmer'>comnfirmer</button>
+                <br />
+                <button type="submit" className='confirmer'>Confirmer</button>
             </form>
             {message && <p>{message}</p>}
             <Footer/>
