@@ -5,15 +5,7 @@ import './RechercheOuvrier.css';
 import axios from 'axios';
 
 const RechercheOuvrier = () => {
-  const [formData, setFormData] = useState({
-    domaines: "",
-    specialites: "",
-    city: "",
-    date: "",
-    time: "",
-    description: "",
-    image: null, // Changed to null to match initial state
-  });
+
   const [domaines, setDomaines] = useState([]);
   const [specialites, setSpecialites] = useState([]);
   const [error, setError] = useState(null);
@@ -58,19 +50,30 @@ const RechercheOuvrier = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`, 
-          formData,
-          {
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-          }    
+      const requestData = {
+        domaines: selectedDomain,
+        specialites: selectedSpecialite,
+        city,
+        date,
+        time,
+        description,
+        image: null, // You can update this if needed
+      };
+  
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`,
+      JSON.stringify(this.state),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
-      console.log(response.data); 
+      console.log(response.data);
     } catch (error) {
       console.error('Erreur lors de la requête :', error);
     }
   };
+  
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
