@@ -11,13 +11,13 @@
 }
 
 
-.main-content {
+.main {
     display: flex;
     flex: 1; 
     padding: 20px;
 }
 
-.sidebar {
+.profil-side {
     width: 30%;
     padding: 20px;
     background-color: #ffffff52;

@@ -60,8 +60,9 @@ const RechercheOuvrier = () => {
         image: null, // You can update this if needed
       };
   
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/demandes`,
-      JSON.stringify(this.state),
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/client/demandes`,
+        requestData,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -73,6 +74,7 @@ const RechercheOuvrier = () => {
       console.error('Erreur lors de la requête :', error);
     }
   };
+  
   
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
@@ -97,7 +99,7 @@ const RechercheOuvrier = () => {
           >
             <option value="">Sélectionnez un domaine</option>
             {domaines && domaines.map((domaine, index) => (
-              <option key={index} value={domaine.id_domaine}>{domaine.nom_domaine}</option>
+              <option key={index} value={domaine.nom_domaine}>{domaine.nom_domaine}</option>
             ))}
           </select>
           

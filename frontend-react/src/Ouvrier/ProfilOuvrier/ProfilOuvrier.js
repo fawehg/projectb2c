@@ -32,8 +32,8 @@ function ProfilOuvrier() {
         <div>
             <Header/>
             <div className="profil-container">
-                <div className="main-content">
-                    <div className="sidebar">
+                <div className="main">
+                    <div className="profil-side">
                         <h1>Profil</h1>
                         {informationsPersonnelles ? (
                             <div>

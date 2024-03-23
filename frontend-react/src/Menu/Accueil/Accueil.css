@@ -10,6 +10,7 @@ body {
 
 .accueil-container {
   font-family: 'poppins', sans-serif;
+  height: 100%;
 }
 
 
@@ -20,6 +21,7 @@ body {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  height: 100%;
 }
 
 .client,
@@ -70,6 +72,7 @@ body,
 .phrase-card p,
 .footer-container span {
   font-family: 'Poppins', sans-serif;
+  height: 100%;
 }
 
 
@@ -121,11 +124,7 @@ body,
   background-color: rgba(255, 255, 255, 0.2); /* Change la couleur de fond au survol */
 }
 
-.footer-container span {
-  font-size: 18px;
-  display: block;
-  margin-top: 20px; /* Ajoute de l'espace entre les boutons et le texte */
-}
+
 .additional-text {
   font-weight: bold;
   font-size: 24px; /* Ajustez la taille selon vos préférences */

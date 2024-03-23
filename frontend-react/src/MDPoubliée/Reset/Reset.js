@@ -2,41 +2,52 @@ import React, { useState } from 'react';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import './Reset.css';
+import axios from 'axios';
 
 function ResetMotDePasse() {
+    const [email, setEmail] = useState('');
+    const [token, setToken] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    const [token, setToken] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (password !== passwordConfirmation) {
+            setError('Les mots de passe ne correspondent pas.');
+            return;
+        }
 
         try {
-            const response = await fetch('/api/password/reset', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/verify-reset-code`,
+                {
+                    email,
+                    token,
+                    password,
+                    passwordConfirmation
                 },
-                body: JSON.stringify({ email, token, password, password_confirmation: passwordConfirmation }),
-            });
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
 
-            const data = await response.json();
-            setMessage(data.message);
+            console.log(response.data);
+
         } catch (error) {
-            console.error('Erreur lors de l\'envoi de la demande :', error);
+            console.error('Erreur lors de la requête', error);
+            setError('Une erreur est survenue lors de la réinitialisation du mot de passe.');
         }
     };
 
     return (
         <div>
-            <Header/>
-            
+            <Header />
             <form onSubmit={handleSubmit} className='reset'>
-            <h2>Réinitialiser le mot de passe</h2>
-            <input
-                 placeholder="Email"
+                <h2>Réinitialiser le mot de passe</h2>
+                <input
+                    placeholder="Email"
                     type="email"
                     id="email"
                     name="email"
@@ -45,7 +56,7 @@ function ResetMotDePasse() {
                     required
                 /><br />
                 <input
-                placeholder="Code de réinitialisation"
+                    placeholder="Code de réinitialisation"
                     type="text"
                     id="token"
                     name="token"
@@ -53,10 +64,8 @@ function ResetMotDePasse() {
                     onChange={(e) => setToken(e.target.value)}
                     required
                 /><br />
-                
-               
                 <input
-                placeholder="Nouveau mot de passe"
+                    placeholder="Nouveau mot de passe"
                     type="password"
                     id="password"
                     name="password"
@@ -65,7 +74,7 @@ function ResetMotDePasse() {
                     required
                 /><br />
                 <input
-                placeholder="Confirmez le nouveau mot de passe"
+                    placeholder="Confirmez le nouveau mot de passe"
                     type="password"
                     id="passwordConfirmation"
                     name="passwordConfirmation"
@@ -73,10 +82,10 @@ function ResetMotDePasse() {
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                     required
                 /><br />
-                <button type="submit" className='confirmer'>comnfirmer</button>
+                <button type="submit" className='confirmer'>Confirmer</button>
             </form>
-            {message && <p>{message}</p>}
-            <Footer/>
+            
+            <Footer />
         </div>
     );
 }
