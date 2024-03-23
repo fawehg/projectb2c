@@ -220,13 +220,15 @@ a {
 }
 
 
-.input-field-icon{
-  right: 300px; /* Ajustez cette valeur selon vos préférences */
+.icon {
+  position: absolute;
+  right: 225px; /* Ajustez cette valeur selon vos préférences */
   top: 50%;
-  color: #1c109c; /* Couleur de l'icône */
+  transform: translateY(-50%);
+  color: #1c109c;
   font-size: 1.2rem; /* Taille de l'icône */
 }
-.input-field-container {
+.input-field-container {  
   display: flex;
   align-items: center;
   margin-bottom: 10px;

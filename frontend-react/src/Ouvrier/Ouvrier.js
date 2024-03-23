@@ -204,7 +204,7 @@ class Ouvrier extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <h1>Créer un compte</h1>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faUser} className="input-field-icon" />
+                <FontAwesomeIcon icon={faUser} className="icon" />
                 <input
                   className="input-field"
                   type="text"
@@ -215,7 +215,7 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faUser} className="input-field-icon" />
+                <FontAwesomeIcon icon={faUser} className="icon" />
                 <input
                   className="input-field"
                   type="text"
@@ -226,7 +226,7 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faEnvelope} className="input-field-icon" />
+                <FontAwesomeIcon icon={faEnvelope} className="icon" />
                 <input
                   className="input-field"
                   type="email"
@@ -237,7 +237,7 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="input-field-icon" />
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
                 <input
                   className="input-field"
                   type="text"
@@ -248,7 +248,7 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faAddressCard} className="input-field-icon" />
+                <FontAwesomeIcon icon={faAddressCard} className="icon" />
                 <input
                   className="input-field"
                   type="text"
@@ -259,7 +259,7 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faLock} className="input-field-icon" />
+                <FontAwesomeIcon icon={faLock} className="icon" />
                 <input
                   className="input-field"
                   type="password"
@@ -270,7 +270,7 @@ class Ouvrier extends React.Component {
                 />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faLock} className="input-field-icon" />
+                <FontAwesomeIcon icon={faLock} className="icon" />
                 <input
                   className="input-field"
                   type="password"
@@ -351,11 +351,11 @@ class Ouvrier extends React.Component {
             <form>
               <h1>Connexion</h1>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faEnvelope} className="input-field-icon" />
+                <FontAwesomeIcon icon={faEnvelope} className="icon" />
                 <input className="input-field" type="email" placeholder="Email" />
               </div>
               <div className="input-field-container">
-                <FontAwesomeIcon icon={faLock} className="input-field-icon" />
+                <FontAwesomeIcon icon={faLock} className="icon" />
                 <input className="input-field" type="password" placeholder="Mot de passe" />
               </div>
               <Link to="/MotDePasseOublie">Mot de passe Oublié?</Link>
