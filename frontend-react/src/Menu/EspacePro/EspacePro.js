@@ -7,24 +7,34 @@ function EspacePro() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!validateEmail(email)) {
       setEmailError('Veuillez saisir une adresse e-mail valide.');
-      setPassword(''); // Clear password field on email validation error
+      setPassword('');
       return;
     }
-   
-    setEmailError('');
-    console.log('Login submitted for:', email, password);
-   
-    setEmail('');
-    setPassword('');
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error during login:', error);
+      setErrorMessage('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
+    }
   };
 
   const handleEmailChange = (e) => {
@@ -32,6 +42,7 @@ function EspacePro() {
     if (emailError) setEmailError('');
   };
 
+  
   return (
     <div className="login-containere">
       <Header />
@@ -61,9 +72,7 @@ function EspacePro() {
             />
           </div>
           <button type="submit">Connexion</button>
-          <p className="forgot-password">
-            <a href="/forgot-password">Mot de passe oublié</a>
-          </p>
+
         </form>
       </div>
       <Footer />

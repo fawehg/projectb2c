@@ -1,4 +1,4 @@
-/* ProfilOuvrier.css */
+
 
 .profil-container {
     display: flex;
@@ -17,7 +17,7 @@
     padding: 20px;
 }
 
-.profil-side {
+.profil {
     width: 30%;
     padding: 20px;
     background-color: #ffffff52;

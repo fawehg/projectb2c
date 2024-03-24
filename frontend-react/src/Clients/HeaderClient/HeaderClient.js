@@ -1,16 +1,28 @@
 import React from 'react';
 import './HeaderClient.css';
-import { Link } from 'react-router-dom'; 
+import axios from 'axios';
 
 
 const Header = () => {
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/client/logout`);
+      console(response.data);
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la déconnexion:', error);
+      alert('Une erreur s\'est produite lors de la déconnexion.');
+    }
+  };
+
+
   return (
     <div className="header"> 
       <div className="logo-container">
         <img src="./LOGO.png" alt="Logo" className="logo" />
       </div>
       <div className="buttons">
-        <Link to="/"><button>Déconnexion</button></Link>
+        <button onClick={handleLogout}>Déconnexion</button>
         
         
       </div>

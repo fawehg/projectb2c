@@ -1,4 +1,4 @@
-*, *:before, *:after {
+ /*   *, *:before, *:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -137,3 +137,4 @@ height: 80vh; }
     transform: rotateY(0deg);    
   }
 }
+*/
