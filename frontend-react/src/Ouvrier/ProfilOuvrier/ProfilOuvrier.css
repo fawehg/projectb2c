@@ -41,5 +41,16 @@
     border-radius: 8px; 
     transition: 0.3s;
   }
-
+  .profile-img {
+    max-width: 200px;
+    border-radius: 50%;
+  }
+  
+  .profile-info {
+    margin-top: 20px;
+  }
+  
+  .profile-info p {
+    margin-bottom: 10px;
+  }
 

@@ -5,28 +5,25 @@ import Footer from '../FooterOuvrier/FooterOuvrier';
 import axios from 'axios'; 
 
 function ProfilOuvrier() {
-    const [informationsPersonnelles, setInformationsPersonnelles] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchUser = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/show`); 
-                setInformationsPersonnelles(response.data);
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/show`);
+                setUser(response.data);
             } catch (error) {
-                console.error('Erreur lors de la récupération des données : ', error);
+                console.error("Erreur lors de la récupération de l'utilisateur:", error);
             }
         };
-        fetchData();
+  
+        fetchUser();
     }, []);
-
-    const handleModifierProfil = async () => {
-        try {
-            const response = await axios.put(`${process.env.REACT_APP_API_URL}/update`); 
-            console.log("Profil modifié avec succès !");
-        } catch (error) {
-            console.error('Erreur lors de la modification du profil : ', error);
-        }
+  
+    const handleModifierProfil = () => {
+        console.log("Modifier profil");
     };
+  
 
     return (
         <div>
@@ -35,16 +32,22 @@ function ProfilOuvrier() {
                 <div className="main">
                     <div className="profil">
                         <h1>Profil</h1>
-                        {informationsPersonnelles ? (
+                        {user ? (
                             <div>
-                                <ul>
-                                    <li>Nom: {informationsPersonnelles.nom}</li>
-                                    <li>Email: {informationsPersonnelles.email}</li>
-                                    <li>Adresse: {informationsPersonnelles.adresse}</li>
-                                    <li>Profession: {informationsPersonnelles.profession}</li>
-                                    <li>Spécialités: {informationsPersonnelles.specialites.join(', ')}</li>
-                                    <li>Numéro de téléphone: {informationsPersonnelles.telephone}</li>
-                                </ul>
+                                <div className="profile-img">
+                                    <img src={user.image} alt={`${user.nom} ${user.prenom}`} />
+                                </div>
+                                <div className="profile-info">
+                                    <h2>{user.nom} {user.prenom}</h2>
+                                    <p>Email: {user.email}</p>
+                                    <p>Ville: {user.ville}</p>
+                                    <p>Adresse: {user.adresse}</p>
+                                    <p>Profession: {user.profession}</p>
+                                    <p>Spécialités: {user.specialties ? user.specialties.join(', ') : 'Non spécifié'}</p>
+                                    <p>Jours de disponibilité: {user.joursDisponibilite ? user.joursDisponibilite.join(', ') : 'Non spécifié'}</p>
+                                    <p>Heure de début: {user.heureDebut}</p>
+                                    <p>Heure de fin: {user.heureFin}</p>
+                                </div>
                             </div>
                         ) : (
                             <p>Chargement des informations personnelles...</p>

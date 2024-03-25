@@ -42,16 +42,17 @@ class Client extends React.Component {
     if (Object.keys(errors).length === 0) {
       try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/register`, 
-        JSON.stringify(this.state),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+          this.state,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
         if (response.status === 200) {
           localStorage.setItem('token', response.data.token);
-          this.navigate('/recherche-ouvrier');
-          console.log('Inscription réussie');
+         
+          return <link to="/recherche-ouvrier" />;
         } 
       } catch (error) {
         console.error('Erreur lors de la requête :', error);
@@ -60,27 +61,24 @@ class Client extends React.Component {
       this.setState({ errors });
     }
   }
-  
 
   handleSubmitSignin = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/login`,
-            this.state,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-        console.log(response.data);
-        localStorage.setItem('token', response.data.token);
-        console.log('Connexion réussie');
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/login`,
+          this.state,
+          {
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          }
+      );
+      localStorage.setItem('token', response.data.token);
+      console.log('Connexion réussie');
     } catch (error) {
-        console.error('Erreur lors de la requête :', error);
-        
+      console.error('Erreur lors de la requête :', error);
     }
-};
+  };
 
 
   validateForm = () => {
@@ -236,6 +234,7 @@ class Client extends React.Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
+                {errors.email && <span className="error">{errors.email}</span>}
               </div>
               <div className="input-container">
                 <FaLock className="icon" />
@@ -248,6 +247,7 @@ class Client extends React.Component {
                   onChange={this.handleChange}
                 />
               </div>
+              {errors.password && <span className="error">{errors.password}</span>}
               <button className='Auth' type="submit" >Connexion</button>
               <Link to="#">Mot de passe Oublié?</Link>
             </form>
