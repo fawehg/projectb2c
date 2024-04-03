@@ -1,34 +1,23 @@
-/* Footer */
+
 .footer-container {
-    position: absolute;
-    display: flex; /* Utiliser flexbox */
-    justify-content: space-between; /* Aligner les éléments horizontalement */
-    align-items: center; /* Centrer les éléments verticalement */
-    text-align: center;
-    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
-    color: white;
-    padding: 10px 10px; /* Ajoute du padding en haut et en bas, et un peu sur les côtés */
-  }
-  
-  .footer-container button {
-    padding: 10px 20px; /* Ajuste la taille des boutons */
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    color: white; /* Change la couleur du texte des boutons */
-    border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
-    border-radius: 8px; /* Arrondit les coins des boutons */
-    transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
-  }
-  
-  .footer-container button:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Change la couleur de fond au survol */
-  }
-  
-  .footer-container .rapide {
-    font-size: 18px;
-    margin-left: right; /* Place le texte à droite */
-    color: rgb(2, 35, 100); /* Changez la couleur selon vos préférences */
-    
-  }
-  
+  position: absolute;
+  display: flex; /* Utiliser flexbox */
+  justify-content: space-between; /* Aligner les éléments horizontalement */
+  align-items: center; /* Centrer les éléments verticalement */
+  text-align: center;
+  background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+  color: white;
+  padding: 10px 10px; /* Ajoute du padding en haut et en bas, et un peu sur les côtés */
+}
+
+.footer-container button {
+  padding: 10px 20px; /* Ajuste la taille des boutons */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: white; /* Change la couleur du texte des boutons */
+  border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
+  border-radius: 8px; /* Arrondit les coins des boutons */
+  transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
+}
+

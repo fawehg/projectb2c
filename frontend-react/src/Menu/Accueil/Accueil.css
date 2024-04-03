@@ -1,17 +1,5 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 
-.accueil-container {
-  font-family: 'poppins', sans-serif;
-  height: 100%;
-}
 
 
 
@@ -33,8 +21,6 @@ body {
 
 
 
-
-
 .client img,
 .ouvrier img {
   width: 600px; /* Taille ajustée */
@@ -44,7 +30,7 @@ body {
 }
 
 
-/* Style spécifique pour le bouton "cher-client" */
+
 .cher-client,
 .cher-ouvrier {
   margin: 0 40px;
@@ -62,30 +48,6 @@ body {
 }
 
 
-body,
-.accueil-container,
-.header,
-.header-text,
-.header-text p, 
-.footer-container button,
-.additional-text,
-.phrase-card p,
-.footer-container span {
-  font-family: 'Poppins', sans-serif;
-  height: 100%;
-}
-
-
-
-/* Boutons à droite */
-.buttons {
-  display: flex;
-  align-items: center;
-}
-
-.buttons button {
-  margin-left: 10px;
-}
 
 
 .buttons {
@@ -120,9 +82,6 @@ body,
   transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
 }
 
-.footer-container button:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Change la couleur de fond au survol */
-}
 
 
 .additional-text {
@@ -154,16 +113,17 @@ body,
 .phrases-container {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
-  text-size-adjust: 20px;
+  margin-top: 2px;
+  
 }
 
 .phrase-card {
   text-align: center;
+ 
 }
 
 .phrase-card p {
-  font-size: 23px;
+  font-size: 22px;
 }
 .phrase-card img {
   width: 100px; /* Ajustez la largeur des images selon vos besoins */

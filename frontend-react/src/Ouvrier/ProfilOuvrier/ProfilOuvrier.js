@@ -5,55 +5,71 @@ import Footer from '../FooterOuvrier/FooterOuvrier';
 import axios from 'axios'; 
 
 function ProfilOuvrier() {
-    const [user, setUser] = useState(null);
+    const [informationsPersonnelles, setInformationsPersonnelles] = useState(null);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/show`);
-                setUser(response.data);
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/profil`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }); 
+                setInformationsPersonnelles(response.data);
             } catch (error) {
-                console.error("Erreur lors de la récupération de l'utilisateur:", error);
+                console.error('Erreur lors de la récupération des données : ', error);
             }
         };
-  
-        fetchUser();
+        fetchData();
     }, []);
-  
-    const handleModifierProfil = () => {
-        console.log("Modifier profil");
+
+    const handleModifierProfil = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/ouvrier/profil`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }); 
+            console.log("Profil modifié avec succès !");
+        } catch (error) {
+            console.error('Erreur lors de la modification du profil : ', error);
+        }
     };
-  
 
     return (
         <div>
             <Header/>
             <div className="profil-container">
                 <div className="main">
-                    <div className="profil">
-                        <h1>Profil</h1>
-                        {user ? (
-                            <div>
-                                <div className="profile-img">
-                                    <img src={user.image} alt={`${user.nom} ${user.prenom}`} />
-                                </div>
-                                <div className="profile-info">
-                                    <h2>{user.nom} {user.prenom}</h2>
-                                    <p>Email: {user.email}</p>
-                                    <p>Ville: {user.ville}</p>
-                                    <p>Adresse: {user.adresse}</p>
-                                    <p>Profession: {user.profession}</p>
-                                    <p>Spécialités: {user.specialties ? user.specialties.join(', ') : 'Non spécifié'}</p>
-                                    <p>Jours de disponibilité: {user.joursDisponibilite ? user.joursDisponibilite.join(', ') : 'Non spécifié'}</p>
-                                    <p>Heure de début: {user.heureDebut}</p>
-                                    <p>Heure de fin: {user.heureFin}</p>
-                                </div>
-                            </div>
-                        ) : (
-                            <p>Chargement des informations personnelles...</p>
-                        )}
-                        <button className='button' onClick={handleModifierProfil}>Modifier profil</button>
-                    </div>
+                <div className="profil">
+    <div className="profil-header">
+    {informationsPersonnelles && informationsPersonnelles.photo ? (
+            <img src={informationsPersonnelles.photo} alt="Photo de profil" className="profil-photo" />
+        ) : (
+            <div className="profil-photo placeholder"></div>
+        )}
+    </div>
+    
+    {informationsPersonnelles ? (
+        <div className="profil-info">
+            <ul>
+                <li>Nom: {informationsPersonnelles.nom}</li>
+                <li>Email: {informationsPersonnelles.email}</li>
+                <li>Adresse: {informationsPersonnelles.adresse}</li>
+                <li>Profession: {informationsPersonnelles.profession}</li>
+                <li>Spécialités: {informationsPersonnelles.specialties ? informationsPersonnelles.specialties.join(', ') : 'N/A'}</li>
+                <li>Numéro de téléphone: {informationsPersonnelles.telephone}</li>
+            </ul>
+        </div>
+    ) : (
+        <p>Chargement des informations personnelles...</p>
+    )}
+    
+    <button className='modifier' onClick={handleModifierProfil}>Modifier profil</button>
+</div>
+
 
                     <div className="history">
                         <h2>Historique</h2>

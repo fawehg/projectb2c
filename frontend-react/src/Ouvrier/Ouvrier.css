@@ -1,9 +1,4 @@
 
-.background-container {
-  background-image: url('../client.jpg');
-  background-size: cover;
-  background-position: center;
-}
 
 form {
   max-width: 600px;

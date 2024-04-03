@@ -3,7 +3,7 @@
 .profil-container {
     display: flex;
     flex-direction: column;
-    height: 80vh; 
+    height: 70vh; 
     background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
     color: rgb(255, 255, 255);;
     background-size: cover; /* Pour couvrir toute la surface */
@@ -33,18 +33,24 @@
     border-radius: 2%;
 }
     
-   button {   
-    padding: 10px 20px; 
+   .profil.main.modifier {
+    margin-left: 10px;
+    padding: 10px 20px; /* Ajuste la taille des boutons */
+    border: none;
     background-color: transparent;
-    color: white;
-    border: 2px solid white; 
-    border-radius: 8px; 
-    transition: 0.3s;
+    cursor: pointer;
+    color: white; /* Change la couleur du texte des boutons */
+    border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
+    border-radius: 8px; /* Arrondit les coins des boutons */
+    transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
   }
-  .profile-img {
-    max-width: 200px;
+  .profil-photo {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-  }
+    margin-right: 20px;
+    object-fit: cover;
+}
   
   .profile-info {
     margin-top: 20px;
@@ -53,4 +59,40 @@
   .profile-info p {
     margin-bottom: 10px;
   }
+  .profil-info ul {
+    list-style-type: none;
+    padding: 0;
+}
 
+.profil-info li {
+    margin-bottom: 10px;
+}
+
+.modifier {
+  background-color: #066edd00;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: white;
+  margin-top: 20px; /* espace supplémentaire au-dessus du bouton */
+}
+.profil-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profil-photo.placeholder {
+  width: 100px;
+  height: 100px;
+  background-color: #e0e0e0; /* couleur de fond gris clair */
+  border-radius: 50%; /* pour un effet arrondi */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #888; /* couleur de texte gris */
+}

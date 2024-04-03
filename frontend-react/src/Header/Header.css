@@ -107,16 +107,7 @@ header {
 
 
 
-  .accueil-container {
-    font-family: 'poppins', sans-serif;
-  }
-  
 
-  
-  
-  
- 
-    
   .header {
     position: relative;
     text-align: center;
@@ -150,8 +141,8 @@ header {
   }
   
   .logo {
-    width: 200px; /* Définissez la largeur souhaitée */
-    height: auto; /* Gardez la hauteur proportionnelle pour éviter la distorsion */
+    width: 200px;
+    height: auto; 
   }
 
  

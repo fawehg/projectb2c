@@ -1,9 +1,8 @@
 import React from 'react';
-import './Accueil.css'; // Import the CSS file
+import './Accueil.css'; 
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import { Link } from 'react-router-dom'; 
-import Client from '../../Clients/Client.js';
 const Accueil = () => {
   return (
     

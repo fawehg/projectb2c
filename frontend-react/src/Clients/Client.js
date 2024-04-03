@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Client.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import rechercheouvrier from './RechercheOuvrier/RechercheOuvrier';
 import { FaUser, FaEnvelope, FaLock, FaMapMarkerAlt } from 'react-icons/fa'; 
 import axios from 'axios';
 
@@ -51,9 +50,8 @@ class Client extends React.Component {
         );
         if (response.status === 200) {
           localStorage.setItem('token', response.data.token);
-         
-          return <link to="/recherche-ouvrier" />;
-        } 
+          
+        }   
       } catch (error) {
         console.error('Erreur lors de la requête :', error);
       }
@@ -65,7 +63,7 @@ class Client extends React.Component {
   handleSubmitSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/login`,
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/login`, 
           this.state,
           {
               headers: {
@@ -73,8 +71,10 @@ class Client extends React.Component {
               },
           }
       );
-      localStorage.setItem('token', response.data.token);
-      console.log('Connexion réussie');
+      if (response.status === 200) {
+        localStorage.setItem('token', response.data.token);
+        <link to="/recherche-ouvrier" />;
+      } 
     } catch (error) {
       console.error('Erreur lors de la requête :', error);
     }
