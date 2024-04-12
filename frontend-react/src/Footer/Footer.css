@@ -10,7 +10,7 @@
   padding: 10px 10px; /* Ajoute du padding en haut et en bas, et un peu sur les côtés */
 }
 
-.footer-container button {
+.button-container {
   padding: 10px 20px; /* Ajuste la taille des boutons */
   border: none;
   background-color: transparent;

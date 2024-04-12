@@ -1,23 +1,18 @@
-
-
 form {
   max-width: 600px;
- 
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  box-shadow: #0056b3;
+  box-shadow: 0 0 10px #0056b3; /* Fixed the box-shadow property */
 }
-
 
 h1 {
   font-size: 24px;
   margin-bottom: 20px;
   font-weight: bold;
 }
-
 
 select,
 input[type="time"],
@@ -33,7 +28,6 @@ textarea {
   box-sizing: border-box; 
 }
 
-
 .checkbox-container {
   margin-bottom: 20px;
 }
@@ -41,7 +35,6 @@ textarea {
 .checkbox-container input[type="checkbox"] {
   margin-right: 2px;
 }
-
 
 button[type="submit"] {
   background-color: #007bff;
@@ -63,7 +56,6 @@ ul {
 ul li {
   margin-bottom: 8px;
 }
-
 
 .Label {
   font-size: 18px;
@@ -98,8 +90,6 @@ a {
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
-
-
 .container {
   background-color: rgba(109, 110, 112, 0.247);
   border-radius: 30px;
@@ -217,8 +207,7 @@ a {
 
 .icon {
   position: absolute;
-  right: 225px; /* Ajustez cette valeur selon vos préférences */
-  top: 50%;
+  
   transform: translateY(-50%);
   color: #1c109c;
   font-size: 1.2rem; /* Taille de l'icône */
