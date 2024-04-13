@@ -57,16 +57,34 @@ const Ouvrier = () => {
     }));
   };
 
-  const handleDomainChange = (event) => {
-    const selectedDomain = event.target.value;
-    const filteredSpecialites = state.domaines.find(domaine => domaine.nom_domaine === selectedDomain)?.specialites || [];
+ const handleDomainChange = (event) => {
+  const selectedDomain = event.target.value;
+  const domain = state.domaines.find(domaine => domaine.nom_domaine === selectedDomain);
+  
+  if (!domain) {
     setState(prevState => ({
       ...prevState,
       selectedDomain,
+      profession: '',  
       specialties: [],
-      filteredSpecialites,
+      filteredSpecialites: [],
     }));
-  };
+    return;
+  }
+
+  const filteredSpecialites = domain.specialites || [];
+  const profession = domain.profession || '';  // Assurez-vous que "profession" est une chaîne de caractères
+
+  setState(prevState => ({
+    ...prevState,
+    selectedDomain,
+    profession,  // Mettez à jour "profession" ici
+    specialties: [],
+    filteredSpecialites,
+  }));
+};
+
+  
   
   const handleSpecialtyChange = (e) => {
     const { name, checked } = e.target;
@@ -166,7 +184,8 @@ const Ouvrier = () => {
     if (!adresse.trim()) errors.adresse = 'Veuillez saisir votre adresse';
     if (!password.trim()) errors.password = 'Veuillez saisir votre mot de passe';
     if (!confirmationMotDePasse.trim()) errors.confirmationMotDePasse = 'Veuillez confirmer votre mot de passe';
-    
+    if (!password.trim()) errors.profession = 'Veuillez saisir profession';
+
 
     return errors;
   };
