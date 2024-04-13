@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Client.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -25,7 +25,8 @@ class Client extends React.Component {
         email: '',
         password: '',
         confirmationMotDePasse: '',
-      }
+      },
+      redirect: false
     };
   }
 
@@ -38,6 +39,7 @@ class Client extends React.Component {
   handleSubmitSignup = async (e) => {
     e.preventDefault();
     const errors = this.validateForm();
+    
     if (Object.keys(errors).length === 0) {
       try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/register`, 
@@ -48,9 +50,10 @@ class Client extends React.Component {
             },
           }
         );
+        
         if (response.status === 200) {
           localStorage.setItem('token', response.data.token);
-          
+          this.setState({ redirect: true });
         }   
       } catch (error) {
         console.error('Erreur lors de la requête :', error);
@@ -62,6 +65,7 @@ class Client extends React.Component {
 
   handleSubmitSignin = async (e) => {
     e.preventDefault();
+    
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/login`, 
           this.state,
@@ -73,13 +77,12 @@ class Client extends React.Component {
       );
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token);
-        <link to="/recherche-ouvrier" />;
+        this.setState({ redirect: true });
       } 
     } catch (error) {
       console.error('Erreur lors de la requête :', error);
     }
-  };
-
+  }
 
   validateForm = () => {
     const errors = {};
@@ -124,7 +127,11 @@ class Client extends React.Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors, redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to="/recherche-ouvrier" />;
+    }
 
     return (
       <div>
