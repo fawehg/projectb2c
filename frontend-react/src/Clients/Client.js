@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Client.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -35,7 +35,7 @@ class Client extends React.Component {
       [e.target.name]: e.target.value
     });
   }
-
+ 
   handleSubmitSignup = async (e) => {
     e.preventDefault();
     const errors = this.validateForm();
@@ -50,17 +50,14 @@ class Client extends React.Component {
             },
           }
         );
-        
         if (response.status === 200) {
+          this.props.navigate('/recherche-ouvrier');
           localStorage.setItem('token', response.data.token);
-          this.setState({ redirect: true });
         }   
       } catch (error) {
         console.error('Erreur lors de la requête :', error);
       }
-    } else {
-      this.setState({ errors });
-    }
+    } 
   }
 
   handleSubmitSignin = async (e) => {
@@ -77,7 +74,7 @@ class Client extends React.Component {
       );
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token);
-        this.setState({ redirect: true });
+        this.props.navigate('/recherche-ouvrier');
       } 
     } catch (error) {
       console.error('Erreur lors de la requête :', error);
@@ -127,12 +124,7 @@ class Client extends React.Component {
   }
 
   render() {
-    const { errors, redirect } = this.state;
-
-    if (redirect) {
-      return <Redirect to="/recherche-ouvrier" />;
-    }
-
+    const { errors } = this.state;
     return (
       <div>
         <Header />
@@ -255,7 +247,7 @@ class Client extends React.Component {
                 />
               </div>
               {errors.password && <span className="error">{errors.password}</span>}
-              <button className='Auth' type="submit" >Connexion</button>
+              <button className='Auth' type="submit">Connexion</button>
               <Link to="#">Mot de passe Oublié?</Link>
             </form>
           </div>
@@ -280,5 +272,4 @@ class Client extends React.Component {
     );
   }
 }
-
 export default Client;

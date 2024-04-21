@@ -10,7 +10,7 @@ import ProfilOuvrier from './Ouvrier/ProfilOuvrier/ProfilOuvrier';
 import MotDePasseOublie from './MDPoubliée/MDPoubliée';
 import Reset from './MDPoubliée/Reset/Reset';
 import SupportUtilisateurs from './Menu/SupportUtilisateurs/SupportUtilisateurs';
-
+import Admin from './Menu/EspacePro/Admin/Admin';
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path="/mot-de-passe-oublie" element={<MotDePasseOublie/>} />
           <Route path="/reset" element={<Reset/>} />
           <Route path="/support-utilisateurs" element={<SupportUtilisateurs/>} />
+          <Route path="/admin" element={<Admin/>} />
 
         </Routes>
       </div>
