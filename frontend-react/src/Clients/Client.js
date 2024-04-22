@@ -6,6 +6,8 @@ import Footer from '../Footer/Footer';
 import { FaUser, FaEnvelope, FaLock, FaMapMarkerAlt } from 'react-icons/fa'; 
 import axios from 'axios';
 
+
+
 class Client extends React.Component {
   constructor(props) {
     super(props);
@@ -51,8 +53,9 @@ class Client extends React.Component {
           }
         );
         if (response.status === 200) {
-          this.props.navigate('/recherche-ouvrier');
+          
           localStorage.setItem('token', response.data.token);
+          this.props.navigate('/recherche-ouvrier');
         }   
       } catch (error) {
         console.error('Erreur lors de la requête :', error);

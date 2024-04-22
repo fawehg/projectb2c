@@ -57,9 +57,8 @@ const RechercheOuvrier = () => {
         date,
         time,
         description,
-        image: null, // You can update this if needed
+        image: null,
       };
-  
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/client/demandes`,
         requestData,
@@ -74,8 +73,6 @@ const RechercheOuvrier = () => {
       console.error('Erreur lors de la requête :', error);
     }
   };
-  
-  
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };

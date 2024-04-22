@@ -8,25 +8,23 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 const Ouvrier = () => {
-  const [state, setState] = useState({
-    nom: '',
-    prenom: '',
-    email: '',
-    ville: '',
-    adresse: '',
-    password: '',
-    confirmationMotDePasse: '',
-    profession: '',
-    specialties: [],
-    joursDisponibilite: [],
-    heureDebut: '',
-    heureFin: '',
-    errors: {},
-    domaines: [],
-    specialites: [],
-    selectedDomain: '',
-    filteredSpecialites: [],
-  });
+  const [domain, setDomain] = useState({});
+  const [nom, setNom] = useState('');
+  const [prenom, setPrenom] = useState('');
+  const [email, setEmail] = useState('');
+  const [ville, setVille] = useState('');
+  const [adresse, setAdresse] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmationMotDePasse, setConfirmationMotDePasse] = useState('');
+  const [profession, setProfession] = useState('');
+  const [specialties, setSpecialties] = useState([]);
+  const [joursDisponibilite, setJoursDisponibilite] = useState([]);
+  const [heureDebut, setHeureDebut] = useState('');
+  const [heureFin, setHeureFin] = useState('');
+  const [errors, setErrors] = useState({});
+  const [selectedDomain, setSelectedDomain] = useState('');
+  const [filteredSpecialites, setFilteredSpecialites] = useState([]);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,11 +34,10 @@ const Ouvrier = () => {
           axios.get(`${process.env.REACT_APP_API_URL}/specialites`),
         ]);
 
-        setState(prevState => ({
-          ...prevState,
+        setDomain({
           domaines: domainesResponse.data || [],
           specialites: specialitesResponse.data || [],
-        }));
+        });
       } catch (error) {
         console.error('Erreur lors de la récupération des données :', error);
       }
@@ -49,133 +46,54 @@ const Ouvrier = () => {
     fetchData();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleDomainChange = (event) => {
+    const selectedDomain = event.target.value;
+    const domainData = domain.domaines.find(domaine => domaine.nom_domaine === selectedDomain);
+    setSelectedDomain(selectedDomain);
+    console.log(domainData);
+    if (!domainData) {
+      setProfession('');
+      setSpecialties([]);
+      setFilteredSpecialites([]);
+      return;
+    }
+
+    const filteredSpecialites = domainData.specialites || [];
+    const professionData = domainData.nom_domaine || '';
+    setProfession(professionData);
+    setSpecialties([]);
+    setFilteredSpecialites(filteredSpecialites);
   };
 
- const handleDomainChange = (event) => {
-  const selectedDomain = event.target.value;
-  const domain = state.domaines.find(domaine => domaine.nom_domaine === selectedDomain);
-  
-  if (!domain) {
-    setState(prevState => ({
-      ...prevState,
-      selectedDomain,
-      profession: '',  
-      specialties: [],
-      filteredSpecialites: [],
-    }));
-    return;
-  }
-
-  const filteredSpecialites = domain.specialites || [];
-  const profession = domain.profession || '';  // Assurez-vous que "profession" est une chaîne de caractères
-
-  setState(prevState => ({
-    ...prevState,
-    selectedDomain,
-    profession,  // Mettez à jour "profession" ici
-    specialties: [],
-    filteredSpecialites,
-  }));
-};
-
-  
-  
   const handleSpecialtyChange = (e) => {
     const { name, checked } = e.target;
     console.log(`Checkbox ${name} checked: ${checked}`);
+    
     if (checked) {
-      setState(prevState => ({
-        ...prevState,
-        specialties: [...prevState.specialties, name],
-      }));
+      setSpecialties(prevSpecialties => [...prevSpecialties, name]);
     } else {
-      setState(prevState => ({
-        ...prevState,
-        specialties: prevState.specialties.filter(specialty => specialty !== name),
-      }));
+      setSpecialties(prevSpecialties => prevSpecialties.filter(specialty => specialty !== name));
     }
   };
   
-  
-
-  
-
   const handleAvailabilityChange = (e) => {
     const day = e.target.value;
-    setState(prevState => ({
-      ...prevState,
-      joursDisponibilite: prevState.joursDisponibilite.includes(day) ? prevState.joursDisponibilite.filter(item => item !== day) : [...prevState.joursDisponibilite, day],
-    }));
+    setJoursDisponibilite(prevState => {
+      if (prevState.includes(day)) {
+        return prevState.filter(item => item !== day);
+      } else {
+        return [...prevState, day];
+      }
+    });
   };
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
-    setState(prevState => ({
-      ...prevState,
-      image: imageFile,
-    }));
-  };
-
-  const navigate = useNavigate();
-
-  const handleSubmitRegister = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/register`, 
-        state,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      if (response.status === 200) {
-        console.log(response.data);
-        localStorage.setItem('token', response.data.token);
-      }   
-    } catch (error) {
-      console.error('Erreur lors de la requête :', error);
-    }
-  };
-  
-
-  const handleSubmitLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/login`, {
-        email: state.email,
-        password: state.password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      handleResponse(response);
-    } catch (error) {
-      console.error('Erreur lors de la requête :', error);
-    }
-  };
-
-  const handleResponse = (response) => {
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      navigate('/profil-ouvrier');
-    } else {
-      console.error('Token not found in response:', response.data);
-    }
+    setImage(imageFile);
   };
 
   const validateForm = () => {
     const errors = {};
-    const { nom, prenom, email, ville, adresse, password, confirmationMotDePasse, profession } = state;
 
     if (!nom.trim()) errors.nom = 'Veuillez saisir votre nom';
     if (!prenom.trim()) errors.prenom = 'Veuillez saisir votre prénom';
@@ -184,10 +102,76 @@ const Ouvrier = () => {
     if (!adresse.trim()) errors.adresse = 'Veuillez saisir votre adresse';
     if (!password.trim()) errors.password = 'Veuillez saisir votre mot de passe';
     if (!confirmationMotDePasse.trim()) errors.confirmationMotDePasse = 'Veuillez confirmer votre mot de passe';
-    if (!password.trim()) errors.profession = 'Veuillez saisir profession';
+    if (!profession.trim()) errors.profession = 'Saisie votre profession';
 
+    setErrors(errors);
 
-    return errors;
+    return Object.keys(errors).length === 0;
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmitRegister = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append('nom', nom);
+    formData.append('prenom', prenom);
+    formData.append('email', email);
+    formData.append('ville', ville);
+    formData.append('adresse', adresse);
+    formData.append('password', password);
+    formData.append('confirmationMotDePasse', confirmationMotDePasse);
+    formData.append('profession', profession);
+    formData.append('specialties', JSON.stringify(specialties));
+    formData.append('joursDisponibilite', JSON.stringify(joursDisponibilite));
+    formData.append('heureDebut', heureDebut);
+    formData.append('heureFin', heureFin);
+    formData.append('image', image);
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/ouvrier/register`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        localStorage.setItem('token', response.data.token);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête :', error);
+    }
+  };
+
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/login`, {
+        email,
+        password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        navigate('/profil-ouvrier');
+      } else {
+        console.error('Token not found in response:', response.data);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête :', error);
+    }
   };
 
   const handleSignUpClick = () => {
@@ -199,8 +183,6 @@ const Ouvrier = () => {
     const container = document.getElementById('container');
     container.classList.remove('right-panel-active');
   };
-
-  const filteredSpecialites = state.filteredSpecialites || [];
 
   return (
     <div>
@@ -216,9 +198,10 @@ const Ouvrier = () => {
                 type="text"
                 placeholder="Nom"
                 name="nom"
-                value={state.nom}
-                onChange={handleChange}
+                value={nom}
+                onChange={e => setNom(e.target.value)}
               />
+              {errors.nom && <p className="error-message">{errors.nom}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faUser} className="icon" />
@@ -227,9 +210,10 @@ const Ouvrier = () => {
                 type="text"
                 placeholder="Prénom"
                 name="prenom"
-                value={state.prenom}
-                onChange={handleChange}
+                value={prenom}
+                onChange={e => setPrenom(e.target.value)}
               />
+              {errors.prenom && <p className="error-message">{errors.prenom}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faEnvelope} className="icon" />
@@ -238,9 +222,10 @@ const Ouvrier = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                value={state.email}
-                onChange={handleChange}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
+              {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
@@ -249,9 +234,10 @@ const Ouvrier = () => {
                 type="text"
                 placeholder="Ville"
                 name="ville"
-                value={state.ville}
-                onChange={handleChange}
+                value={ville}
+                onChange={e => setVille(e.target.value)}
               />
+              {errors.ville && <p className="error-message">{errors.ville}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faAddressCard} className="icon" />
@@ -260,9 +246,10 @@ const Ouvrier = () => {
                 type="text"
                 placeholder="Adresse"
                 name="adresse"
-                value={state.adresse}
-                onChange={handleChange}
+                value={adresse}
+                onChange={e => setAdresse(e.target.value)}
               />
+              {errors.adresse && <p className="error-message">{errors.adresse}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faLock} className="icon" />
@@ -271,9 +258,10 @@ const Ouvrier = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
-                value={state.password}
-                onChange={handleChange}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
+              {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faLock} className="icon" />
@@ -282,41 +270,40 @@ const Ouvrier = () => {
                 type="password"
                 placeholder="Confirmation du mot de passe"
                 name="confirmationMotDePasse"
-                value={state.confirmationMotDePasse}
-                onChange={handleChange}
+                value={confirmationMotDePasse}
+                onChange={e => setConfirmationMotDePasse(e.target.value)}
               />
+              {errors.confirmationMotDePasse && <p className="error-message">{errors.confirmationMotDePasse}</p>}
             </div>
 
             <select
-  className="input-field-container select-field"
-  value={state.selectedDomain}
-  onChange={handleDomainChange}
-  name="selectedDomain"
->
-  <option value="">Sélectionnez une profession</option>
-  {state.domaines && state.domaines.map((domaine, index) => (
-    <option key={index} value={domaine.nom_domaine}>
-      {domaine.nom_domaine}
-    </option>
-  ))}
-</select>
+              className="input-field-container select-field"
+              value={selectedDomain}
+              onChange={handleDomainChange}
+              name="selectedDomain"
+            >
+              <option value="">Sélectionnez une profession</option>
+              {domain.domaines && domain.domaines.map((domaine, index) => (
+                <option key={index} value={domaine.id_domaine}>
+                  {domaine.nom_domaine}
+                </option>
+              ))}
+            </select>
 
-<div className="input-field-container">
-  {filteredSpecialites.map((specialite, index) => (
-    <div key={index}>
-      <input
-        type="checkbox"
-        id={`specialite-${index}`}
-        name={specialite.nom_specialites}
-        onChange={handleSpecialtyChange}
-        checked={state.specialties.includes(specialite.nom_specialites)}
-      />
-      <label htmlFor={`specialite-${index}`}>{specialite.nom_specialites}</label>
-    </div>
-  ))}
-</div>
-
-
+            <div className="input-field-container">
+              {filteredSpecialites && filteredSpecialites.map((specialite, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    id={`specialite-${index}`}
+                    name={specialite.nom_specialite}
+                    onChange={handleSpecialtyChange}
+                    checked={specialties.includes(specialite.nom_specialite)}
+                  />
+                  <label htmlFor={`specialite-${index}`}>{specialite.nom_specialite}</label>
+                </div>
+              ))}
+            </div>
 
             <h3>Jours de disponibilité :</h3>
             <div className="input-field-container">
@@ -325,7 +312,7 @@ const Ouvrier = () => {
                   <input
                     type="checkbox"
                     value={day}
-                    checked={state.joursDisponibilite ? state.joursDisponibilite.includes(day) : false}
+                    checked={joursDisponibilite.includes(day)}
                     onChange={handleAvailabilityChange}
                   />
                   {day}
@@ -340,8 +327,8 @@ const Ouvrier = () => {
                 type="time"
                 placeholder="Heure de début"
                 name="heureDebut"
-                value={state.heureDebut}
-                onChange={handleChange}
+                value={heureDebut}
+                onChange={e => setHeureDebut(e.target.value)}
               />
               <label htmlFor="heureFin">Heure de Fin:</label>
               <input
@@ -349,8 +336,8 @@ const Ouvrier = () => {
                 type="time"
                 placeholder="Heure de fin"
                 name="heureFin"
-                value={state.heureFin}
-                onChange={handleChange}
+                value={heureFin}
+                onChange={e => setHeureFin(e.target.value)}
               />
             </div>
             <div className="input-field-container">
@@ -378,8 +365,8 @@ const Ouvrier = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                value={state.email}
-                onChange={handleChange}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <div className="input-field-container">
@@ -389,8 +376,8 @@ const Ouvrier = () => {
                 type="password"
                 placeholder="Mot de passe"
                 name="password"
-                value={state.password}
-                onChange={handleChange}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
             </div>
             <Link to="/mot-de-passe-oublie">Mot de passe Oublié?</Link>
