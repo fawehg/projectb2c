@@ -50,7 +50,6 @@ const Ouvrier = () => {
     const selectedDomain = event.target.value;
     const domainData = domain.domaines.find(domaine => domaine.nom_domaine === selectedDomain);
     setSelectedDomain(selectedDomain);
-    console.log(domainData);
     if (!domainData) {
       setProfession('');
       setSpecialties([]);
@@ -67,7 +66,6 @@ const Ouvrier = () => {
 
   const handleSpecialtyChange = (e) => {
     const { name, checked } = e.target;
-    console.log(`Checkbox ${name} checked: ${checked}`);
     
     if (checked) {
       setSpecialties(prevSpecialties => [...prevSpecialties, name]);
@@ -116,6 +114,17 @@ const Ouvrier = () => {
     if (!validateForm()) {
       return;
     }
+
+    if (!Array.isArray(specialties)) {
+      setErrors(prevErrors => ({ ...prevErrors, specialties: ['The specialties field must be an array.'] }));
+      return;
+    }
+
+    if (!Array.isArray(joursDisponibilite)) {
+      setErrors(prevErrors => ({ ...prevErrors, joursDisponibilite: ['The jours disponibilite field must be an array.'] }));
+      return;
+    }
+
     const formData = new FormData();
     formData.append('nom', nom);
     formData.append('prenom', prenom);
@@ -146,7 +155,11 @@ const Ouvrier = () => {
         localStorage.setItem('token', response.data.token);
       }
     } catch (error) {
-      console.error('Erreur lors de la requête :', error);
+      if (error.response && error.response.data && error.response.data.ResultInfo) {
+        setErrors(error.response.data.ResultInfo.ErrorMessage);
+      } else {
+        console.error('Erreur lors de la requête :', error);
+      }
     }
   };
 
@@ -346,9 +359,10 @@ const Ouvrier = () => {
                 type="file"
                 id="image"
                 name="image"
-                accept="image/*"
+                accept="image/jpeg, image/png, image/jpg, image/gif"
                 onChange={handleImageChange}
               />
+              {errors.image && <p className="error-message">{errors.image.join(', ')}</p>}
             </div>
 
             <button type="submit">S'inscrire</button>
