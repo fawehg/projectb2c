@@ -26,6 +26,8 @@ const Ouvrier = () => {
   const [filteredSpecialites, setFilteredSpecialites] = useState([]);
   const [image, setImage] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -107,23 +109,12 @@ const Ouvrier = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const navigate = useNavigate();
-
   const handleSubmitRegister = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
 
-    if (!Array.isArray(specialties)) {
-      setErrors(prevErrors => ({ ...prevErrors, specialties: ['The specialties field must be an array.'] }));
-      return;
-    }
-
-    if (!Array.isArray(joursDisponibilite)) {
-      setErrors(prevErrors => ({ ...prevErrors, joursDisponibilite: ['The jours disponibilite field must be an array.'] }));
-      return;
-    }
 
     const formData = new FormData();
     formData.append('nom', nom);
@@ -148,12 +139,15 @@ const Ouvrier = () => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+          
         }
+        
       );
-      if (response.status === 200) {
-        console.log(response.data);
-        localStorage.setItem('token', response.data.token);
-      }
+      console.log(response.data.ResultData.token);
+        localStorage.setItem('token', response.data.ResultData.token);
+        localStorage.getItem('token', response.data.ResultData.token);
+  
+        navigate('/profil-ouvrier');
     } catch (error) {
       if (error.response && error.response.data && error.response.data.ResultInfo) {
         setErrors(error.response.data.ResultInfo.ErrorMessage);
@@ -175,9 +169,9 @@ const Ouvrier = () => {
           'Content-Type': 'application/json',
         },
       });
-
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      if (response.status === 200 && response.data.ResultData.token) {
+        localStorage.setItem('token', response.data.ResultData.token);
+        localStorage.getItem('token', response.data.ResultData.token);
         navigate('/profil-ouvrier');
       } else {
         console.error('Token not found in response:', response.data);

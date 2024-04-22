@@ -54,7 +54,9 @@ class Client extends React.Component {
         );
         if (response.status === 200) {
           
-          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('token', response.data.ResultData.token);
+          localStorage.getItem('token', response.data.ResultData.token);
+         
           this.props.navigate('/recherche-ouvrier');
         }   
       } catch (error) {
