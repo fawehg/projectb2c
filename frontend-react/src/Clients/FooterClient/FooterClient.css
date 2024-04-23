@@ -1,6 +1,6 @@
 /* Footer */
 .footer-container {
-    position: relative;
+    position: 'absolute';
     display: flex; /* Utiliser flexbox */
     justify-content: space-between; /* Aligner les éléments horizontalement */
     align-items: center; /* Centrer les éléments verticalement */
@@ -12,7 +12,7 @@
   
   .footer-container button {
     padding: 10px 20px; /* Ajuste la taille des boutons */
-    border: none;
+    border: white;
     background-color: transparent;
     cursor: pointer;
     color: white; /* Change la couleur du texte des boutons */

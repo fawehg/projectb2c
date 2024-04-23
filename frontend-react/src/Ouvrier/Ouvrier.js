@@ -146,7 +146,6 @@ const Ouvrier = () => {
       console.log(response.data.ResultData.token);
         localStorage.setItem('token', response.data.ResultData.token);
         localStorage.getItem('token', response.data.ResultData.token);
-  
         navigate('/profil-ouvrier');
     } catch (error) {
       if (error.response && error.response.data && error.response.data.ResultInfo) {

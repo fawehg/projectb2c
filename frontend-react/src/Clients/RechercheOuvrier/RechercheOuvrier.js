@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HeaderClient from '../HeaderClient/HeaderClient';
 import FooterClient from '../FooterClient/FooterClient';
 import './RechercheOuvrier.css';
@@ -46,7 +47,7 @@ const RechercheOuvrier = () => {
     setSelectedDomain(event.target.value);
     setSelectedSpecialite('');
   };
-
+const navigate=useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -68,7 +69,11 @@ const RechercheOuvrier = () => {
           },
         }
       );
-      console.log(response.data);
+      console.log(response.data.ResultData.token);
+      localStorage.setItem('token', response.data.ResultData.token);
+      localStorage.getItem('token', response.data.ResultData.token);
+      navigate('/liste-ouvrier');
+      
     } catch (error) {
       console.error('Erreur lors de la requête :', error);
     }
@@ -86,7 +91,7 @@ const RechercheOuvrier = () => {
       <HeaderClient />
       
       <div className="service-search">
-        <form onSubmit={handleSubmit} className="service-search-form">
+        <form  className="service-search-form">
           <h1>Veuillez Choisir votre Ouvrier</h1>
           <select
             className="input-field"
@@ -142,7 +147,7 @@ const RechercheOuvrier = () => {
             onChange={handleImageChange}
             className="input-field"
           />
-          <button type="submit">Rechercher</button>
+          <button type="submit" onClick={handleSubmit}>Rechercher</button>
         </form>
         <img src="./RechercheOuv.png" className="RechercheOuv" alt="Recherche Ouvrier" />
       </div>

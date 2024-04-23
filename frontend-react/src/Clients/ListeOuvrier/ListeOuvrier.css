@@ -1,30 +1,11 @@
-.root {
-    display: flex;
-  }
-  
-  .appBar {
-    z-index: 1201;
-  }
-  
-  .drawer {
-    width: 240px;
-    flex-shrink: 0;
-  }
-  
-  .drawerPaper {
-    width: 240px;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .drawerContainer {
-    overflow-y: auto;
-  }
-  
-  .card {
-    margin-bottom: 10px;
-  }
-  
+root: {
+  maxWidth: 3450,
+  margin: '10px',
+},
+title: {
+  fontSize: 20,
+},
+media: {
+  height: 20,
+},
+});

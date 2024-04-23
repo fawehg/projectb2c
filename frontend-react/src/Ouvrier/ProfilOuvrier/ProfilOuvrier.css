@@ -33,7 +33,7 @@
     border-radius: 2%;
 }
     
-   .profil.main.modifier {
+   .modifier {
     margin-left: 10px;
     padding: 10px 20px; /* Ajuste la taille des boutons */
     border: none;
@@ -95,4 +95,15 @@
   align-items: center;
   font-size: 24px;
   color: #888; /* couleur de texte gris */
+}
+.notification {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  z-index: 999;
 }

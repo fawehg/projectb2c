@@ -7,13 +7,14 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/ouvrier/logout`);
-      console(response.data);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/logout`);
+      console.log(response.data);
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la déconnexion:', error);
       alert('Une erreur s\'est produite lors de la déconnexion.');
     }
   };
+  
   return (
     <div className="header"> 
       <div className="logo-container">

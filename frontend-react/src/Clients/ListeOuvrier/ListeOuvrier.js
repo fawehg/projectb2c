@@ -1,98 +1,47 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Drawer,
-  AppBar,
-  Toolbar,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Card,
-  CardContent,
-  Typography,
-} from '@material-ui/core';
-import { Menu as MenuIcon, Dashboard as DashboardIcon } from '@material-ui/icons';
-import './ListeOuvrier.css';
+import { Card, CardContent, CardActions, Button, Typography, makeStyles, CardMedia } from '@material-ui/core';
+import Footer from '../FooterClient/FooterClient';
+import Header from '../HeaderClient/HeaderClient';
 
-const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
-    display: 'flex',
+    maxWidth: 3450,
+    margin: '10px',
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+  title: {
+    fontSize: 20,
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+  media: {
+    height: 20,
   },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  drawerContainer: {
-    overflowY: 'auto',
-  },
-  card: {
-    marginBottom: 10,
-  },
-}));
+});
 
-const ListeOuvrier = () => {
+const ListeOuvrier = ({ nom, prenom, photo, telephone, actionText }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <MenuIcon />
-          <Typography variant="h6" noWrap>
-            Mon Application
+    <div>
+      <Header/>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          image={photo}
+          title={`${prenom} ${nom}`}
+        />
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            Nom :{prenom} {nom}
           </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <Toolbar />
-        <div className={classes.drawerContainer}>
-          <List>
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            {/* Ajoutez d'autres éléments de menu ici */}
-          </List>
-        </div>
-      </Drawer>
-      <main className={classes.content}>
-        <Toolbar />
-        <div>
-          {[1, 2, 3, 4, 5].map((item) => (
-            <Card key={item} className={classes.card}>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Card {item}
-                </Typography>
-                <Typography color="textSecondary">
-                  Description de la carte {item}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </main>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Téléphone: {telephone}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">{actionText}</Button>
+        </CardActions>
+      </Card>
+      <Footer/>
     </div>
   );
 };
