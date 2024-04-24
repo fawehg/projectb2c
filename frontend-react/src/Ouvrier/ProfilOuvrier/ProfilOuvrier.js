@@ -21,8 +21,8 @@ function ProfilOuvrier() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem('token');
-                console.log("Token:", token); // Vérifiez le token
+                const token = localStorage.getItem('token',response.data.ResultData.token);
+                console.log("Token:", token); 
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/profil`, {
                     headers: {
                         Authorization: `Bearer ${token}`,

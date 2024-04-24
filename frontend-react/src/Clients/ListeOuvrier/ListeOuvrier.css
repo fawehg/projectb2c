@@ -1,11 +1,6 @@
-root: {
-  maxWidth: 3450,
-  margin: '10px',
-},
-title: {
-  fontSize: 20,
-},
-media: {
-  height: 20,
-},
-});
+
+.Aucune {
+text-align: 'center';
+font-size: 87;
+margin-top: 20;
+}

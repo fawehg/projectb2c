@@ -69,9 +69,9 @@ const navigate=useNavigate();
           },
         }
       );
-      console.log(response.data.ResultData.token);
-      localStorage.setItem('token', response.data.ResultData.token);
-      localStorage.getItem('token', response.data.ResultData.token);
+      
+      localStorage.setItem('token', response.data);
+     
       navigate('/liste-ouvrier');
       
     } catch (error) {
