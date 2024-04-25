@@ -1,6 +1,6 @@
 
 
-.profil-container {
+.profil-ouvrier {
     display: flex;
     flex-direction: column;
     height: 70vh; 
@@ -35,7 +35,7 @@
     
    .modifier {
     margin-left: 10px;
-    padding: 10px 20px; /* Ajuste la taille des boutons */
+    padding: 10px 20px; 
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -43,42 +43,65 @@
     border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
     border-radius: 8px; /* Arrondit les coins des boutons */
     transition: background-color 0.3s ease; /* Ajoute une transition pour une animation fluide */
+
   }
-  .profil-photo {
-    width: 100px;
-    height: 100px;
+  .profil-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-profil {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    margin-right: 20px;
     object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-  
-  .profile-info {
-    margin-top: 20px;
-  }
-  
-  .profile-info p {
-    margin-bottom: 10px;
-  }
-  .profil-info ul {
+
+.profil-info ul {
     list-style-type: none;
-    padding: 0;
+    padding-left: 0;
 }
 
-.profil-info li {
+.profil-info ul li {
     margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
 }
 
-.modifier {
-  background-color: #066edd00;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: white;
-  margin-top: 20px; /* espace supplémentaire au-dessus du bouton */
+.profil-info ul li::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 10px;
+    color: #555;
 }
+
+.profil-info ul li.Nom::before {
+    content: 'Nom:';
+}
+
+.profil-info ul li.Email::before {
+    content: 'Email:';
+}
+
+.profil-info ul li.Adresse::before {
+    content: 'Adresse:';
+}
+
+.profil-info ul li.Profession::before {
+    content: 'Profession:';
+}
+
+.profil-info ul li.Téléphone::before {
+    content: 'Numéro de téléphone:';
+}
+
+
 .profil-header {
   display: flex;
   align-items: center;
@@ -88,7 +111,7 @@
 .profil-photo.placeholder {
   width: 100px;
   height: 100px;
-  background-color: #e0e0e0; /* couleur de fond gris clair */
+  background-color: #323131; /* couleur de fond gris clair */
   border-radius: 50%; /* pour un effet arrondi */
   display: flex;
   justify-content: center;

@@ -12,7 +12,7 @@ import Reset from './MDPoubliée/Reset/Reset';
 import SupportUtilisateurs from './Menu/SupportUtilisateurs/SupportUtilisateurs';
 import Admin from './Menu/EspacePro/Admin/Admin';
 import ListeOuvrier from './Clients/ListeOuvrier/ListeOuvrier';
-
+import ModifierProfil from './Ouvrier/ProfilOuvrier/ModiferProfil/ModifierProfil';
 function App() {
   return (
     <Router>
@@ -30,6 +30,8 @@ function App() {
           <Route path="/support-utilisateurs" element={<SupportUtilisateurs/>} />
           <Route path="/admin" element={<Admin/>} />
           <Route path="/liste-ouvrier" element={<ListeOuvrier/>} />
+          <Route path="/modifier-profil" element={<ModifierProfil/>} />
+
 
         </Routes>
       </div>

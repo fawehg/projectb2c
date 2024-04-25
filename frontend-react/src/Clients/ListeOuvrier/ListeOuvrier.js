@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardContent, CardActions, Button, Typography, makeStyles, CardMedia } from '@material-ui/core';
+import { Card, CardContent, CardActions, Button, Typography, makeStyles } from '@material-ui/core';
 import Footer from '../FooterClient/FooterClient';
 import Header from '../HeaderClient/HeaderClient';
-import { red } from '@material-ui/core/colors';
+
+import './ListeOuvrier.css';
 
 const ListeOuvrier = () => {
   const [ouvriers, setOuvriers] = useState([]);
@@ -11,24 +12,24 @@ const ListeOuvrier = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token');
-        console.log("Token:", token);
+          const token = localStorage.getItem('token');
+          console.log("Token:", token); 
 
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/client/ouvriers`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        
-        console.log("Données récupérées:", response.data);
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/client/ouvriers`, {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              },
+          });
 
-        setOuvriers(response.data.ResultData);
+          console.log("Données récupérées:", response.data);
+
+          setOuvriers(response.data.ResultData);
 
       } catch (error) {
-        console.error('Erreur lors de la récupération des données : ', error);
+          console.error('Erreur lors de la récupération des données : ', error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -46,8 +47,8 @@ const ListeOuvrier = () => {
     message: {
       textAlign: 'center',
       fontSize: 50,
-      marginTop: 200,
-      
+      marginTop: 20,
+      marginRight:10,
     },
   });
 
@@ -57,13 +58,12 @@ const ListeOuvrier = () => {
     <div>
       <Header/>
       {ouvriers.length === 0 ? (
-        
-        
-        <Typography className={classes.message}>
-          Oups !!
-          <div className='Aucune'>   Il n'y a pas d'ouvrier disponible pour le moment, veuillez réessayer ultérieurement.</div>
-        </Typography>
-        
+        <div className='Aucune'>
+          <Typography className={classes.message}>
+            Oups !!
+            Il n'y a pas d'ouvrier disponible pour le moment, veuillez réessayer ultérieurement.
+          </Typography>
+        </div>
       ) : (
         ouvriers.map((ouvrier, index) => (
           <Card key={index} className={classes.root}>
@@ -71,6 +71,11 @@ const ListeOuvrier = () => {
               <Typography variant="h5" component="h2">
                 Nom: {ouvrier.prenom} {ouvrier.nom}
               </Typography>
+              {ouvrier.specialties && (
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Spécialités: {ouvrier.specialties.join(', ')}
+                </Typography>
+              )}
             </CardContent>
             <CardActions>
               <Button size="small">Réserver</Button>
@@ -78,6 +83,7 @@ const ListeOuvrier = () => {
           </Card>
         ))
       )}
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       <Footer/>
     </div>
   );

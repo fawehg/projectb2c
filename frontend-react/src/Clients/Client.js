@@ -51,7 +51,7 @@ const Client = () => {
           }
         );
 
-        console.log(response.data.ResultData.token);
+        
         localStorage.setItem('token', response.data.ResultData.token);
         navigate('/recherche-ouvrier');
       } catch (error) {

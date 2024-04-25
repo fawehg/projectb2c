@@ -60,8 +60,7 @@ const navigate=useNavigate();
         description,
         image: null,
       };
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/client/demandes`,
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/demandes`,
         requestData,
         {
           headers: {

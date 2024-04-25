@@ -1,19 +1,38 @@
 import React from 'react';
 import './HeaderClient.css';
 import axios from 'axios';
+import {  useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/client/logout`);
-      console(response.data);
-    } catch (error) {
-      console.error('Une erreur s\'est produite lors de la déconnexion:', error);
-      alert('Une erreur s\'est produite lors de la déconnexion.');
+
+ const navigate = useNavigate();
+ const handleLogout = async () => {
+  try {
+    const response = await axios.put(
+      `${process.env.REACT_APP_API_URL}/client/logout`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming you are using a Bearer token
+        },
+      }
+    );
+
+    console.log("Request Headers:", JSON.stringify(response.headers));
+
+    if (response.status === 200) {
+      console.log("logout successful");
+      localStorage.removeItem('token');
+    } else {
+      console.log("Logout failed");
     }
-  };
+  } catch (error) {
+    console.log("An error occurred while trying to logout", error);
+  }
+};
 
 
   return (

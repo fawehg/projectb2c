@@ -13,7 +13,7 @@ const Ouvrier = () => {
   const [prenom, setPrenom] = useState('');
   const [email, setEmail] = useState('');
   const [ville, setVille] = useState('');
-  const [adresse, setAdresse] = useState('');
+  const [numeroTelephone, setnumeroTelephone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmationMotDePasse, setConfirmationMotDePasse] = useState('');
   const [profession, setProfession] = useState('');
@@ -99,7 +99,7 @@ const Ouvrier = () => {
     if (!prenom.trim()) errors.prenom = 'Veuillez saisir votre prénom';
     if (!email.trim()) errors.email = 'Veuillez saisir votre adresse e-mail';
     if (!ville.trim()) errors.ville = 'Veuillez saisir votre ville';
-    if (!adresse.trim()) errors.adresse = 'Veuillez saisir votre adresse';
+    if (!numeroTelephone.trim()) errors.numeroTelephone = 'Veuillez saisir votre numero du Telephone';
     if (!password.trim()) errors.password = 'Veuillez saisir votre mot de passe';
     if (!confirmationMotDePasse.trim()) errors.confirmationMotDePasse = 'Veuillez confirmer votre mot de passe';
     if (!profession.trim()) errors.profession = 'Saisie votre profession';
@@ -114,23 +114,25 @@ const Ouvrier = () => {
     if (!validateForm()) {
       return;
     }
-
-
+  
+    console.log('Specialties:', specialties);
+    console.log('Jours Disponibilite:', joursDisponibilite);
+  
     const formData = new FormData();
     formData.append('nom', nom);
     formData.append('prenom', prenom);
     formData.append('email', email);
     formData.append('ville', ville);
-    formData.append('adresse', adresse);
+    formData.append('numeroTelephone', numeroTelephone);
     formData.append('password', password);
     formData.append('confirmationMotDePasse', confirmationMotDePasse);
     formData.append('profession', profession);
-    formData.append('specialties', JSON.stringify(specialties));
-    formData.append('joursDisponibilite', JSON.stringify(joursDisponibilite));
+    formData.append('specialties', specialties); // Corrected
+    formData.append('joursDisponibilite', joursDisponibilite); // Corrected
     formData.append('heureDebut', heureDebut);
     formData.append('heureFin', heureFin);
     formData.append('image', image);
-
+  
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/ouvrier/register`,
@@ -139,22 +141,22 @@ const Ouvrier = () => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-          
         }
-        
       );
       console.log(response.data.ResultData.token);
-        localStorage.setItem('token', response.data.ResultData.token);
-        localStorage.getItem('token', response.data.ResultData.token);
-        navigate('/profil-ouvrier');
+      localStorage.setItem('token', response.data.ResultData.token);
+      navigate('/profil-ouvrier');
     } catch (error) {
       if (error.response && error.response.data && error.response.data.ResultInfo) {
         setErrors(error.response.data.ResultInfo.ErrorMessage);
       } else {
-        console.error('Erreur lors de la requête :', error);
+        setErrors({ general: 'Une erreur s\'est produite. Veuillez réessayer.' });
       }
     }
   };
+  
+  
+  
 
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
@@ -251,12 +253,12 @@ const Ouvrier = () => {
               <input
                 className="input-field"
                 type="text"
-                placeholder="Adresse"
-                name="adresse"
-                value={adresse}
-                onChange={e => setAdresse(e.target.value)}
+                placeholder="numéro du Télephone"
+                name="numeroTelephone"
+                value={numeroTelephone}
+                onChange={e => setnumeroTelephone(e.target.value)}
               />
-              {errors.adresse && <p className="error-message">{errors.adresse}</p>}
+              {errors.numeroTelephone && <p className="error-message">{errors.numeroTelephone}</p>}
             </div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faLock} className="icon" />

@@ -1,0 +1,6 @@
+.form-update {
+    position: absolute;
+    top: 220;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
