@@ -5,8 +5,7 @@
     flex-direction: column;
     height: 70vh; 
     background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
-    color: rgb(255, 255, 255);;
-    background-size: cover; /* Pour couvrir toute la surface */
+    background-size: cover; 
     background-position: center;
 }
 
@@ -46,18 +45,17 @@
 
   }
   .profil-info {
-    display: flex;
     align-items: center;
     gap: 20px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #ffffff30;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .photo-profil {
     width: 150px;
-    height: 150px;
+    height: 170px;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -71,7 +69,7 @@
 .profil-info ul li {
     margin-bottom: 10px;
     font-size: 16px;
-    color: #333;
+    color: #ffffff;
 }
 
 .profil-info ul li::before {
@@ -82,6 +80,7 @@
 }
 
 .profil-info ul li.Nom::before {
+  display: inline;
     content: 'Nom:';
 }
 
@@ -102,21 +101,16 @@
 }
 
 
-.profil-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
+
 
 .profil-photo.placeholder {
-  width: 100px;
+  width: 1000px;
   height: 100px;
   background-color: #323131; /* couleur de fond gris clair */
   border-radius: 50%; /* pour un effet arrondi */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
   color: #888; /* couleur de texte gris */
 }
 .notification {

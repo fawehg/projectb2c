@@ -12,10 +12,6 @@ function ProfilOuvrier() {
     const [ville, setVille] = useState('');
     const [adresse, setAdresse] = useState('');
     const [profession, setProfession] = useState('');
-    const [specialties, setSpecialties] = useState([]);
-    const [joursDisponibilite, setJoursDisponibilite] = useState([]);
-    const [heureDebut, setHeureDebut] = useState('');
-    const [heureFin, setHeureFin] = useState('');
     const [telephone, setTelephone] = useState('');
     const [notification, setNotification] = useState('');
     const [photoProfil, setPhotoProfil] = useState('');
@@ -25,22 +21,20 @@ function ProfilOuvrier() {
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem('token');
-                console.log("Token:", token); 
-
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/profil`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                
-                console.log("Données récupérées:", response.data);
+        
                 setNom(response.data.ResultData.data.nom);
                 setPrenom(response.data.ResultData.data.prenom);
                 setEmail(response.data.ResultData.data.email);
-                setAdresse(response.data.ResultData.data.adresse);
+                setVille(response.data.ResultData.data.ville);
                 setProfession(response.data.ResultData.data.profession);
                 setPhotoProfil(response.data.ResultData.data.photoProfil);
-                setTelephone(response.data.ResultData.data.telephone);   
+                setTelephone(response.data.ResultData.data.numeroTelephone);  
+                setPhotoProfil(response.data.ResultData.data.image); 
                 setLoading(false);
 
             } catch (error) {
@@ -66,6 +60,7 @@ function ProfilOuvrier() {
                         ) : (
                             <div className="profil-info">
                             <img src={photoProfil} className="photo-profil" />
+                            
                             <ul>
                                 <li data-label="Nom" className="Nom">{nom}</li>
                                 <li data-label="Email" className="Email">{email}</li>

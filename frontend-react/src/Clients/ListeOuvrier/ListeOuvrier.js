@@ -12,24 +12,28 @@ const ListeOuvrier = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-          const token = localStorage.getItem('token');
-          console.log("Token:", token); 
-
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/client/ouvriers`, {
-              headers: {
-                  Authorization: `Bearer ${token}`,
-              },
-          });
-
-          console.log("Données récupérées:", response.data);
-
-          setOuvriers(response.data.ResultData);
-
+        // Récupérer le token depuis le localStorage
+        const token = localStorage.getItem('token');
+        console.log("Token:", token); 
+    
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/client/ouvriers`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+    
+        console.log("Données récupérées:", response.data);
+    
+        // Si vous utilisez useState pour gérer l'état des données
+        setOuvriers(response.data.ResultData);
+        
+        // Sinon, si vous utilisez une autre méthode pour gérer les données, remplacez la ligne ci-dessus par votre propre logique pour gérer les données récupérées.
+    
       } catch (error) {
-          console.error('Erreur lors de la récupération des données : ', error);
+        console.error('Erreur lors de la récupération des données : ', error);
       }
     };
-
+    
     fetchData();
   }, []);
 

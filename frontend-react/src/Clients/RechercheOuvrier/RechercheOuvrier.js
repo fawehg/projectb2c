@@ -48,35 +48,45 @@ const RechercheOuvrier = () => {
     setSelectedSpecialite('');
   };
 const navigate=useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const requestData = {
-        domaines: selectedDomain,
-        specialites: selectedSpecialite,
-        city,
-        date,
-        time,
-        description,
-        image: null,
-      };
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/demandes`,
-        requestData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      
-      localStorage.setItem('token', response.data);
-     
-      navigate('/liste-ouvrier');
-      
-    } catch (error) {
-      console.error('Erreur lors de la requête :', error);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const requestData = {
+      domaines: selectedDomain,
+      specialites: selectedSpecialite,
+      city,
+      date,
+      time,
+      description,
+      image: null,
+    };
+    const token = localStorage.getItem('token');
+    console.log("Token:", token);
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/client/demandes`,
+      requestData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include authorization token in headers
+        },
+      }
+    );
+
+    // Handle response data if necessary
+    console.log("Response:", response.data);
+
+    // Navigate to '/liste-ouvrier' after successful request
+    // Assuming 'navigate' is a function to navigate to a different route
+    navigate('/liste-ouvrier');
+  } catch (error) {
+    console.error('Erreur lors de la requête :', error);
+    // Log error response from server if available
+    if (error.response) {
+      console.error('Error response from server:', error.response.data);
     }
-  };
+  }
+};
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
@@ -100,7 +110,7 @@ const navigate=useNavigate();
           >
             <option value="">Sélectionnez un domaine</option>
             {domaines && domaines.map((domaine, index) => (
-              <option key={index} value={domaine.nom_domaine}>{domaine.nom_domaine}</option>
+              <option key={index} value={domaine.domaine_id}>{domaine.nom_domaine}</option>
             ))}
           </select>
           

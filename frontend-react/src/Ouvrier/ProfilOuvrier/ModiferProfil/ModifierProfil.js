@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faMapMarkerAlt, faAddressCard, faLock } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Header from '../../HeaderOuvrier/HeaderOuvrier';
 import Footer from '../../FooterOuvrier/FooterOuvrier';
+import './ModifierProfil.css';
 
 const ModiferProfil = () => {
-  const [domain, setDomain] = useState({});
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
   const [email, setEmail] = useState('');
@@ -15,66 +15,15 @@ const ModiferProfil = () => {
   const [numeroTelephone, setnumeroTelephone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmationMotDePasse, setConfirmationMotDePasse] = useState('');
-  const [profession, setProfession] = useState('');
-  const [specialties, setSpecialties] = useState([]);
   const [joursDisponibilite, setJoursDisponibilite] = useState([]);
   const [heureDebut, setHeureDebut] = useState('');
   const [heureFin, setHeureFin] = useState('');
   const [errors, setErrors] = useState({});
-  const [selectedDomain, setSelectedDomain] = useState('');
-  const [filteredSpecialites, setFilteredSpecialites] = useState([]);
   const [image, setImage] = useState(null);
   const [notification, setNotification] = useState('');
 
-  const navigate = useNavigate();
+  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [domainesResponse, specialitesResponse] = await Promise.all([
-          axios.get(`${process.env.REACT_APP_API_URL}/domaines`),
-          axios.get(`${process.env.REACT_APP_API_URL}/specialites`),
-        ]);
-
-        setDomain({
-          domaines: domainesResponse.data || [],
-          specialites: specialitesResponse.data || [],
-        });
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données :', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleDomainChange = (event) => {
-    const selectedDomain = event.target.value;
-    const domainData = domain.domaines.find(domaine => domaine.nom_domaine === selectedDomain);
-    setSelectedDomain(selectedDomain);
-    if (!domainData) {
-      setProfession('');
-      setSpecialties([]);
-      setFilteredSpecialites([]);
-      return;
-    }
-
-    const filteredSpecialites = domainData.specialites || [];
-    const professionData = domainData.nom_domaine || '';
-    setProfession(professionData);
-    setSpecialties([]);
-    setFilteredSpecialites(filteredSpecialites);
-  };
-
-  const handleSpecialtyChange = (e) => {
-    const { name, checked } = e.target;
-    
-    if (checked) {
-      setSpecialties(prevSpecialties => [...prevSpecialties, name]);
-    } else {
-      setSpecialties(prevSpecialties => prevSpecialties.filter(specialty => specialty !== name));
-    }
-  };
   
   const handleAvailabilityChange = (e) => {
     const day = e.target.value;
@@ -91,7 +40,7 @@ const ModiferProfil = () => {
     const imageFile = e.target.files[0];
     setImage(imageFile);
   };
-
+  const navigate=useNavigate();
   const handleModifierProfil = async (e) => {
     e.preventDefault();
     try {
@@ -106,21 +55,19 @@ const ModiferProfil = () => {
       formData.append('numeroTelephone', numeroTelephone);
       formData.append('password', password);
       formData.append('confirmationMotDePasse', confirmationMotDePasse);
-      formData.append('profession', profession);
-      formData.append('specialties', JSON.stringify(specialties)); // Corrected
       formData.append('joursDisponibilite', JSON.stringify(joursDisponibilite)); // Corrected
       formData.append('heureDebut', heureDebut);
       formData.append('heureFin', heureFin);
       formData.append('image', image);
     
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/ouvrier/mettreAJourProfil`, formData, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/ouvrier/update-profil`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       console.log("Profil modifié avec succès !");
-      setNotification('Profil modifié avec succès !');
-      console.log(response.data); 
+      alert('Profil modifié avec succès !');
+      navigate('/profil-ouvrier');
     } catch (error) {
       console.error('Erreur lors de la modification du profil : ', error);
       setNotification('Erreur lors de la modification du profil');
@@ -216,35 +163,6 @@ const ModiferProfil = () => {
               onChange={e => setConfirmationMotDePasse(e.target.value)}
             />
             {errors.confirmationMotDePasse && <p className="error-message">{errors.confirmationMotDePasse}</p>}
-          </div>
-
-          <select
-            className="input-field-container select-field"
-            value={selectedDomain}
-            onChange={handleDomainChange}
-            name="selectedDomain"
-          >
-            <option value="">Sélectionnez une profession</option>
-            {domain.domaines && domain.domaines.map((domaine, index) => (
-              <option key={index} value={domaine.id_domaine}>
-                {domaine.nom_domaine}
-              </option>
-            ))}
-          </select>
-
-          <div className="input-field-container">
-            {filteredSpecialites && filteredSpecialites.map((specialite, index) => (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  id={`specialite-${index}`}
-                  name={specialite.nom_specialite}
-                  onChange={handleSpecialtyChange}
-                  checked={specialties.includes(specialite.nom_specialite)}
-                />
-                <label htmlFor={`specialite-${index}`}>{specialite.nom_specialite}</label>
-              </div>
-            ))}
           </div>
 
           <h3>Jours de disponibilité :</h3>
