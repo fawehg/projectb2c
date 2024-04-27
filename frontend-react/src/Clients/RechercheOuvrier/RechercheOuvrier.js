@@ -61,30 +61,23 @@ const handleSubmit = async (e) => {
       image: null,
     };
     const token = localStorage.getItem('token');
-    console.log("Token:", token);
+    
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}/client/demandes`,
       requestData,
       {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include authorization token in headers
+          'Authorization': `Bearer ${token}`, 
         },
       }
     );
 
-    // Handle response data if necessary
     console.log("Response:", response.data);
 
-    // Navigate to '/liste-ouvrier' after successful request
-    // Assuming 'navigate' is a function to navigate to a different route
     navigate('/liste-ouvrier');
   } catch (error) {
     console.error('Erreur lors de la requête :', error);
-    // Log error response from server if available
-    if (error.response) {
-      console.error('Error response from server:', error.response.data);
-    }
   }
 };
   const handleImageChange = (event) => {
