@@ -61,7 +61,6 @@ const handleSubmit = async (e) => {
       image: null,
     };
     const token = localStorage.getItem('token');
-    
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}/client/demandes`,
       requestData,
@@ -72,9 +71,6 @@ const handleSubmit = async (e) => {
         },
       }
     );
-
-    console.log("Response:", response.data);
-
     navigate('/liste-ouvrier');
   } catch (error) {
     console.error('Erreur lors de la requête :', error);

@@ -8,6 +8,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 const Ouvrier = () => {
+  const [adresse, setAdresse] = useState('');
   const [domain, setDomain] = useState({});
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
@@ -103,6 +104,8 @@ const Ouvrier = () => {
     if (!password.trim()) errors.password = 'Veuillez saisir votre mot de passe';
     if (!confirmationMotDePasse.trim()) errors.confirmationMotDePasse = 'Veuillez confirmer votre mot de passe';
     if (!profession.trim()) errors.profession = 'Saisie votre profession';
+    if (!adresse.trim()) errors.adresse = 'Veuillez saisir votre adresse';
+
 
     setErrors(errors);
 
@@ -127,11 +130,13 @@ const Ouvrier = () => {
     formData.append('password', password);
     formData.append('confirmationMotDePasse', confirmationMotDePasse);
     formData.append('profession', profession);
-    formData.append('specialties', specialties); // Corrected
+    formData.append('specialties', JSON.stringify(specialties));
     formData.append('joursDisponibilite', joursDisponibilite); // Corrected
     formData.append('heureDebut', heureDebut);
     formData.append('heureFin', heureFin);
     formData.append('image', image);
+    formData.append('adresse', adresse);
+
   
     try {
       const response = await axios.post(
@@ -248,6 +253,18 @@ const Ouvrier = () => {
               />
               {errors.ville && <p className="error-message">{errors.ville}</p>}
             </div>
+            <div className="input-field-container">
+  <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
+  <input
+    className="input-field"
+    type="text"
+    placeholder="Adresse"
+    name="adresse"
+    value={adresse}
+    onChange={e => setAdresse(e.target.value)}
+  />
+  {errors.adresse && <p className="error-message">{errors.adresse}</p>}
+</div>
             <div className="input-field-container">
               <FontAwesomeIcon icon={faAddressCard} className="icon" />
               <input
