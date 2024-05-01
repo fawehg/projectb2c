@@ -60,19 +60,21 @@ function ProfilOuvrier() {
                         ) : (
                             <div className="profil-info">
                             <img src={photoProfil} className="photo-profil" />
-                            
+                            <Link to="/JOBS"><button className='modifier'>Travail demandée</button></Link>
                             <ul>
-                                <li data-label="Nom" className="Nom">{nom}</li>
+                                <li data-label="Nom" className="Nom">{nom} {prenom}</li>
                                 <li data-label="Email" className="Email">{email}</li>
-                                <li data-label="Adresse" className="Adresse">{adresse}</li>
-                                <li data-label="Profession" className="Profession">{profession}</li>
                                 <li data-label="Téléphone" className="Téléphone">{telephone}</li>
+                                <li data-label="Profession" className="Profession">{profession}</li>
+                                <li data-label="ville" className="ville">{ville}</li>
                             </ul>
                             
                         </div>
                         
                         )}
-                        <br/><br/>
+                        <br/>
+                        
+                        <br/>
                        <Link to="/modifier-profil"><button className='modifier'>Modifier profil</button></Link>
                     </div>
                     <div className="history">

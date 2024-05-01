@@ -16,7 +16,7 @@
    /* Positionnement relatif pour faciliter le positionnement absolu */
   width: 3000px; /* Largeur du formulaire */
   height: 80vh;
-  background-color: rgba(24, 121, 201, 0.247);
+  background-color: rgba(61, 165, 250, 0.517);
   border-radius: 30px;
   box-shadow: 0 14px 28px rgba(239, 235, 235, 0.25), 
               0 10px 10px rgba(14, 11, 216, 0.719);

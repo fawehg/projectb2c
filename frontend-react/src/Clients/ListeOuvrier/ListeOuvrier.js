@@ -38,22 +38,21 @@ const ListeOuvrier = () => {
     
     fetchData();
   }, []);
-  const handleSubmit = async (ouvrierId) => {
+
+  const handleSubmit = async (ouvrierId, demandeData) => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/reserver-ouvrier`, {
         ouvrier_id: ouvrierId,
+        
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-  
       console.log('Réservation effectuée avec succès:', response.data.message);
-      // Ici vous pouvez afficher un message à l'utilisateur pour lui indiquer que la réservation a été effectuée avec succès
     } catch (error) {
       console.error('Erreur lors de la réservation : ', error);
-      // Ici vous pouvez afficher un message à l'utilisateur pour lui indiquer qu'une erreur s'est produite lors de la réservation
     }
   };
   
@@ -61,7 +60,7 @@ const ListeOuvrier = () => {
     root: {
       maxWidth: 3450,
       margin: '10px',
-      backgroundColor: 'rgba(24, 121, 201, 0.247)',
+      backgroundColor: 'rgba(61, 165, 250, 0.517)',
       borderRadius: 30,
       boxShadow: '0 14px 28px rgba(239, 235, 235, 0.25), 0 10px 10px rgba(14, 11, 216, 0.719)',
     },
@@ -93,23 +92,23 @@ const ListeOuvrier = () => {
       ) : (   
         <div>
           {ouvriers.map((ouvrier, index) => (
-    <Card key={index} className={classes.root}>
-    <CardContent>
-      <Avatar alt={`${ouvrier.prenom} ${ouvrier.nom}`} src={ouvrier.image} className={classes.avatar} />
-      <Typography variant="h5" component="h2">
-        Nom: {ouvrier.prenom} {ouvrier.nom}  
-      </Typography>
-      <Typography variant="h5" component="h2">
-        numéro du telephone :{ouvrier.numeroTelephone} 
-      </Typography>
-      <Typography variant="h5" component="h2">
-        Email :{ouvrier.email}
-      </Typography>
-    </CardContent>
-    <CardActions className='reserver' >  
-    <Button size="small" onClick={(e) => handleSubmit(e)}>Réserver</Button>
-    </CardActions>
-  </Card>
+            <Card key={index} className={classes.root}>
+              <CardContent>
+                <Avatar alt={`${ouvrier.prenom} ${ouvrier.nom}`} src={ouvrier.image} className={classes.avatar} />
+                <Typography variant="h5" component="h2">
+                  Nom: {ouvrier.prenom} {ouvrier.nom}  
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  numéro du telephone :{ouvrier.numeroTelephone} 
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  Email :{ouvrier.email}
+                </Typography>
+              </CardContent>
+              <CardActions className='reserver'>  
+                <Button size="small" onClick={() => handleSubmit(ouvrier.id)} >Réserver</Button>
+              </CardActions>
+            </Card>
           ))}
         </div>
       )}

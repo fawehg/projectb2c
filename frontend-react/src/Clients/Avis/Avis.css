@@ -1,0 +1,40 @@
+.avis-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .comment-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .comment-item {
+    margin-bottom: 20px;
+  }
+  
+  .comment-rating {
+    margin-bottom: 10px;
+  }
+  
+  .star {
+    cursor: pointer;
+  }
+  
+  .comment-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .submit-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
