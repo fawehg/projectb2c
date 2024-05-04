@@ -8,12 +8,13 @@ const Header = () => {
   return (
     <div className="header"> 
       <div className="logo-container">
-        <img src="./LOGO.png" alt="Logo" className="logo" />
+      <Link to="/"> <img src="./LOGO.png" alt="Logo" className="logo" /></Link>
       </div>
       <div className="buttons">
         <Link to="/"><button>Accueil</button></Link>
         <Link to="/espacepro"><button>Espace Pro</button></Link>
         <Link to="/support-utilisateurs"><button>Support Utilisateur</button></Link>
+        <Link to="/contact"><button>Contactez Nous </button></Link>
       </div>
       <div className="header-text">
       

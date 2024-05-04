@@ -132,7 +132,7 @@ const Client = () => {
       <div className="container" id="container">
         <div className="form-container sign-up-container">
           <form onSubmit={handleSubmitSignup}>
-            <h1>Créer un compte</h1>
+            <h1>Créer un compte</h1>  
             <div className="input-container">
               <FaUser className="icon" />
               <input
@@ -266,7 +266,6 @@ const Client = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

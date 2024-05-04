@@ -15,6 +15,7 @@ import ListeOuvrier from './Clients/ListeOuvrier/ListeOuvrier';
 import ModifierProfil from './Ouvrier/ProfilOuvrier/ModiferProfil/ModifierProfil';
 import Avis from './Clients/Avis/Avis';
 import Jobs from'./Ouvrier/ProfilOuvrier/Jobs/Jobs';
+import Contact from './Menu/contact/contact';
 function App() {
   return (
     <Router>
@@ -23,19 +24,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/espacePro" element={<EspacePro />} />
+          <Route path="/support-utilisateurs" element={<SupportUtilisateurs/>} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/client" element={<Client/>} />
           <Route path="/ouvrier" element={<Ouvrier/>} />
-          <Route path="/recherche-ouvrier" element={<RechercheOuvrier/>} />
-          <Route path="/profil-ouvrier" element={<ProfilOuvrier/>} />
+          <Route path="/admin" element={<Admin/>} />
           <Route path="/mot-de-passe-oublie" element={<MotDePasseOublie/>} />
           <Route path="/reset" element={<Reset/>} />
-          <Route path="/support-utilisateurs" element={<SupportUtilisateurs/>} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/liste-ouvrier" element={<ListeOuvrier/>} />
+          <Route path="/recherche-ouvrier" element={<RechercheOuvrier/>} />
+          <Route path="/profil-ouvrier" element={<ProfilOuvrier/>} />
           <Route path="/modifier-profil" element={<ModifierProfil/>} />
+          <Route path="/liste-ouvrier" element={<ListeOuvrier/>} />
+          <Route path="/jobs" element={<Jobs />} />
           <Route path="/avis" element={<Avis/>} />
-          <Route path="/jobs" element={<Jobs/>} />
-
+         
 
 
         </Routes>

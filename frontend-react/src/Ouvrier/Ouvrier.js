@@ -205,7 +205,7 @@ const Ouvrier = () => {
         <div className="form-container sign-up-container">
           <form onSubmit={handleSubmitRegister}>
             <h1>Créer un compte</h1>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faUser} className="icon" />
               <input
                 className="input-field"
@@ -217,7 +217,7 @@ const Ouvrier = () => {
               />
               {errors.nom && <p className="error-message">{errors.nom}</p>}
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faUser} className="icon" />
               <input
                 className="input-field"
@@ -229,7 +229,7 @@ const Ouvrier = () => {
               />
               {errors.prenom && <p className="error-message">{errors.prenom}</p>}
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faEnvelope} className="icon" />
               <input
                 className="input-field"
@@ -241,7 +241,7 @@ const Ouvrier = () => {
               />
               {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
               <input
                 className="input-field"
@@ -253,7 +253,7 @@ const Ouvrier = () => {
               />
               {errors.ville && <p className="error-message">{errors.ville}</p>}
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
   <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
   <input
     className="input-field"
@@ -265,7 +265,7 @@ const Ouvrier = () => {
   />
   {errors.adresse && <p className="error-message">{errors.adresse}</p>}
 </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faAddressCard} className="icon" />
               <input
                 className="input-field"
@@ -277,7 +277,7 @@ const Ouvrier = () => {
               />
               {errors.numeroTelephone && <p className="error-message">{errors.numeroTelephone}</p>}
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faLock} className="icon" />
               <input
                 className="input-field"
@@ -289,7 +289,7 @@ const Ouvrier = () => {
               />
               {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faLock} className="icon" />
               <input
                 className="input-field"
@@ -303,7 +303,7 @@ const Ouvrier = () => {
             </div>
 
             <select
-              className="input-field-container select-field"
+              className="input-container "
               value={selectedDomain}
               onChange={handleDomainChange}
               name="selectedDomain"
@@ -385,7 +385,7 @@ const Ouvrier = () => {
         <div className="form-container sign-in-container">
           <form onSubmit={handleSubmitLogin}>
             <h1>Connexion</h1>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faEnvelope} className="icon" />
               <input
                 className="input-field"
@@ -396,7 +396,7 @@ const Ouvrier = () => {
                 onChange={e => setEmail(e.target.value)}
               />
             </div>
-            <div className="input-field-container">
+            <div className="input-container">
               <FontAwesomeIcon icon={faLock} className="icon" />
               <input
                 className="input-field"
@@ -427,7 +427,7 @@ const Ouvrier = () => {
           </div>
         </div>
       </div>
-      <Footer />
+     
     </div>
   );
 };

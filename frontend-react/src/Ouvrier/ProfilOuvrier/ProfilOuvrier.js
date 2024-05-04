@@ -10,12 +10,12 @@ function ProfilOuvrier() {
     const [prenom, setPrenom] = useState('');
     const [email, setEmail] = useState('');
     const [ville, setVille] = useState('');
-    const [adresse, setAdresse] = useState('');
     const [profession, setProfession] = useState('');
     const [telephone, setTelephone] = useState('');
     const [notification, setNotification] = useState('');
     const [photoProfil, setPhotoProfil] = useState('');
     const [loading, setLoading] = useState(true);
+    const [id, setId] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,6 +35,8 @@ function ProfilOuvrier() {
                 setPhotoProfil(response.data.ResultData.data.photoProfil);
                 setTelephone(response.data.ResultData.data.numeroTelephone);  
                 setPhotoProfil(response.data.ResultData.data.image); 
+                
+                setId(response.data.ResultData.data.id);
                 setLoading(false);
 
             } catch (error) {
@@ -45,8 +47,6 @@ function ProfilOuvrier() {
 
         fetchData();
     }, []);
-
-
 
     return (
         <div>
@@ -59,23 +59,27 @@ function ProfilOuvrier() {
                             <p>Chargement des informations personnelles...</p>
                         ) : (
                             <div className="profil-info">
-                            <img src={photoProfil} className="photo-profil" />
-                            <Link to="/JOBS"><button className='modifier'>Travail demandée</button></Link>
-                            <ul>
-                                <li data-label="Nom" className="Nom">{nom} {prenom}</li>
-                                <li data-label="Email" className="Email">{email}</li>
-                                <li data-label="Téléphone" className="Téléphone">{telephone}</li>
-                                <li data-label="Profession" className="Profession">{profession}</li>
-                                <li data-label="ville" className="ville">{ville}</li>
-                            </ul>
-                            
-                        </div>
-                        
+                                <img src={photoProfil} className="photo-profil" />
+                                
+                                <ul>
+                                    <li data-label="Nom" className="Nom">{nom} {prenom}</li>
+                                    <li data-label="Email" className="Email">{email}</li>
+                                    <li data-label="Téléphone" className="Téléphone">{telephone}</li>
+                                    <li data-label="Profession" className="Profession">{profession}</li>
+                                    <li data-label="ville" className="ville">{ville}</li>
+                                </ul>
+                                <Link to={`/JOBS`}><button className='modifier'>Travail demandée</button></Link>
+                            </div>
                         )}
                         <br/>
-                        
                         <br/>
-                       <Link to="/modifier-profil"><button className='modifier'>Modifier profil</button></Link>
+                        <Link to="/modifier-profil"><button className='modifier'>Modifier profil</button></Link>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
                     <div className="history">
                         <h2>Historique</h2>
@@ -86,7 +90,7 @@ function ProfilOuvrier() {
                     </div>
                 </div>
             </div>
-            <Footer />
+            
         </div>
     );
 }

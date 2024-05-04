@@ -1,0 +1,131 @@
+
+.contact-header h1 {
+  color: #333; /* Couleur du texte */
+}
+
+.contact-options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.contact-option {
+  background: linear-gradient(60deg, rgb(84, 58, 183) 0%, rgba(0, 172, 193, 1) 100%);
+  padding: 20px;
+  margin: 10px;
+  width: 30%;
+}
+
+
+
+h2 {
+  color: #fff; /* Couleur du titre de chaque option */
+}
+
+p, span {
+  color: #fff; /* Couleur du texte */
+}
+
+button {
+  background: #333; /* Couleur de fond du bouton */
+  color: #fff; /* Couleur du texte du bouton */
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+
+
+.contact-header {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.contact-form {
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.contact-options {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.contact-option {
+  text-align: center;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.contact-option h2,
+.contact-option p,
+.contact-option span {
+  margin-bottom: 10px;
+}
+
+.contact-content {
+  display: flex;
+  align-items: center;
+}
+
+.contact-form {
+  flex-grow: 1;
+  margin-right: 400px;
+}
+
+.contact-image-container {
+  flex-shrink: 0; /* L'image ne doit pas rétrécir */
+}
+
+.contact-image {
+  width: 500px; /* Ajustez la taille selon vos besoins */
+}
+
+.contact-container {
+background-color:#EDF2FE;
+display: flex;
+flex-direction: column;
+align-items: center;
+}

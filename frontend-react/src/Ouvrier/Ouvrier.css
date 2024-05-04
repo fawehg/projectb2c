@@ -207,10 +207,11 @@ a {
 
 .icon {
   position: absolute;
-  
+  right: 225px; 
+  top: 50%;
   transform: translateY(-50%);
   color: #1c109c;
-  font-size: 1.2rem; /* Taille de l'icône */
+  font-size: 1.2rem;
 }
 .input-field-container {  
   display: flex;

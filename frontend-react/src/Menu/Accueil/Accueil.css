@@ -23,7 +23,7 @@
 
 .client img,
 .ouvrier img {
-  width: 600px; /* Taille ajustée */
+  width: 700px; /* Taille ajustée */
   height: auto; /* Pour maintenir le rapport hauteur/largeur */
   margin-bottom: 10px;
   border-radius: 40px;

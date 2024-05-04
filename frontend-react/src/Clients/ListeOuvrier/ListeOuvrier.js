@@ -39,9 +39,10 @@ const ListeOuvrier = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (ouvrierId, demandeData) => {
+  const handleSubmit = async (ouvrierId) => {
     try {
       const token = localStorage.getItem('token');
+      
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/reserver-ouvrier`, {
         ouvrier_id: ouvrierId,
         

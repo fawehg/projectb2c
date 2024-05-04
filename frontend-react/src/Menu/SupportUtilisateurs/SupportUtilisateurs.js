@@ -1,49 +1,77 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Header from '../../Header/Header';
 import './SupportUtilisateurs.css';
 
-const SupportUtilisateurs= () => {
-  const [flipped, setFlipped] = useState(false);
-
-  const toggleFlip = () => {
-    setFlipped(!flipped);
-  };
-
+function SupportUtilisateurs() {
   return (
-    <div className="book">
-      <Page
-        title="The Pilgrim's Path"
-        content="The pilgrim must visit each of the Shrines of the Seven Graces. At each site the pilgrim must stand before the three-sided stone triolith and read the inscription. To ease the pilgrim's task, the Temple has made this list of shrines along with directions and advice to pilgrims. The blessings of each shrine last at least a half day."
-        flipped={flipped}
-        toggleFlip={toggleFlip}
-      />
-      <Page
-        title="The Fields of Kummu: Shrine of Humility"
-        content="Here Lord Vivec met a poor farmer whose guar had died. The farmer could not harvest his muck without his guar, and he could not provide for his family or his village. So the Lord Vivec removed his fine clothes and toiled in the fields like a beast of burden until the crop was harvested. It is at the Fields of Kummu we go to pray for the same humility Lord Vivec showed on that day. The Fields of Kummu are west of Suran on the north shore of Lake Amaya as you head towards Pelagiad. The shrine is between two rocks, and most easily noticed while traveling east along the road. Alof's farm nearby has a small dock on the north bank of Lake Amaya. This is the only dock nearby which Alof kindly allows servants of the Temple to use. It is customary to leave a portion of muck at the shrine to represent Vivec's humility."
-        flipped={flipped}
-        toggleFlip={toggleFlip}
-      />
-      {/* Ajoutez d'autres pages ici */}
+    <div>
+      <Header/>
+      <br/>
+    <strong>Bienvenue sur "Business To Client"    !</strong>
+    <br/><br/><br/>
+    <p className='intro'>
+      Nous sommes extrêmement enthousiastes de vous présenter notre plateforme innovante,spécialement conçue pour simplifier et optimiser votre expérience<br/> 
+      dans la rechercheet la gestion d'ouvriers qualifiés, couvrant une vaste gamme de domaines allant de la construction,à la rénovation, en passant par la plomberie,<br/>
+       l'électricité, et bien d'autres encore. Avec notre solution, vous pourrez accéder à un réseau étendu de professionnels compétents, prêts à répondre <br/>
+       à vos besoins les plus divers, que ce soit pour des projets résidentiels, commerciaux, ou industriels.</p>
+    <table>
+      
+      <tbody>
+        <tr>
+          <td>
+          <legend>Cher Client !</legend>
+            <p>
+            Bienvenue sur notre plateforme de gestion des ouvriers ! Nous sommes ravis de vous accueillir dans notre communauté 
+            dédiée à simplifier la gestion des travailleurs. Chez nous, vous trouverez un espace convivial et intuitif conçu pour
+             répondre à vos besoins en matière de gestion de personnel. Que vous soyez une petite entreprise désireuse de
+              rationaliser ses opérations ou une grande société cherchant à optimiser la productivité de ses équipes,
+               notre plateforme offre une gamme complète d'outils efficaces pour faciliter la gestion de vos équipes, 
+               l'organisation des plannings, le suivi des performances et bien plus encore. Explorez nos fonctionnalités 
+               dès maintenant et découvrez comment notre plateforme peut révolutionner votre gestion des ouvriers pour le mieux.
+            </p>
+          </td>
+          <td>
+            <img src="/client.png" alt="client" className="client-img" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="/ouv.png" alt="Ouvrier" className="ouvrier-img" />
+          </td>
+          <td>
+          <legend>Cher Ouvrier !</legend>
+            <p>
+            Vous êtes un ouvrier à la recherche d'opportunités passionnantes ? Rejoignez notre communauté dès aujourd'hui
+             et explorez un large éventail d'offres d'emploi dans divers secteurs. Que vous soyez un professionnel chevronné
+              à la recherche de nouveaux défis ou un débutant désireux de faire ses preuves, notre plateforme conviviale vous
+               offre l'opportunité idéale de mettre en valeur vos compétences et votre expérience en postulant directement.
+                Ne laissez pas passer ces opportunités excitantes qui vous attendent. Rejoignez-nous dès maintenant pour découvrir le poste parfaitement adapté à vos compétences et à vos aspirations professionnelles.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <strong className='équipe'>L'équipe de "Business To Client"</strong>
+    <div className="phrases-container">
+          <div className="phrase-card">
+            <img src="target.png" alt="Target" />
+            <p >Précisez votre urgence en une minute</p>
+          </div>
+          <div className="phrase-card">
+            <img src="link.png" alt="Link" />
+            <p>Besoin de professionnels disponibles immédiatement</p>
+          </div>
+          <div className="phrase-card">
+            <img src="people.png" alt="People" />
+            <p>Nous recommandons les meilleurs professionnels pour vous</p>
+          </div>
+          <div className="phrase-card">
+            <img src="bussiness.png" alt="Business" />
+            <p>Une validation simple, en un clic</p>
+          </div>
+        </div>
     </div>
   );
-};
-
-const Page = ({ title, content, flipped, toggleFlip }) => {
-  return (
-    <div className={`page ${flipped ? 'flipped' : ''}`} onClick={toggleFlip}>
-      <div className="side-1">
-        <div className="content">
-          <h2>{title}</h2>
-          <p>{content}</p>
-        </div>
-      </div>
-      <div className="side-2">
-        <div className="content">
-          <h2>{title}</h2>
-          <p>{content}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+}
 
 export default SupportUtilisateurs;

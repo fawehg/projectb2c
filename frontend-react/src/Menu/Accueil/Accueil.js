@@ -10,12 +10,11 @@ const Accueil = () => {
         <Header/>
         <nav className="nav-container">
           <div className="client">
-            <img src="client.png" alt="Client" />
-            <Link  to="/Client"><button className='cher-client'>Cher Client</button></Link>
+          <Link  to="/Client"> <img src="client.png" alt="Client" /></Link>
+            
           </div>
           <div className="ouvrier">
-            <img src="OUV.png" alt="Ouvrier" />
-            <Link    to="/Ouvrier">< button className='cher-ouvrier'>Cher Ouvrier</button></Link>
+          <Link to="/Ouvrier"> <img src="OUV.png" alt="Ouvrier" /></Link>
           </div>
         </nav>
         <div className="phrases-container">
