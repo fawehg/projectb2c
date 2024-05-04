@@ -193,18 +193,6 @@ a {
   transform: translateX(20%);
 }
 
-
-.input-field {
-  width: calc(100% - 24px); 
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 3px solid #cccccc76;
-  border-radius: 5px;
-  box-sizing: border-box;
-  background-color: #7b7d8001;
-}
-
-
 .icon {
   position: absolute;
   right: 225px; 

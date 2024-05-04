@@ -13,10 +13,11 @@ p {
     
    width: 1000px; /* Largeur du formulaire */
    height: 80vh;
-   background-color: rgba(95, 105, 215, 0.685) ;
-   border-radius: 20px;
+   background-color: rgba(37, 37, 37, 0.904) ;
+   border-radius: 80px;
    box-shadow:      rgb(65, 74, 167) , 
                     rgb(65, 74, 167);
+ 
  }
  
 input {
@@ -28,3 +29,12 @@ input {
 }
 
 
+.back{
+    position: relative;
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la div */
+    background-position: center; /* Centre l'image horizontalement et verticalement */
+    /* Vous pouvez également ajouter d'autres styles comme la largeur et la hauteur */
+    width: 100%; /* Par exemple, 100% de la largeur parente */
+    height: auto; /* Par exemple, une hauteur fixe de 500 pixels */
+    
+}

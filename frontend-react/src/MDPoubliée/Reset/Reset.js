@@ -42,9 +42,10 @@ function ResetMotDePasse() {
     };
 
     return (
-        <div>
+        <div >
             <Header />
-            <form onSubmit={handleSubmit} className='reset'>
+            <div className='back' style={{backgroundImage: `url('/reset.jpg')`}}>
+            <form onSubmit={handleSubmit} className='reset' >
                 <h2>Réinitialiser le mot de passe</h2>
                 <input
                     placeholder="Email"
@@ -84,7 +85,7 @@ function ResetMotDePasse() {
                 /><br />
                 <button type="submit" className='confirmer'>Confirmer</button>
             </form>
-            
+            </div>
             <Footer />
         </div>
     );

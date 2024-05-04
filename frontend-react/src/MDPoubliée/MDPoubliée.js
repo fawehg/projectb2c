@@ -34,7 +34,9 @@ function ResetMotDePasse() {
     };
 
     return (
-        <div className='MDPoubliee'>
+        
+                <div className='MDPoubliee' style={{backgroundImage: `url('/reset.jpg')`}}>
+
             <Header/> 
             <form onSubmit={handleSubmit} className='md'>
                 <h2>Réinitialiser le mot de passe</h2>

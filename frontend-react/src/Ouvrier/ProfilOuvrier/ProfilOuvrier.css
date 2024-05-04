@@ -60,7 +60,7 @@
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(253, 254, 255, 0.658);
     width: 250px;
-    height: auto;
+    height: 300px;
 }
 
 
@@ -69,13 +69,17 @@
     height: 200px;
     border-radius: 50%;
     margin-bottom: 20px;
-    background-image: url('/frontend-react/public/avatar.jpg'); 
+   
     background-size: cover;
     background-position: center;
     
 }
 
 
+  .profil ul li span:hover {
+    background: white;
+    color: #77a1fb;
+  }
 
 
 .profil ul li span {
@@ -95,9 +99,10 @@
     size: 12px;
 }
 .profil ul li {
+    font-weight: bold;
     margin-bottom: 10px;
     font-size: 12px;
-    color: rgb(12, 9, 9)
+    color: rgb(255, 255, 255)
 }
 
 
@@ -124,6 +129,6 @@
 .profil-info li[data-label]::before {
     content: attr(data-label) ": ";
     font-weight: bold;
-    color: #302f2f;
+    color: #181818;
     margin-right: 10px;
 }

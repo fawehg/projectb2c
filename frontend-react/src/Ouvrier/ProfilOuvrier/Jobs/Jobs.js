@@ -2,24 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Jobs.css';
 import Header from '../../HeaderOuvrier/HeaderOuvrier';
-import Footer from '../../FooterOuvrier/FooterOuvrier';
 
 function DemandeInfo({ clientInfo, demandeInfo, onConfirmation, onRefus }) {
   return (
     <div className="card">
       <div>
         <h2>Offre de travail</h2>
-        <p><strong>Nom du client:</strong> {clientInfo['Nom du client']} {clientInfo['Prénom du client']}</p>
+        <p><strong>Nom du client:</strong> {clientInfo.Nom} {clientInfo.prenom}</p>
         <p><strong>Ville:</strong> {demandeInfo.Ville}</p>
         <p><strong>Domaines:</strong> {demandeInfo.Domaines}</p>
         <p><strong>Spécialités:</strong> {demandeInfo.Spécialités}</p>
-        <p><strong>Date:</strong> {demandeInfo.date}</p>
-        <p><strong>Heure:</strong> {demandeInfo.heure}</p>
+        <p><strong>Date:</strong> {demandeInfo.Date}</p>
+        <p><strong>Heure:</strong> {demandeInfo.Heure}</p>
       </div>
       <div>
         <h2>Plus de détails</h2>
-        <p><strong>Adresse du client:</strong> {clientInfo['Adresse du client']}</p>
-        <p><strong>Email du client:</strong> {clientInfo['Email du client']}</p>
+        <p><strong>Adresse du client:</strong> {clientInfo.Adresse}</p>
+        <p><strong>Email du client:</strong> {clientInfo.Email}</p>
         <p><strong>Description:</strong> {demandeInfo.Description}</p>
       </div>
       <div className="Acceptation">
@@ -57,7 +56,7 @@ function Jobs() {
       const token = localStorage.getItem('token');
       
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/confirm-demande`, {
-        // Add data to be sent in the post request if needed
+        
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,7 +91,6 @@ function Jobs() {
       ) : (
         <p>Loading...</p>
       )}
-      <Footer/>
     </div>
   );
 }

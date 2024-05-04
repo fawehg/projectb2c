@@ -40,6 +40,7 @@ function ProfilOuvrier() {
                 setTelephone(data.numeroTelephone);
                 setId(data.id);
                 setLoading(false);
+                console.log(data.id);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données : ', error);
                 setLoading(false);

@@ -316,7 +316,7 @@ const Ouvrier = () => {
               ))}
             </select>
 
-            <div className="input-field-container">
+            <div className="input-field">
               {filteredSpecialites && filteredSpecialites.map((specialite, index) => (
                 <div key={index}>
                   <input
@@ -330,43 +330,7 @@ const Ouvrier = () => {
                 </div>
               ))}
             </div>
-
-            <h3>Jours de disponibilité :</h3>
-            <div className="input-field-container">
-              {['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((day, index) => (
-                <label key={index}>
-                  <input
-                    type="checkbox"
-                    value={day}
-                    checked={joursDisponibilite.includes(day)}
-                    onChange={handleAvailabilityChange}
-                  />
-                  {day}
-                </label>
-              ))}
-            </div>
-
-            <div className="input-field-container">
-              <label htmlFor="heureDebut">Heure de début:</label>
-              <input
-                className="input-field"
-                type="time"
-                placeholder="Heure de début"
-                name="heureDebut"
-                value={heureDebut}
-                onChange={e => setHeureDebut(e.target.value)}
-              />
-              <label htmlFor="heureFin">Heure de Fin:</label>
-              <input
-                className="input-field"
-                type="time"
-                placeholder="Heure de fin"
-                name="heureFin"
-                value={heureFin}
-                onChange={e => setHeureFin(e.target.value)}
-              />
-            </div>
-            <div className="input-field-container">
+            <div className="input-field">
               <label htmlFor="image">Image:</label>
               <input
                 type="file"
