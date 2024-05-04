@@ -1,13 +1,6 @@
 
 
-.profil-ouvrier {
-    display: flex;
-    flex-direction: column;
-    height: 70vh; 
-    
-    background-size: cover; 
-    background-position: center;
-}
+
 .profil-background{
    position: absolute;
    height: 100%;
@@ -18,23 +11,36 @@
     display: flex;
     flex: 1; 
     padding: 20px;
+    width: 102%;
+    height: 102vh; 
 }
 
 .profil {
-    width: 30%;
-    padding: 20px;
-    background:linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
-    border-radius: 2%;
-    
-    
-}
+    position:fixed;
+    width: 23vw;
 
-.history {
-    width: 70%;
+    background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+    padding:40px;
+    left: -2%;
+    top: -3%;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(84, 58, 183, 1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+ }
+
+.history { 
+    position:relative;
+    left: 20%;
+    top: -3%;
+    width: 90%;
     padding-left: 50px;
     padding: 20px;
-    background:linear-gradient(160deg,  rgba(0, 172, 193, 1) 0%,rgba(84, 58, 183, 1) 100%);
-    border-radius: 2%;
+    background:rgb(238,238,238);
+    box-shadow: 0 4px 8px rgba(84, 58, 183, 1);
+    
+    
 }
     
    .modifier {
@@ -46,57 +52,78 @@
     border-radius: 8px; /* Arrondit les coins des boutons */
     
   }
-  .profil-info {
-  
-    background:rgba(255, 255, 255, 0.212);
-    padding:40px;
+  .profil-info  {
+    justify-content: center;
+    background:rgba(255, 255, 255, 0.158);
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.658);
-    width: 300px;
+    box-shadow: 0 4px 8px rgba(253, 254, 255, 0.658);
+    width: 250px;
     height: auto;
 }
 
-.photo-profil {
-    width: 150px;
-    height: 170px;
-    border-radius: 80%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+.profil.photo-profil {
+    width: 300px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    background-image: url('/frontend-react/public/avatar.jpg'); 
+    background-size: cover;
+    background-position: center;
+    
 }
 
-.profil-info ul {
+
+
+
+.profil ul li span {
+    color: #ffffff;
+    font-size: 20px;
+    position:fixed;
+}
+
+
+.profil ul {
     list-style-type: none;
     padding-left: 0;
 }
-
-.profil-info ul li {
+.profil ul li svg {
+    margin-right: 9px;
+    color: #ffffff;
+    size: 12px;
+}
+.profil ul li {
     margin-bottom: 10px;
-    font-size: 16px;
-    color: rgb(255, 255, 255)
+    font-size: 12px;
+    color: rgb(12, 9, 9)
 }
-.profil-info ul li::before {
-    content: attr(data-label);
+
+
+
+.profil {
+    height: Auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+ 
+.LOGO-PROFIL{
+    width: 100px;
+    height: 100PX;
+    position: fixed;
+    top: 1%;
+}
+
+.profil-info li {
+    margin-bottom: 10px;
+}
+
+.profil-info li[data-label]::before {
+    content: attr(data-label) ": ";
     font-weight: bold;
+    color: #302f2f;
     margin-right: 10px;
-    color: #000000;
-}
-
-.profil-info ul li.Nom::before {
-  display: inline;
-    content: 'Nom:';
-}
-
-.profil-info ul li.Email::before {
-    content: 'Email:';
-}
-
-.profil-info ul li.Adresse::before {
-    content: 'Adresse:';
-}
-
-.profil-info ul li.Profession::before {
-    content: 'Profession:';
-}
-
-.profil-info ul li.Téléphone::before {
-    content: 'Numéro de téléphone:';
 }

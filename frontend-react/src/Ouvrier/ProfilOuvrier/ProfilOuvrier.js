@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './ProfilOuvrier.css';
-import Header from '../HeaderOuvrier/HeaderOuvrier';
-import Footer from '../FooterOuvrier/FooterOuvrier';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faCog } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 
 function ProfilOuvrier() {
     const [nom, setNom] = useState('');
@@ -16,7 +17,8 @@ function ProfilOuvrier() {
     const [photoProfil, setPhotoProfil] = useState('');
     const [loading, setLoading] = useState(true);
     const [id, setId] = useState('');
-
+    const [specialties, setSpecialites] = useState([]);
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -27,18 +29,17 @@ function ProfilOuvrier() {
                     },
                 });
         
-                setNom(response.data.ResultData.data.nom);
-                setPrenom(response.data.ResultData.data.prenom);
-                setEmail(response.data.ResultData.data.email);
-                setVille(response.data.ResultData.data.ville);
-                setProfession(response.data.ResultData.data.profession);
-                setPhotoProfil(response.data.ResultData.data.photoProfil);
-                setTelephone(response.data.ResultData.data.numeroTelephone);  
-                setPhotoProfil(response.data.ResultData.data.image); 
-                
-                setId(response.data.ResultData.data.id);
+                const data = response.data.ResultData.data;
+                setNom(data.nom);
+                setPrenom(data.prenom);
+                setEmail(data.email);
+                setVille(data.ville);
+                setProfession(data.profession);
+                setSpecialites(data.specialties)
+                setPhotoProfil(data.photoProfil);
+                setTelephone(data.numeroTelephone);
+                setId(data.id);
                 setLoading(false);
-
             } catch (error) {
                 console.error('Erreur lors de la récupération des données : ', error);
                 setLoading(false);
@@ -50,37 +51,30 @@ function ProfilOuvrier() {
 
     return (
         <div>
-            <Header />
             {notification && <div className="notification">{notification}</div>}
             <div className="profil-ouvrier">
                 <div className="main">
                     <div className="profil">
-                        {loading ? (
-                            <p>Chargement des informations personnelles...</p>
-                        ) : (
-                            <div className="profil-info">
-                                <img src={photoProfil} className="photo-profil" />
-                                
-                                <ul>
-                                    <li data-label="Nom" className="Nom">{nom} {prenom}</li>
-                                    <li data-label="Email" className="Email">{email}</li>
-                                    <li data-label="Téléphone" className="Téléphone">{telephone}</li>
-                                    <li data-label="Profession" className="Profession">{profession}</li>
-                                    <li data-label="ville" className="ville">{ville}</li>
-                                </ul>
-                                <Link to={`/JOBS`}><button className='modifier'>Travail demandée</button></Link>
-                            </div>
-                        )}
-                        <br/>
-                        <br/>
-                        <Link to="/modifier-profil"><button className='modifier'>Modifier profil</button></Link>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+                    <img src="/LOGO.png" className="LOGO-PROFIL" alt="Photo de profil" />
+
+                        <ul>
+                            <li><FontAwesomeIcon icon={faUsers} /> <Link to={`/JOBS`}><span>Travail demandé</span></Link> </li>
+                            <br/>
+                            <li><FontAwesomeIcon icon={faCog} /><Link to="/modifier-profil"><span>Modifier profil</span></Link> </li>
+                        </ul>  
+                        <br/><br/><br/><br/>
+                        <ul className="profil-info">
+                        <img src={photoProfil} className="photo-profil" alt="Photo de profil" />
+                            <li data-label="Nom" className="Nom">{nom} {prenom}</li>
+                            <li data-label="Ville" className="ville">{ville}</li>
+                            <li data-label="Email" className="Email">{email}</li>
+                            <li data-label="Tél" className="Téléphone">{telephone}</li>
+                            <li data-label="Profession" className="Profession">{profession}</li>
+                            <li data-label="specialties" className="specialties">{specialties}</li>
+                            
+                        </ul>
                     </div>
+                    
                     <div className="history">
                         <h2>Historique</h2>
                         <div>
@@ -90,7 +84,6 @@ function ProfilOuvrier() {
                     </div>
                 </div>
             </div>
-            
         </div>
     );
 }
