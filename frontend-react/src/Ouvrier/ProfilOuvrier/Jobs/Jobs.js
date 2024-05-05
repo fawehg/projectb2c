@@ -51,23 +51,29 @@ function Jobs() {
     fetchData();
   }, []);
 
-  const handleConfirmation = async (index) => {
+
+  const handleConfirmation = async (demandeId) => {
     try {
-      const token = localStorage.getItem('token');
-      
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/confirm-demande`, {
+        const token = localStorage.getItem('token');
         
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log('Réservation effectuée avec succès:', response.data.message);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/confirm-demande`, {
+            demande_id: demandeId,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (response && response.data && response.data.message) {
+            console.log('Réservation effectuée avec succès:', response.data.message);
+        } else {
+            console.error('Réponse de serveur invalide:', response);
+        }
     } catch (error) {
-      console.error('Erreur lors de la réservation : ', error);
+        console.error('Erreur lors de la réservation : ', error);
     }
-  };
-  
+};
+
 
   const handleRefus = (index) => {
     console.log("Job rejected:", index);

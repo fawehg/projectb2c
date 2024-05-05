@@ -61,7 +61,11 @@ function ProfilOuvrier() {
                         <ul>
                             <li><FontAwesomeIcon icon={faUsers} /> <Link to={`/JOBS`}><span>Travail demandé</span></Link> </li>
                             <br/>
+                            <li><FontAwesomeIcon icon={faUsers} /><Link to="/Avis"><span>Avis</span></Link> </li>
+                            <br/>
                             <li><FontAwesomeIcon icon={faCog} /><Link to="/modifier-profil"><span>Modifier profil</span></Link> </li>
+                         
+                      
                         </ul>  
                         <br/><br/><br/><br/>
                         <ul className="profil-info">

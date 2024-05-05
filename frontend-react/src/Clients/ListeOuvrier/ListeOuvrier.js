@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Card, CardContent, CardActions, Button, Typography, makeStyles } from '@material-ui/core';
 import { Avatar } from '@mui/material';
@@ -57,35 +58,14 @@ const ListeOuvrier = () => {
     }
   };
   
-  const useStyles = makeStyles({
-    root: {
-      maxWidth: 3450,
-      margin: '10px',
-      backgroundColor: 'rgba(61, 165, 250, 0.517)',
-      borderRadius: 30,
-      boxShadow: '0 14px 28px rgba(239, 235, 235, 0.25), 0 10px 10px rgba(14, 11, 216, 0.719)',
-    },
-    title: {
-      fontSize: 20,
-    },
-    media: {
-      height: 140,
-    },
-    message: {
-      textAlign: 'center',
-      fontSize: 20,
-      marginTop: 20,
-    },
-  });
 
-  const classes = useStyles();
 
   return (
     <div>
       <Header/>
       {loading ? (
         <div className='Aucune'>
-          <Typography className={classes.message}>
+          <Typography >
             Oups !!
             Il n'y a pas d'ouvrier disponible pour le moment, veuillez réessayer ultérieurement.
           </Typography>
@@ -93,9 +73,9 @@ const ListeOuvrier = () => {
       ) : (   
         <div>
           {ouvriers.map((ouvrier, index) => (
-            <Card key={index} className={classes.root}>
+            <Card key={index} className='liste'>
               <CardContent>
-                <Avatar alt={`${ouvrier.prenom} ${ouvrier.nom}`} src={ouvrier.image} className={classes.avatar} />
+                <Avatar alt={`${ouvrier.prenom} ${ouvrier.nom}`} src={ouvrier.image} />
                 <Typography variant="h5" component="h2">
                   Nom: {ouvrier.prenom} {ouvrier.nom}  
                 </Typography>
@@ -108,6 +88,9 @@ const ListeOuvrier = () => {
               </CardContent>
               <CardActions className='reserver'>  
                 <Button size="small" onClick={() => handleSubmit(ouvrier.id)} >Réserver</Button>
+              </CardActions>
+              <CardActions className='Avis'>  
+                <Link to='/avis'><Button size="small">Avis</Button></Link>
               </CardActions>
             </Card>
           ))}

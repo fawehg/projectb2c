@@ -13,9 +13,12 @@ import SupportUtilisateurs from './Menu/SupportUtilisateurs/SupportUtilisateurs'
 import Admin from './Menu/EspacePro/Admin/Admin';
 import ListeOuvrier from './Clients/ListeOuvrier/ListeOuvrier';
 import ModifierProfil from './Ouvrier/ProfilOuvrier/ModiferProfil/ModifierProfil';
-import Avis from './Clients/Avis/Avis';
+import Avis from './Ouvrier/Avis/Avis';
 import Jobs from'./Ouvrier/ProfilOuvrier/Jobs/Jobs';
 import Contact from './Menu/contact/contact';
+import Validation from './Clients/Validation/Validation';
+import Rate from './Clients/Rate/Rate';
+
 function App() {
   return (
     <Router>
@@ -37,6 +40,8 @@ function App() {
           <Route path="/liste-ouvrier" element={<ListeOuvrier/>} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/avis" element={<Avis/>} />
+          <Route path="/validation" element={<Validation/>} />
+          <Route path="/rate" element={<Rate/>} /> 
          
 
 
