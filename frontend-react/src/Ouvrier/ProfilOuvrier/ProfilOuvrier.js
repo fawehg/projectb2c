@@ -70,7 +70,7 @@ function ProfilOuvrier() {
                         <br/><br/><br/><br/>
                         <ul className="profil-info">
                         <img src={photoProfil} className="photo-profil" alt="Photo de profil" />
-                            <li data-label="Nom" className="Nom">{nom} {prenom}</li>
+                            <li data-label="Nom" className="Nom">{nom} Zitoun</li>
                             <li data-label="Ville" className="ville">{ville}</li>
                             <li data-label="Email" className="Email">{email}</li>
                             <li data-label="Tél" className="Téléphone">{telephone}</li>

@@ -1,5 +1,6 @@
 
 .Aucune {
+        position:relative;
 text-align: 'center';
 font-size: 87;
 margin-top: 20;
@@ -9,7 +10,7 @@ color: rgba(255, 0, 0, 0.699);
         position: relative;
         display: flex;
         justify-content: flex-end;
-        left: 1250px;
+        left: 1000px;
         top: 90px;
         background-color: transparent;
         cursor: pointer;
@@ -36,14 +37,49 @@ color: rgba(255, 0, 0, 0.699);
 }
 
 .liste{
-        width: 99%;
-        height: 350px;
+        position: relative;
+        width: 1300px;
+        height: 400px;
+        left: 220px;
         margin-bottom: 20px;
-        border: 3px solid #000000;
+        border: 3px solid #0b0b0b;
         border-radius: 20px;
         padding: 20px;
         box-sizing: border-box;
-        background:linear-gradient(200deg, rgba(84, 58, 183, 1) 0%, rgb(0, 167, 189) 100%);
+        background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+
        
       }
 
+.listeOuv{
+        position:fixed;
+        width: 16vw;
+        background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+        padding:40px;
+        left: -2%;
+        top: -3%;
+        border-radius: 2px;
+        box-shadow: 0 4px 8px rgba(84, 58, 183, 1);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+     }
+
+     
+    .listeOuv ul li {
+        position: fixed;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+        top: 200px;
+    }
+    
+    .mainOuv {
+        display: flex;
+        flex: 1; 
+        padding: 20px;
+        width: 102%;
+        height: 102vh; 
+    }
+    

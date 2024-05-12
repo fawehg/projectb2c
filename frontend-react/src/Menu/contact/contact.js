@@ -2,7 +2,6 @@ import React from 'react';
 import './contact.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faUsers } from '@fortawesome/free-solid-svg-icons';
-import Header from '../../Header/Header';
 
 const Contact = () => {
   return (

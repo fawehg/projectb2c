@@ -31,39 +31,73 @@ function DemandeInfo({ clientInfo, demandeInfo, onConfirmation, onRefus }) {
 
 function Jobs() {
   const [jobData, setJobData] = useState([]);
-  
+  const [id,setId]=useState();
+ 
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/travail-demander`, {
+        const responseOuvrier = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/profil`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        const data = response.data;
-        setJobData(data); // Assuming data is an array of job objects
+        const data = responseOuvrier.data.ResultData.data;
+        setId(data.id);
+        console.log(data.id);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching ouvrier profil:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, []); 
+
+  useEffect(() => {
+    const fetchData = async (ouvrier_id) => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/travail-demander`, {
+          params: {
+            ouvrier_id: ouvrier_id
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        const data = response.data;
+     
+
+        setJobData(data); 
+      } catch (error) {
+        console.error('Error fetching travail-demander data:', error);
+      }
+    };
+
+    if (id !== null) { 
+      fetchData(id);
+    }
+  }, [id]); // Dependency on id, runs whenever id changes
+
+console.log("aaaaaaaab",jobData)
 
 
-  const handleConfirmation = async (demandeId) => {
+
+const travail_id = jobData.length > 0 ? jobData[jobData.length - 1].id : null;
+console.log("Le dernier élément du tableau est :", travail_id);
+  const handleConfirmation = async () => {
     try {
         const token = localStorage.getItem('token');
-        
+       
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/confirm-demande`, {
-            demande_id: demandeId,
+          travail_id  :travail_id,
         }, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-
+       
         if (response && response.data && response.data.message) {
             console.log('Réservation effectuée avec succès:', response.data.message);
         } else {

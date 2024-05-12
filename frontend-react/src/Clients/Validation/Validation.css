@@ -1,10 +1,125 @@
-.validation{
+.valider{
+    position:absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 1230px;
+    top: 780px;
+    background-color:transparent;
+    cursor: pointer;
+    border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
+    border-radius: 8px; /* Arrondit les coins des boutons */
+    transition: background-color 0.3s ease; 
+    width: 150px;
+    
+}
+.commenter{
+  position:absolute;
+  display: flex;
+  justify-content: flex-end;
+  left: 1070px;
+  top: 610px;
+  background-color:transparent;
+  cursor: pointer;
+  border: 2px solid white; /* Ajoute une bordure blanche aux boutons */
+  border-radius: 8px; /* Arrondit les coins des boutons */
+  transition: background-color 0.3s ease; 
+  width: 200px;
+  
+}
+
+.travail{
     width: 99%;
-    height: 400px;
+    height: 550px;
     margin-bottom: 20px;
-    border: 3px solid #3f3f3f;
+    border: 3px solid #000000;
     border-radius: 20px;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #c6c5c5ee;
-    }
+    background:linear-gradient(200deg, rgba(84, 58, 183, 1) 0%, rgb(0, 167, 189) 100%);
+   
+  }
+  .card p {
+    margin-bottom: 4px;
+  
+  }
+  .travail strong {
+    color: #555;
+    font-size: 20px;
+    left: 0%;
+    
+  }
+  /* Style pour les textes forts strong */
+  .travail h2 {
+    color: #363636;
+    font-size: 40px;
+    left: 0%;
+    
+  }
+  .travail h1 {
+    color: #363636;
+    font-size: 40px;
+    font-size: 100;
+    position:absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 490px;
+    top: 320px;
+    
+  }
+  .travail textarea {
+    color: #363636;
+    font-size: 40px;
+    font-size: 100;
+    position:absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 490px;
+    top: 400px;
+    width: 800px;
+    
+  }
+
+  .star-cb-group {
+    font-size: 100;
+    position:absolute;
+    display: flex;
+    justify-content: flex-end;
+    left: 580px;
+    top: 360px;
+  }
+  .star-cb-group * {
+    font-size: 1rem;
+  }
+  .star-cb-group > input {
+    display: none;
+  }
+  .star-cb-group > input + label {
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 9999px;
+    width: 1em;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .star-cb-group > input + label:before {
+    display: inline-block;
+    text-indent: -9999px;
+    content: '\2606';
+    color: #4c4c4c;
+  }
+  .star-cb-group > input:checked ~ label:before,
+  .star-cb-group > input + label:hover ~ label:before,
+  .star-cb-group > input + label:hover:before {
+    content: '\2605';
+    color: rgb(255, 64, 0);
+    text-shadow: 0 0 1px #333;
+  }
+  .star-cb-group > .star-cb-clear + label {
+    text-indent: -9999px;
+    width: .52em;
+    margin-left: -.5em;
+  }
+  .star-cb-group > .star-cb-clear + label:before {
+    width: .5em;
+  }
+  

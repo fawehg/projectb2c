@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import HeaderClient from '../HeaderClient/HeaderClient';
-import FooterClient from '../FooterClient/FooterClient';
+import { useNavigate ,Link} from 'react-router-dom';
 import './RechercheOuvrier.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const RechercheOuvrier = () => {
 
@@ -86,7 +86,16 @@ const handleSubmit = async (e) => {
   
   return (
     <div>
-      <HeaderClient />
+          <div className="listeOuv">
+                    <img src="/LOGO.png" className="LOGO-PROFIL" alt="LOGO-PROFIL" />
+
+                        <ul>
+                            <li><FontAwesomeIcon icon={faUsers} /> <Link to={`/validation`}><span>Validation en attente</span></Link> </li>
+                            <br/>
+                        </ul>  
+                        
+                  
+                    </div>
       
       <div className="service-search">
         <form  className="service-search-form">
@@ -149,7 +158,6 @@ const handleSubmit = async (e) => {
         </form>
         <img src="./RechercheOuv.png" className="RechercheOuv" alt="Recherche Ouvrier" />
       </div>
-      <FooterClient />
     </div>
   );
 };

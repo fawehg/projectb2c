@@ -117,10 +117,6 @@ const Ouvrier = () => {
     if (!validateForm()) {
       return;
     }
-  
-    console.log('Specialties:', specialties);
-    console.log('Jours Disponibilite:', joursDisponibilite);
-  
     const formData = new FormData();
     formData.append('nom', nom);
     formData.append('prenom', prenom);
@@ -178,7 +174,7 @@ const Ouvrier = () => {
     
       if (response.status === 200 && response.data.ResultData.token) {
         localStorage.setItem('token', response.data.ResultData.token);
-        localStorage.getItem('token', response.data.ResultData.token);
+     
         navigate('/profil-ouvrier');
       } else {
         console.error('Token not found in response:', response.data);
