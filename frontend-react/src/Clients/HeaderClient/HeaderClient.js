@@ -10,8 +10,7 @@ const Header = () => {
  const navigate = useNavigate();
  const handleLogout = async () => {
   try {
-    const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}/client/logout`,
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/logout`,
       {},
       {
         headers: {
