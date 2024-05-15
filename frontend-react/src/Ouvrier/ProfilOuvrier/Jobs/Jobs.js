@@ -44,8 +44,9 @@ function Jobs() {
           },
         });
         const data = responseOuvrier.data.ResultData.data;
+        console.log(data);
         setId(data.id);
-        console.log(data.id);
+        console.log('aaa',data.id);
       } catch (error) {
         console.error('Error fetching ouvrier profil:', error);
       }
@@ -71,21 +72,21 @@ function Jobs() {
 
         setJobData(data); 
       } catch (error) {
-        console.error('Error fetching travail-demander data:', error);
+        console.error('Error feng travail-demander data:', error);
       }
     };
 
     if (id !== null) { 
       fetchData(id);
     }
-  }, [id]); // Dependency on id, runs whenever id changes
+  }, [id]); 
 
 console.log("aaaaaaaab",jobData)
 
 
 
 const travail_id = jobData.length > 0 ? jobData[jobData.length - 1].id : null;
-console.log("Le dernier élément du tableau est :", travail_id);
+console.log("l id de travail demandee est :", travail_id);
   const handleConfirmation = async () => {
     try {
         const token = localStorage.getItem('token');

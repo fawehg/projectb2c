@@ -163,7 +163,7 @@ const Ouvrier = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/login`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/ouvrier/ouvrierlogin`, {
         email,
         password,
       }, {

@@ -109,7 +109,7 @@ const JobCard = ({ travail }) => {
         <p><strong>Date:</strong> {travail.demande.Date}</p>
         <p><strong>Heure:</strong> {travail.demande.Heure}</p>
         <button className='valider' onClick={() => handleSubmit(avis_id, travail.ouvrier.id)}>Travail effectué</button>
-        <h1>Star Rating</h1>
+        <h1>Ajouter votre Avis</h1>
         <StarRating rating={rating} onChange={handleChange} />
         <textarea
           className="commentaire"
