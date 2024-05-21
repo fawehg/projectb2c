@@ -1,0 +1,25 @@
+.detaille {
+    position:absolute;
+    left: 550px;
+    top: 350px; 
+    width: 500px;
+    padding: 10px; /* Ajoute un espace de remplissage de 10px à l'intérieur du conteneur */
+    margin-bottom: 20px; /* Ajoute une marge en bas de 20px */
+    border-radius: 5px; /* Ajoute un rayon de bordure de 5px pour arrondir les coins */
+  }
+  
+  .detaille p {
+    margin: 5px 0; /* Ajoute une marge de 5px en haut et en bas pour chaque paragraphe à l'intérieur de .detaille */
+  }
+  
+  .detaille strong {
+    color: #333; /* Change la couleur du texte fort (balise <strong>) en noir */
+  }
+  .detaille.h2 {
+    position:absolute;
+    left: 550px;
+    top: 35px; 
+    color: #363636;
+    font-size: 40px;
+    left: 0%;}
+    

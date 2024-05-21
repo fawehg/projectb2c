@@ -136,7 +136,7 @@ const Ouvrier = () => {
   
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/ouvrier/register`,
+        `${process.env.REACT_APP_API_URL}/ouvrier/ouvrierregister`,
         formData,
         {
           headers: {
@@ -326,6 +326,32 @@ const Ouvrier = () => {
                 </div>
               ))}
             </div>
+            <div className="input-container">
+  <label htmlFor="heureDebut">Heure de début :</label>
+  <input
+    className="input-field"
+    type="time"
+    id="heureDebut"
+    name="heureDebut"
+    value={heureDebut}
+    onChange={e => setHeureDebut(e.target.value)}
+  />
+  {errors.heureDebut && <p className="error-message">{errors.heureDebut}</p>}
+</div>
+
+<div className="input-container">
+  <label htmlFor="heureFin">Heure de fin :</label>
+  <input
+    className="input-field"
+    type="time"
+    id="heureFin"
+    name="heureFin"
+    value={heureFin}
+    onChange={e => setHeureFin(e.target.value)}
+  />
+  {errors.heureFin && <p className="error-message">{errors.heureFin}</p>}
+</div>
+
             <div className="input-field">
               <label htmlFor="image">Image:</label>
               <input

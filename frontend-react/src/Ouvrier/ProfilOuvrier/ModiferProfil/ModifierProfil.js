@@ -21,10 +21,37 @@ const ModiferProfil = () => {
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState(null);
   const [notification, setNotification] = useState('');
-
+  const [photoProfil, setPhotoProfil] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [id, setId] = useState('');
   
 
-  
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/ouvrier/profil`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = response.data.ResultData.data;
+            setNom(data.nom);
+            setPrenom(data.prenom);
+            setEmail(data.email);
+            setVille(data.ville);
+            setnumeroTelephone(data.numeroTelephone);
+            setId(data.id);
+      
+            console.log(data.id);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données : ', error);
+          
+        }
+    };
+
+    fetchData();
+}, []);
   const handleAvailabilityChange = (e) => {
     const day = e.target.value;
     setJoursDisponibilite(prevState => {
@@ -80,7 +107,7 @@ const ModiferProfil = () => {
       <div className="update-profil">
         <form onSubmit={handleModifierProfil} className='form-update'>
           <h1>Modifier le profil</h1>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faUser} className="icon" />
             <input
               className="input-field"
@@ -92,7 +119,7 @@ const ModiferProfil = () => {
             />
             {errors.nom && <p className="error-message">{errors.nom}</p>}
           </div>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faUser} className="icon" />
             <input
               className="input-field"
@@ -104,7 +131,7 @@ const ModiferProfil = () => {
             />
             {errors.prenom && <p className="error-message">{errors.prenom}</p>}
           </div>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faEnvelope} className="icon" />
             <input
               className="input-field"
@@ -116,7 +143,7 @@ const ModiferProfil = () => {
             />
             {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
             <input
               className="input-field"
@@ -128,7 +155,7 @@ const ModiferProfil = () => {
             />
             {errors.ville && <p className="error-message">{errors.ville}</p>}
           </div>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faAddressCard} className="icon" />
             <input
               className="input-field"
@@ -140,7 +167,7 @@ const ModiferProfil = () => {
             />
             {errors.numeroTelephone && <p className="error-message">{errors.numeroTelephone}</p>}
           </div>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faLock} className="icon" />
             <input
               className="input-field"
@@ -152,7 +179,7 @@ const ModiferProfil = () => {
             />
             {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
-          <div className="input-field-container">
+          <div className="input-container">
             <FontAwesomeIcon icon={faLock} className="icon" />
             <input
               className="input-field"

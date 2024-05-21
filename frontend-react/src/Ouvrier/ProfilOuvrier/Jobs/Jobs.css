@@ -56,4 +56,45 @@
   color: white;
 }
 .jobs{
-  background:rgb(238,238,238);}
+  background:rgba(238, 238, 238, 0.298);}
+/* Container pour les champs d'entrée et la zone de texte */
+.card .input-container {
+  display: flex;
+  flex-direction: column; /* Affiche les éléments enfants en colonne */
+}
+
+/* Style pour les champs d'entrée */
+.card input[type="text"],
+.card textarea {
+  width: 8%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style pour les étiquettes des champs */
+.card label {
+  margin-bottom: 1px;
+  font-weight: bold;
+}
+
+/* Style pour les boutons de confirmation et de refus */
+.card .confirm,
+.card .reject {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.card .confirm {
+  background-color: green;
+}
+
+.card .reject {
+  background-color: red;
+}

@@ -13,17 +13,15 @@ import SupportUtilisateurs from './Menu/SupportUtilisateurs/SupportUtilisateurs'
 import Admin from './Menu/EspacePro/Admin/Admin';
 import ListeOuvrier from './Clients/ListeOuvrier/ListeOuvrier';
 import ModifierProfil from './Ouvrier/ProfilOuvrier/ModiferProfil/ModifierProfil';
-import Avis from './Ouvrier/Avis/Avis';
 import Jobs from'./Ouvrier/ProfilOuvrier/Jobs/Jobs';
 import Contact from './Menu/contact/contact';
 import Validation from './Clients/Validation/Validation';
 import Rate from './Clients/Rate/Rate';
-
+import Confirmation from './Clients/confimation/confimation';
 function App() {
   return (
     <Router>
       <div className="app-container">
-        
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/espacePro" element={<EspacePro />} />
@@ -39,12 +37,9 @@ function App() {
           <Route path="/modifier-profil" element={<ModifierProfil/>} />
           <Route path="/liste-ouvrier" element={<ListeOuvrier/>} />
           <Route path="/jobs" element={<Jobs />} />
-          <Route path="/avis" element={<Avis/>} />
+          <Route path="/rate/:id" match="exact" element={<Rate/>} /> 
           <Route path="/validation" element={<Validation/>} />
-          <Route path="/rate" element={<Rate/>} /> 
-         
-
-
+          <Route path="/confirmation" element={<Confirmation/>} />
         </Routes>
       </div>
     </Router>

@@ -1,82 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Validation.css';
+import './confimation.css';
+import { Link, useNavigate } from 'react-router-dom'
 import Header from '../HeaderClient/HeaderClient';
 
-function StarRating({ rating, onChange }) {
-  return (
-    <div className="star-cb-group">
-      {[5, 4, 3, 2, 1].map(value => (
-        <React.Fragment key={value}>
-          <input
-            type="radio"
-            id={`rating-${value}`}
-            name="rating"
-            value={value}
-            onChange={onChange}
-            checked={rating === value}
-          />
-          <label htmlFor={`rating-${value}`}>{value}</label>
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
-
 const JobCard = ({ travail }) => {
-  const [rating, setRating] = useState(4);
-  const [commentaire, setCommentaire] = useState('');
-  const [avis_id, setAvis_id] = useState(null);
-
-  const handleChange = (event) => {
-    setRating(Number(event.target.value));
-  };
-
-  const handleSubmitCommentaire = async (ouvrierId) => {
+ 
+ const handleSubmit = async (avisId, ouvrierId,demandeID) => {
     try {
-      const requestData = {
-        rate: rating,
-        commentaire: commentaire,
-        ouvrier_id: ouvrierId,
-      };
+    
       const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/client/avis`,
-        requestData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 201) {
-       const avisId = response.data.resultData.avis_id;
-       setAvis_id(avisId);
-       console.log('Avis ID:', avisId)
-
-        setRating(0);
-        setCommentaire('');
-      } else {
-        throw new Error("Erreur lors de la création de l'avis.");
-      }
-    } catch (error) {
-      console.error("Erreur lors de la création de l'avis :", error.message);
-    }
-  };
-
-  const handleSubmit = async (avisId, ouvrierId,demandeID) => {
-    try {
-      const requestData = {
-        IDavis: avisId,
-        IDouvrier: ouvrierId,
-        IDdemande:demandeID,
-      };
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/client/effectue`,
-        requestData,
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/client/valider`,
+      console.log('rrrrrrrrrrrrr'),
         {
           headers: {
             'Content-Type': 'application/json',
@@ -91,7 +26,6 @@ const JobCard = ({ travail }) => {
       console.error("Erreur lors de la création de l'avis :", error.message);
     }
   };
-
   return (
     <div className="travail">
       <h2>Ouvrier</h2>
@@ -109,19 +43,17 @@ const JobCard = ({ travail }) => {
         <p><strong>Description:</strong> {travail.demande.Description}</p>
         <p><strong>Date:</strong> {travail.demande.Date}</p>
         <p><strong>Heure:</strong> {travail.demande.Heure}</p>
-        <button className='valider' onClick={() => handleSubmit(avis_id, travail.ouvrier.id)}>Travail effectué</button>
-        <h1>Ajouter votre Avis</h1>
-        <StarRating rating={rating} onChange={handleChange} />
-        <textarea
-          className="commentaire"
-          placeholder="Ajouter un commentaire..."
-          value={commentaire}
-          onChange={(e) => setCommentaire(e.target.value)}
-          rows="4"
-          cols="50"
-        ></textarea>
-        <button className='commenter' onClick={() => handleSubmitCommentaire(travail.ouvrier.id)}>Ajouter Un commentaire</button>
-      </div>
+        
+        </div>
+        <div className='detaille'>
+           <h2>Plus détails</h2> 
+        <p><strong>Prix:</strong> {travail.prix} TND</p>
+        <p><strong>Duree:</strong> {travail.duree} Minutes</p>
+        <p><strong>Description:</strong> {travail.description}</p>
+        </div>
+        <Link to='/validation'>
+                <button className='valider' onClick={handleSubmit}>Valider</button>
+         </Link>
     </div>
   );
 };

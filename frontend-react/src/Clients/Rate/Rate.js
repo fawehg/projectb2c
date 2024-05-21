@@ -1,33 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Rate = () => {
-  const [ratesData, setRatesData] = useState([]);
-
+  const [loading, setLoading] = useState(true);
+  const [avis, setAvis] = useState([]);
+  // const [ouvrierId, setouvrierId] = useState();
+  const {id} = useParams();
   useEffect(() => {
-    const fetchRates = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('URL_DE_VOTRE_API_POUR_LES_RATES');
-        setRatesData(response.data);
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/client/avis?ouvrier_id=${id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (Array.isArray(response.data.resultData.avis)) {
+          setAvis(response.data.resultData.avis);
+          console.log(avis)
+        }
+        setLoading(false);
       } catch (error) {
-        console.error('Erreur lors du chargement des taux :', error);
+
+        setLoading(false);
       }
     };
 
-    fetchRates();
-  }, []);
-
+    fetchData();
+  }, [id]);
   return (
-    <div>
-      <h2>Taux des utilisateurs</h2>
-      <div>
-        {ratesData.map((rate, index) => (
-          <div key={index}>
-            <p>Taux : {rate.rate}</p>
-            <p>Commentaire : {rate.comment}</p>
+    <div className="avis-container">
+      {avis.map((avisItem) => {
+        const { id, client_nom, rate, commentaire, client_prenom } = avisItem;
+        return (
+          <div key={id} className="avis-card">
+            <h2>{client_nom} {client_prenom} <h2 className="rating">
+              {[...Array(rate)].map((_, index) => (
+                <span key={index} className="star">&#9733;</span>
+              ))}
+            </h2></h2>
+
+            <h3>{commentaire}</h3>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 };

@@ -81,5 +81,6 @@ color: rgba(255, 0, 0, 0.699);
         padding: 20px;
         width: 102%;
         height: 102vh; 
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     }
     
